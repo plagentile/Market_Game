@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QInputDialog>
+#include "signindialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,9 +15,16 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    MainWindow(const MainWindow & window) = delete;
+    MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
 
 private:
+     void initGetSignIn();
+
+private:
     Ui::MainWindow *ui;
+    SignInDialog *pSDialog;
+    QString key;
 };
 #endif // MAINWINDOW_H
