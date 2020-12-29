@@ -15,8 +15,15 @@ public:
     explicit SignInDialog(QWidget *parent = nullptr);
     ~SignInDialog();
 
+    const QString getAPIKey() const;
+private slots:
+
+
+    void on_loginButton_clicked();
+
 private:
     Ui::SignInDialog *ui;
+    QString APIKey;
 };
 
 #endif // SIGNINDIALOG_H

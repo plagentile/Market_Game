@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), pSDialog(new SignInDialog)
 {
     ui->setupUi(this);
-    this->initGetSignIn();
+    this->GetSignIn();
 }
 
 MainWindow::~MainWindow(){
@@ -15,12 +15,14 @@ MainWindow::~MainWindow(){
 }
 
 
-void MainWindow::initGetSignIn()
+void MainWindow::GetSignIn()
 {
    if(this->pSDialog)
    {
        pSDialog->setModal(true);
        pSDialog->exec();
+       this->key = pSDialog->getAPIKey();
+       printf("Key: %ls\n", qUtf16Printable(key) );
    }
 }
 

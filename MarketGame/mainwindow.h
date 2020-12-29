@@ -20,7 +20,7 @@ public:
     ~MainWindow();
 
 private:
-     void initGetSignIn();
+     void GetSignIn();
 
 private:
     Ui::MainWindow *ui;
