@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SignInDialog</class>
- <widget class="QDialog" name="SignInDialog">
+ <class>GetUserAPIKey</class>
+ <widget class="QDialog" name="GetUserAPIKey">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>725</width>
-    <height>441</height>
+    <width>941</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>100</y>
+     <x>200</x>
+     <y>140</y>
      <width>538</width>
      <height>161</height>
     </rect>

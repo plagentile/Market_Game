@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
-#include "getapikey.h"
+#include "getuserapikey.h"
+#include "signinoptionsdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,7 +26,7 @@ private:
 
 private:
     Ui::MainWindow *ui;
-    SignInDialog *pSDialog;
+    GetUserAPIKey *pSDialog;
     QString key;
 };
 #endif // MAINWINDOW_H

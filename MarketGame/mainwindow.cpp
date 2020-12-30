@@ -3,7 +3,7 @@
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), pSDialog(new SignInDialog)
+    : QMainWindow(parent), ui(new Ui::MainWindow), pSDialog(new GetUserAPIKey)
 {
     ui->setupUi(this);
     this->GetSignIn();
