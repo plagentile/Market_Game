@@ -17,12 +17,27 @@ MainWindow::~MainWindow(){
 
 void MainWindow::GetSignIn()
 {
-   if(this->pSDialog)
-   {
-       pSDialog->setModal(true);
-       pSDialog->exec();
-       this->key = pSDialog->getAPIKey();
-       printf("Key: %ls\n", qUtf16Printable(key) );
-   }
+   do
+    {
+        if(this->pSDialog)
+        {
+
+            pSDialog->setModal(true);
+            pSDialog->exec();
+            this->key = pSDialog->getAPIKey();
+            printf("Key: %ls\n", qUtf16Printable(key) );
+        }
+    } while(pSDialog && !(this->keyOk()));
+}
+
+/**
+ * @brief MainWindow::keyOk
+ * @return
+ * Can add basic key checks here
+ */
+bool MainWindow::keyOk()
+{
+    if(this->key.size() > 5)return true;
+    return false;
 }
 

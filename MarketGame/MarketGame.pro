@@ -9,17 +9,20 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    getapikey.cpp \
     main.cpp \
     mainwindow.cpp \
-    signindialog.cpp
+    signinoptionsdialog.cpp
 
 HEADERS += \
+    getapikey.h \
     mainwindow.h \
-    signindialog.h
+    signinoptionsdialog.h
 
 FORMS += \
+    getapikey.ui \
     mainwindow.ui \
-    signindialog.ui
+    signinoptionsdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

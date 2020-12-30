@@ -1,4 +1,4 @@
-#include "signindialog.h"
+#include "getapikey.h"
 #include "ui_signindialog.h"
 
 SignInDialog::SignInDialog(QWidget *parent) :
@@ -11,8 +11,7 @@ SignInDialog::SignInDialog(QWidget *parent) :
 
 }
 
-SignInDialog::~SignInDialog()
-{
+SignInDialog::~SignInDialog(){
     delete ui;
 }
 
@@ -22,6 +21,5 @@ const QString SignInDialog::getAPIKey() const{
 
 void SignInDialog::on_loginButton_clicked(){
     this->APIKey = this->ui->APIKeyInput->text();
-    printf("Key: %ls\n", qUtf16Printable(this->APIKey) );
 
 }

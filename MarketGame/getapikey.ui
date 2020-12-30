@@ -18,7 +18,7 @@
     <rect>
      <x>110</x>
      <y>100</y>
-     <width>495</width>
+     <width>538</width>
      <height>161</height>
     </rect>
    </property>
@@ -86,7 +86,7 @@
        </font>
       </property>
       <property name="text">
-       <string>NOTE: API Keys are not verified until a request is sent.</string>
+       <string>NOTE: API Keys are not fully verified until a request is sent.</string>
       </property>
      </widget>
     </item>

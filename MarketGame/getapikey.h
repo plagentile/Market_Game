@@ -1,5 +1,5 @@
-#ifndef SIGNINDIALOG_H
-#define SIGNINDIALOG_H
+#ifndef GETAPIKEY_H
+#define GETAPIKEY_H
 
 #include <QDialog>
 
@@ -26,4 +26,4 @@ private:
     QString APIKey;
 };
 
-#endif // SIGNINDIALOG_H
+#endif // GETAPIKEY_H

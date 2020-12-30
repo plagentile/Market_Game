@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1149</width>
-    <height>681</height>
+    <width>1155</width>
+    <height>670</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,11 @@
       <x>0</x>
       <y>0</y>
       <width>511</width>
-      <height>631</height>
+      <height>681</height>
      </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(15, 94, 63);</string>

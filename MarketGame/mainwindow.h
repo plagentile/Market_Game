@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
-#include "signindialog.h"
+#include "getapikey.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +21,7 @@ public:
 
 private:
      void GetSignIn();
+     bool keyOk();
 
 private:
     Ui::MainWindow *ui;
