@@ -15,6 +15,7 @@ SOURCES += \
     signinoptionsdialog.cpp
 
 HEADERS += \
+    coordinator.h \
     getuserapikey.h \
     mainwindow.h \
     signinoptionsdialog.h

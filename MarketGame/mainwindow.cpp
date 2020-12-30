@@ -3,7 +3,7 @@
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), pSDialog(new GetUserAPIKey)
+    : QMainWindow(parent), ui(new Ui::MainWindow), pGetUserAPIKey(new GetUserAPIKey)
 {
     ui->setupUi(this);
     this->GetSignIn();
@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     delete ui;
-    if(this->pSDialog) delete pSDialog;
+    if(this->pGetUserAPIKey) delete pGetUserAPIKey;
 }
 
 
@@ -19,15 +19,15 @@ void MainWindow::GetSignIn()
 {
    do
     {
-        if(this->pSDialog)
+        if(this->pGetUserAPIKey)
         {
 
-            pSDialog->setModal(true);
-            pSDialog->exec();
-            this->key = pSDialog->getAPIKey();
+            pGetUserAPIKey->setModal(true);
+            pGetUserAPIKey->exec();
+            this->key = pGetUserAPIKey->getAPIKey();
             printf("Key: %ls\n", qUtf16Printable(key) );
         }
-    } while(pSDialog && !(this->keyOk()));
+    } while(pGetUserAPIKey && !(this->keyOk()));
 }
 
 /**

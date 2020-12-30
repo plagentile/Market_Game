@@ -26,7 +26,7 @@ private:
 
 private:
     Ui::MainWindow *ui;
-    GetUserAPIKey *pSDialog;
+    GetUserAPIKey *pGetUserAPIKey;
     QString key;
 };
 #endif // MAINWINDOW_H
