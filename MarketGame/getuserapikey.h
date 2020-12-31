@@ -13,9 +13,14 @@ class GetUserAPIKey : public QDialog
 
 public:
     explicit GetUserAPIKey(QWidget *parent = nullptr);
+
+    GetUserAPIKey(const GetUserAPIKey & assignThis) =delete;
+    GetUserAPIKey & operator = (const GetUserAPIKey & assignThis) =delete;
     ~GetUserAPIKey();
 
     const QString getAPIKey() const;
+    bool keyOk() const;
+
 private slots:
     void on_loginButton_clicked();
 

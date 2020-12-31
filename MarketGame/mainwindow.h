@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QInputDialog>
 #include "getuserapikey.h"
-#include "signinoptionsdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,12 +20,7 @@ public:
     ~MainWindow();
 
 private:
-     void GetSignIn();
-     bool keyOk();
-
-private:
     Ui::MainWindow *ui;
-    GetUserAPIKey *pGetUserAPIKey;
     QString key;
 };
 #endif // MAINWINDOW_H
