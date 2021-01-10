@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "getuserapikey.h"
 #include "signinoptionsdialog.h"
+#include <future>
 /*
     This class is responsible for controlling the flow of the program
     It launches the threads that will build the URL list from a raw txt file
@@ -14,10 +15,11 @@
 class Coordinator{
 
 public:
-       static Coordinator * pCInstance; //The singleton instance
+       static Coordinator * pCInstance;                                         //The singleton instance
 public:
        static Coordinator * getInstance();
        void run();
+       bool ProgramDone() const;                                                //Helps prevent spurious wakes for the symbol cv
 
        Coordinator(const Coordinator & assignThis) =delete;
        Coordinator & operator =(const Coordinator &assignThis)=delete;
@@ -30,5 +32,7 @@ private:
 private:
     MainWindow * pMainWindow;
     GetUserAPIKey * pGetUserAPIKey;
+
+
 };
 #endif // COORDINATOR_H

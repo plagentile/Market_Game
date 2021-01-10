@@ -15,12 +15,17 @@ Coordinator::~Coordinator(){
 
 void Coordinator::ShowMainWindow(){
     this->pMainWindow->show();
+
 }
 
-void Coordinator::ShowGetAPIKey()
-{
+void Coordinator::ShowGetAPIKey(){
+    int num = 0;
     this->pGetUserAPIKey->setModal(true);
-    this->pGetUserAPIKey->exec();
+
+    do{
+        num = this->pGetUserAPIKey->exec();
+    } while(num != 0 && (pGetUserAPIKey->keyOk()));
+
     printf("Key: %ls\n", qUtf16Printable(pGetUserAPIKey->getAPIKey()) );
 }
 
@@ -28,7 +33,6 @@ void Coordinator::ShowGetAPIKey()
 
 void Coordinator::run()
 {
-
     this->ShowGetAPIKey();
     this->ShowMainWindow();
 }
