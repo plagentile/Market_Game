@@ -4,19 +4,19 @@
 #include <QDialog>
 
 namespace Ui {
-class signInOptionsDialog;
+class SignInOptionsDialog;
 }
 
-class signInOptionsDialog : public QDialog
+class SignInOptionsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit signInOptionsDialog(QWidget *parent = nullptr);
-    ~signInOptionsDialog();
+    explicit SignInOptionsDialog(QWidget *parent = nullptr);
+    ~SignInOptionsDialog();
 
 private:
-    Ui::signInOptionsDialog *ui;
+    Ui::SignInOptionsDialog *ui;
 };
 
 #endif // SIGNINOPTIONSDIALOG_H

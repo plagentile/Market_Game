@@ -28,10 +28,12 @@ private:
     Coordinator();
     void ShowMainWindow();
     void ShowGetAPIKey();
+    void ShowGetSignInOption();
 
 private:
     MainWindow * pMainWindow;
     GetUserAPIKey * pGetUserAPIKey;
+    SignInOptionsDialog * pSignInOptionsDialog;
 
 
 };

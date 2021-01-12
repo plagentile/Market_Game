@@ -6,6 +6,12 @@ GetUserAPIKey::GetUserAPIKey(QWidget *parent) :
     ui(new Ui::GetUserAPIKey)
 {
     ui->setupUi(this);
+    QPixmap pix(":/resources/img/aPic.jpg");
+    int w = ui->picLabel->width();
+    int h = ui->picLabel->height();
+    ui->picLabel->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+
+
 }
 
 GetUserAPIKey::~GetUserAPIKey(){

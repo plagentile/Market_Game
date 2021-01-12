@@ -1,14 +1,14 @@
 #include "signinoptionsdialog.h"
 #include "ui_signinoptionsdialog.h"
 
-signInOptionsDialog::signInOptionsDialog(QWidget *parent) :
+SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::signInOptionsDialog)
+    ui(new Ui::SignInOptionsDialog)
 {
     ui->setupUi(this);
 }
 
-signInOptionsDialog::~signInOptionsDialog()
+SignInOptionsDialog::~SignInOptionsDialog()
 {
     delete ui;
 }

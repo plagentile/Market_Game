@@ -4,7 +4,7 @@
 Coordinator* Coordinator::pCInstance = 0;
 
 Coordinator::Coordinator()
-    :pMainWindow(new MainWindow()), pGetUserAPIKey(new GetUserAPIKey())
+    :pMainWindow(new MainWindow()), pGetUserAPIKey(new GetUserAPIKey()), pSignInOptionsDialog(new SignInOptionsDialog())
 {
 }
 
@@ -29,11 +29,18 @@ void Coordinator::ShowGetAPIKey(){
     printf("Key: %ls\n", qUtf16Printable(pGetUserAPIKey->getAPIKey()) );
 }
 
+void Coordinator::ShowGetSignInOption()
+{
+    this->pSignInOptionsDialog->setModal(true);
+    this->pSignInOptionsDialog->exec();
+}
+
 
 
 void Coordinator::run()
 {
     this->ShowGetAPIKey();
+    this->ShowGetSignInOption();
     this->ShowMainWindow();
 }
 
