@@ -21,7 +21,7 @@ public:
 
     const QString getAPIKey() const;
     bool keyOk() const;
-
+    void run();
 private slots:
     void on_loginButton_clicked();
 

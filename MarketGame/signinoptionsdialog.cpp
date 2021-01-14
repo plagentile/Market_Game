@@ -3,7 +3,8 @@
 
 SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SignInOptionsDialog)
+    ui(new Ui::SignInOptionsDialog),
+    userSelectedOption(Options::NoOptionSelected)
 {
     ui->setupUi(this);
 }
@@ -11,4 +12,16 @@ SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
 SignInOptionsDialog::~SignInOptionsDialog()
 {
     delete ui;
+}
+
+SignInOptionsDialog::Options SignInOptionsDialog::run()
+{
+    this->setModal(true);
+    this->exec();
+    return this->userSelectedOption;
+}
+
+void SignInOptionsDialog::on_makeNewSimButton_clicked(){
+    this->userSelectedOption = Options::NewSimulation;
+    this->close();
 }

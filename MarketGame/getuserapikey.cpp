@@ -32,6 +32,16 @@ bool GetUserAPIKey::keyOk() const{
     return false;
 }
 
+void GetUserAPIKey::run()
+{
+    do
+    {
+        this->setModal(true);
+        this->exec();
+    } while(!this->keyOk());
+
+}
+
 void GetUserAPIKey::on_loginButton_clicked(){
     this->APIKey = this->ui->APIKeyInput->text();
     if(this->keyOk()){

@@ -1,9 +1,10 @@
 #ifndef COORDINATOR_H
 #define COORDINATOR_H
-#include "applicationerrors.h"
+
 #include "mainwindow.h"
 #include "getuserapikey.h"
 #include "signinoptionsdialog.h"
+#include "applicationerrors.h"
 #include <QApplication>
 #include <future>
 /*

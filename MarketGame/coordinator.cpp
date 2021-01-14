@@ -13,24 +13,28 @@ Coordinator *Coordinator::getInstance(){
 
 int32_t Coordinator::run(const QApplication &coreApp)
 {
+    int num = 0;
     MainWindow  pMainWindow;
-    GetUserAPIKey  pGetUserAPIKey;
     SignInOptionsDialog  pSignInOptionsDialog;
 
+
+    //ApplicationErrors::APP_ERRORS coreStatus = ApplicationErrors::APP_ERRORS::ExitSuccessfully;
+
     /*Run Get Sign In Options*/
-    pSignInOptionsDialog.setModal(true);
-    pSignInOptionsDialog.exec();
-
-    /*Run Get API Key*/
-    int num = 0;
-    pGetUserAPIKey.setModal(true);
-
-    do{
-        num = pGetUserAPIKey.exec();
-    } while(num != 0 && (pGetUserAPIKey.keyOk()));
-
-    printf("Key: %ls\n", qUtf16Printable(pGetUserAPIKey.getAPIKey()) );
-
+    SignInOptionsDialog::Options signInOption = pSignInOptionsDialog.run();
+    if(signInOption == SignInOptionsDialog::Options::NoOptionSelected){
+        return -1;                                                          //User Terminated the Progam
+    }
+    else if(signInOption == SignInOptionsDialog::Options::NewSimulation){
+        /*Run Get API Key*/
+        GetUserAPIKey  getUserAPIKey;
+        getUserAPIKey.run();
+    }
+    else
+    {
+        /*Load Previous Save*/
+        printf("\nTodo...");
+    }
 
     /*Run the Main Window*/
     pMainWindow.show();

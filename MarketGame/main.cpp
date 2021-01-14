@@ -1,12 +1,9 @@
-#include <QApplication>
 #include "Coordinator.h"
 
-int main(int argc, char *argv[]){
+int32_t main(int argc, char *argv[]){
     QApplication a(argc, argv);
     Coordinator * pCoordinator = Coordinator::getInstance();
-    int num = pCoordinator->run(a);
-
-    /*Ensure that leaks are plugged*/
-    delete pCoordinator;
+    int32_t num = pCoordinator->run(a);
+    delete pCoordinator;                                        //Ensure that leaks are plugged
     return num;
 }
