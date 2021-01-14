@@ -38,3 +38,10 @@ void GetUserAPIKey::on_loginButton_clicked(){
         this->close();
     }
 }
+
+void GetUserAPIKey::closeEvent(QCloseEvent *event)
+{
+
+    event->accept();
+    printf("Closing....\n");
+}

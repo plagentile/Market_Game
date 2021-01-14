@@ -2,6 +2,7 @@
 #define GETUSERAPIKEY_H
 
 #include <QDialog>
+#include <QCloseEvent>
 
 namespace Ui {
 class GetUserAPIKey;
@@ -27,6 +28,10 @@ private slots:
 private:
     Ui::GetUserAPIKey *ui;
     QString APIKey;
+
+    // QWidget interface
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif // GETUSERAPIKEY_H

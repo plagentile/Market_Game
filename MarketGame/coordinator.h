@@ -1,8 +1,10 @@
 #ifndef COORDINATOR_H
 #define COORDINATOR_H
+#include "applicationerrors.h"
 #include "mainwindow.h"
 #include "getuserapikey.h"
 #include "signinoptionsdialog.h"
+#include <QApplication>
 #include <future>
 /*
     This class is responsible for controlling the flow of the program
@@ -18,23 +20,13 @@ public:
        static Coordinator * pCInstance;                                         //The singleton instance
 public:
        static Coordinator * getInstance();
-       void run();
-       bool ProgramDone() const;                                                //Helps prevent spurious wakes for the symbol cv
+       int32_t run(const QApplication &coreApp);
 
        Coordinator(const Coordinator & assignThis) =delete;
        Coordinator & operator =(const Coordinator &assignThis)=delete;
-       ~Coordinator();
+       ~Coordinator() =default;
 private:
-    Coordinator();
-    void ShowMainWindow();
-    void ShowGetAPIKey();
-    void ShowGetSignInOption();
-
-private:
-    MainWindow * pMainWindow;
-    GetUserAPIKey * pGetUserAPIKey;
-    SignInOptionsDialog * pSignInOptionsDialog;
-
+    Coordinator() = default;
 
 };
 #endif // COORDINATOR_H
