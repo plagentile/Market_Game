@@ -6,9 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
-    <height>528</height>
+    <width>800</width>
+    <height>450</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>450</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>450</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>800</width>
+    <height>450</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -16,10 +40,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>150</x>
      <y>140</y>
      <width>538</width>
-     <height>182</height>
+     <height>153</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -38,16 +62,20 @@
     <property name="bottomMargin">
      <number>10</number>
     </property>
-    <item>
+    <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
-        <family>Verdana</family>
+        <family>Georgia</family>
         <pointsize>14</pointsize>
+        <italic>true</italic>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Please Enter Your API Key</string>
@@ -92,20 +120,47 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="picLabel">
+  <widget class="QLabel" name="backgroundImageLabel">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
-     <width>931</width>
-     <height>531</height>
+     <width>800</width>
+     <height>450</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>800</width>
+     <height>450</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>800</width>
+     <height>450</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>800</width>
+     <height>450</height>
+    </size>
    </property>
    <property name="text">
     <string/>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+   </property>
   </widget>
-  <zorder>picLabel</zorder>
+  <zorder>backgroundImageLabel</zorder>
   <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources/>
