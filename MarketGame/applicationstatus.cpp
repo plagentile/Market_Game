@@ -1,16 +1,16 @@
-#include "applicationerrors.h"
+#include "applicationstatus.h"
 
-void ApplicationErrors::print_Error_Message(const APP_ERRORS error) const
+void ApplicationStatus::print_Error_Message(const Status error) const
 {
     switch (error){
 
-    case(APP_ERRORS::ExitSuccessfully):
+    case(Status::ExitSuccessfully):
         printf("\nProgram Exited Successfully\n");
         break;
-    case(APP_ERRORS::IncorrectAPIKey):
+    case(Status::IncorrectAPIKey):
         printf("\nAPI Key Did Not Meet Basic Authentication Criteria\n");
         break;
-    case(APP_ERRORS::UserClosedApplication):
+    case(Status::UserClosedApplication):
         printf("\nUser Forcibly Exited the Application\n");
         break;
     default:

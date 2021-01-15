@@ -14,21 +14,24 @@ Coordinator *Coordinator::getInstance(){
 int32_t Coordinator::run(const QApplication &coreApp)
 {
     int num = 0;
-    MainWindow  pMainWindow;
-    SignInOptionsDialog  pSignInOptionsDialog;
+    MainWindow  mainWindow;
+    SignInOptionsDialog  signInOptionsDialog;
 
 
-    //ApplicationErrors::APP_ERRORS coreStatus = ApplicationErrors::APP_ERRORS::ExitSuccessfully;
+    //ApplicationErrors::App_Status coreStatus = ApplicationErrors::APP_ERRORS::ExitSuccessfully;
 
     /*Run Get Sign In Options*/
-    SignInOptionsDialog::Options signInOption = pSignInOptionsDialog.run();
+    SignInOptionsDialog::Options signInOption = signInOptionsDialog.run();
     if(signInOption == SignInOptionsDialog::Options::NoOptionSelected){
         return -1;                                                          //User Terminated the Progam
     }
     else if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         /*Run Get API Key*/
         GetUserAPIKey  getUserAPIKey;
-        getUserAPIKey.run();
+        if(getUserAPIKey.run() != ApplicationStatus::Status::ExitSuccessfully){
+            return -1;
+        }
+
     }
     else
     {
@@ -37,7 +40,7 @@ int32_t Coordinator::run(const QApplication &coreApp)
     }
 
     /*Run the Main Window*/
-    pMainWindow.show();
+    mainWindow.show();
     num = coreApp.exec();
 
     return num;

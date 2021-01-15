@@ -4,7 +4,6 @@
 #include "mainwindow.h"
 #include "getuserapikey.h"
 #include "signinoptionsdialog.h"
-#include "applicationerrors.h"
 #include <QApplication>
 #include <future>
 /*

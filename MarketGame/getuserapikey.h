@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QCloseEvent>
+#include "applicationstatus.h"
 
 namespace Ui {
 class GetUserAPIKey;
@@ -21,13 +22,15 @@ public:
 
     const QString getAPIKey() const;
     bool keyOk() const;
-    void run();
+    ApplicationStatus::Status run();
+
 private slots:
     void on_loginButton_clicked();
 
 private:
     Ui::GetUserAPIKey *ui;
     QString APIKey;
+    ApplicationStatus::Status status;
 
     // QWidget interface
 protected:
