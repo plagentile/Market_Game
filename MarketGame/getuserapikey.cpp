@@ -34,8 +34,7 @@ bool GetUserAPIKey::keyOk() const{
 
 ApplicationStatus::Status GetUserAPIKey::run()
 {
-    while(this->status == ApplicationStatus::Status::Unchanged)
-    {
+    while(this->status == ApplicationStatus::Status::Unchanged){
         this->setModal(true);
         this->exec();
     }

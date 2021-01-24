@@ -7,6 +7,9 @@ SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
     userSelectedOption(Options::NoOptionSelected)
 {
     ui->setupUi(this);
+    QPixmap pix(":/files/img/welcomeScreenBackground.jpg");
+    ui->backgroundImageLabel->setPixmap(pix.scaled(ui->backgroundImageLabel->width(),ui->backgroundImageLabel->height(),Qt::KeepAspectRatioByExpanding));
+
 }
 
 SignInOptionsDialog::~SignInOptionsDialog()
