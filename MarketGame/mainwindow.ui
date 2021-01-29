@@ -46,7 +46,7 @@
 	sharesAndCurrentPriceHorizontalLayout
 */
 
-#staticCurrentPriceLabel, #dynamicCurrentPriceLabel, #staticSharesOwnedLabel, #dynamicSharesOwnedLabel
+#staticUnrealizedTotalLabel, #dynamicUnrealizedTotalLabel, #staticSharesOwnedLabel, #dynamicSharesOwnedLabel
 {
 	font-size:20px;
 	font-family: Calibri;
@@ -54,6 +54,37 @@
 	font-weight: 400;
 }
 
+/*
+	Buy and Sell Buttons
+*/
+#buyButton, #sellButton
+{
+	border: 1px solid gray;
+	border-bottom: none;
+	border-top:none;
+	color: white;
+	background-color: Grey;
+	font-size:20px;
+	font-family: Calibri;
+}
+
+
+#buyButton:hover
+{
+	background-color:white;
+	color:black;
+}
+
+#staticCurrentPriceLabel, #staticHighPriceLabel, #staticLowPriceLabel, #staticVolumeLabel, #staticOpenPriceLabel, #staticClosePriceLabel,
+#dynamicCurrentPriceLabel, #dynamicHighPriceLabel, #dynamicLowPriceLabel, #dynamicVolumeLabel, #dynamicOpenPriceLabel, #dynamicClosePriceLabel
+{
+	border: 1px solid gray;
+}
+
+#positionVerticleSeperator
+{
+	background-color: gray;
+}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -184,7 +215,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::MinimumExpanding</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -196,39 +227,195 @@
       </item>
       <item>
        <widget class="QLabel" name="stockNameLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>Stock Name Placeholder</string>
+         <string>Stock: N/A</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="chartPlaceHolderLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>CHART PLACEHOLDER</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="sharesAndCurrentPriceHorizontalLayout">
+       <layout class="QVBoxLayout" name="stockInfoVerticalLayout">
         <property name="spacing">
          <number>0</number>
         </property>
         <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <layout class="QHBoxLayout" name="staticStockInfoHorizontalLayout">
+          <property name="spacing">
+           <number>0</number>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+          <item>
+           <widget class="QLabel" name="staticCurrentPriceLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <stylestrategy>PreferDefault</stylestrategy>
+             </font>
+            </property>
+            <property name="text">
+             <string>Current Price</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="staticHighPriceLabel">
+            <property name="font">
+             <font>
+              <stylestrategy>PreferDefault</stylestrategy>
+             </font>
+            </property>
+            <property name="text">
+             <string>High</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="staticLowPriceLabel">
+            <property name="text">
+             <string>Low</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="staticVolumeLabel">
+            <property name="text">
+             <string>Volume</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="staticOpenPriceLabel">
+            <property name="text">
+             <string>Open</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="staticClosePriceLabel">
+            <property name="text">
+             <string>Close</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="dynamicStockInfoHorizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="dynamicCurrentPriceLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="dynamicHighPriceLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="dynamicLowPriceLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="dynamicVolumeLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="dynamicOpenPriceLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="dynamicClosePriceLabel">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="sharesAndCurrentPriceHorizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QLabel" name="staticSharesOwnedLabel">
           <property name="sizePolicy">
@@ -250,6 +437,9 @@
           <property name="text">
            <string>Shares Owned:</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
         <item>
@@ -263,26 +453,20 @@
           <property name="text">
            <string>0</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_2">
+         <widget class="Line" name="positionVerticleSeperator">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
         <item>
-         <widget class="QLabel" name="staticCurrentPriceLabel">
+         <widget class="QLabel" name="staticUnrealizedTotalLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -290,12 +474,15 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Current Price:</string>
+           <string>Unrealized Total: </string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="dynamicCurrentPriceLabel">
+         <widget class="QLabel" name="dynamicUnrealizedTotalLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -312,25 +499,12 @@
            </font>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </item>
@@ -343,7 +517,7 @@
          <enum>QLayout::SetNoConstraint</enum>
         </property>
         <item>
-         <widget class="QPushButton" name="sellButton">
+         <widget class="QPushButton" name="buyButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -356,7 +530,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buyButton">
+         <widget class="QPushButton" name="sellButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
