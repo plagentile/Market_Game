@@ -6,162 +6,228 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>450</height>
+    <width>960</width>
+    <height>720</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>800</width>
-    <height>450</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>800</width>
-    <height>450</height>
-   </size>
-  </property>
-  <property name="baseSize">
-   <size>
-    <width>800</width>
-    <height>450</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>140</y>
-     <width>538</width>
-     <height>153</height>
-    </rect>
+  <property name="styleSheet">
+   <string notr="true">#GetUserAPIKey
+{
+ background-image:url(\&quot;:/files/img/getAPIKeyBackground.png\&quot;);
+ background-position: center;
+}
+
+#directionLabel, #noticeLabel
+{
+	font-family: Georgia;
+	font-size:18;
+	color: black;
+}
+
+
+#APIKeyInput
+{
+	font-size: 28px;
+	font-family: Verdana;
+}
+
+
+#loginButton
+{
+	background-color: DodgerBlue;
+	color: white;
+	font-size:20;
+	font-family: Verdana;
+
+}
+
+#loginButton:Hover, #APIKeyInput:Hover
+{
+	border-radius: 25px;
+}
+
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>10</number>
-    </property>
-    <property name="leftMargin">
-     <number>10</number>
-    </property>
-    <property name="topMargin">
-     <number>10</number>
-    </property>
-    <property name="rightMargin">
-     <number>10</number>
-    </property>
-    <property name="bottomMargin">
-     <number>10</number>
-    </property>
-    <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>Georgia</family>
-        <pointsize>14</pointsize>
-        <italic>true</italic>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>Please Enter Your API Key</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="APIKeyInput">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="loginButton">
-      <property name="font">
-       <font>
-        <family>Verdana</family>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Login</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <family>Verdana</family>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>NOTE: API Keys are not fully verified until a request is sent.</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="backgroundImageLabel">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>450</height>
-    </rect>
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
+   <property name="topMargin">
+    <number>0</number>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>800</width>
-     <height>450</height>
-    </size>
+   <property name="rightMargin">
+    <number>0</number>
    </property>
-   <property name="maximumSize">
-    <size>
-     <width>800</width>
-     <height>450</height>
-    </size>
+   <property name="bottomMargin">
+    <number>0</number>
    </property>
-   <property name="baseSize">
-    <size>
-     <width>800</width>
-     <height>450</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <zorder>backgroundImageLabel</zorder>
-  <zorder>verticalLayoutWidget</zorder>
+   <item>
+    <layout class="QVBoxLayout" name="bannerVerticalLayout">
+     <item>
+      <widget class="QLabel" name="directionLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Georgia</family>
+         <pointsize>14</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Please Enter Your API Key</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="inputVerticalLayout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <property name="leftMargin">
+      <number>40</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <property name="rightMargin">
+      <number>40</number>
+     </property>
+     <property name="bottomMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="APIKeyInput">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="loginButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Verdana</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Login</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="noticeLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Georgia</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>NOTE: API Keys are not fully verified until a request is sent.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

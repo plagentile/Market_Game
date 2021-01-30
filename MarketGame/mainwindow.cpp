@@ -6,8 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPixmap pix(":/files/img/chartLogo.png");
-    ui->leftImageLabel->setPixmap(pix.scaled(ui->leftImageLabel->width(), ui->leftImageLabel->height(), Qt::KeepAspectRatioByExpanding));
 }
 
 MainWindow::~MainWindow(){

@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/files">
-        <file>img/welcomeScreenBackground.jpg</file>
-        <file>img/getAPIKeyBackground.jpg</file>
-        <file>img/chartLogo.png</file>
         <file>img/coins.png</file>
+        <file>img/getAPIKeyBackground.png</file>
     </qresource>
 </RCC>

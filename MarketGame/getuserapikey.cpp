@@ -8,8 +8,6 @@ GetUserAPIKey::GetUserAPIKey(QWidget *parent) :
     status(ApplicationStatus::Status::Unchanged)
 {
     ui->setupUi(this);
-    QPixmap pix(":/files/img/getAPIKeyBackground.jpg");
-    ui->backgroundImageLabel->setPixmap(pix.scaled(ui->backgroundImageLabel->width(),ui->backgroundImageLabel->height(),Qt::KeepAspectRatioByExpanding));
     ui->APIKeyInput->setPlaceholderText("Enter API Key: ");
 }
 
