@@ -29,14 +29,16 @@
 {
 	border: 1px solid gray;
 	border-bottom: none;
-	background-color:Aquamarine;
+	background-color:#66ffb3;
 	font-size:18px;
 	font-family: Calibri;
+	color:black;
 }
 
 #searchButton:hover, #saveButton:hover, #settingsButton:hover, #newButton:hover, #exitButton:hover
 {
 	background-color:white;
+	color:black;
 }
 
 /*coreRightVerticalLayout*/
@@ -69,7 +71,7 @@
 }
 
 
-#buyButton:hover
+#buyButton:hover, #sellButton:hover
 {
 	background-color:white;
 	color:black;
@@ -113,6 +115,22 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>240</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="leftImageLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -121,7 +139,10 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>QT MARKET VIEWERtfvygbuhinjm</string>
+         <string>QT MARKET VIEWER</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -215,12 +236,12 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::MinimumExpanding</enum>
+         <enum>QSizePolicy::Expanding</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>800</width>
-          <height>13</height>
+          <width>40</width>
+          <height>0</height>
          </size>
         </property>
        </spacer>
@@ -251,6 +272,9 @@
         </property>
         <property name="text">
          <string>CHART PLACEHOLDER</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -460,6 +484,9 @@
         </item>
         <item>
          <widget class="Line" name="positionVerticleSeperator">
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>

@@ -2,5 +2,7 @@
     <qresource prefix="/files">
         <file>img/welcomeScreenBackground.jpg</file>
         <file>img/getAPIKeyBackground.jpg</file>
+        <file>img/chartLogo.png</file>
+        <file>img/coins.png</file>
     </qresource>
 </RCC>
