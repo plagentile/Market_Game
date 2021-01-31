@@ -8,11 +8,6 @@ GetUserAPIKey::GetUserAPIKey(QWidget *parent) :
     status(ApplicationStatus::Status::Unchanged)
 {
     ui->setupUi(this);
-    ui->APIKeyInput->setPlaceholderText("Enter API Key: ");
-    this->ui->APIKeyInput->setEchoMode(QLineEdit::Password);
-
-    /*border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;*/
-    this->ui->showInputButton->setStyleSheet("border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;");
 }
 
 GetUserAPIKey::~GetUserAPIKey(){
@@ -22,7 +17,6 @@ GetUserAPIKey::~GetUserAPIKey(){
 const QString GetUserAPIKey::getAPIKey() const{
     return this->APIKey;
 }
-
 
 /**
  * @brief GetUserAPIKey::keyOk

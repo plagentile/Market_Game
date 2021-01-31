@@ -16,14 +16,13 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Select Sign In Option</string>
+   <string>QT Market Game</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#SignInOptionsDialog{
- background-image:url(\&quot;:/files/img/coins.png\&quot;);
- background-position: center;
+   <string notr="true">#SignInOptionsDialog
+{
+	border-image: url(:/files/img/welcomeBackground.png) 0 0 0 0 stretch stretch;
 }
-
 #coreLabel
 {
 	font-size:24px;
@@ -90,60 +89,12 @@
       <number>0</number>
      </property>
      <item>
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="coreLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <family>Georgia</family>
-         <pointsize>-1</pointsize>
-         <italic>false</italic>
-         <underline>false</underline>
-         <kerning>true</kerning>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>QT Market Viewer
- A Market Game</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
+        <enum>QSizePolicy::MinimumExpanding</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

@@ -16,8 +16,7 @@
   <property name="styleSheet">
    <string notr="true">#GetUserAPIKey
 {
- background-image:url(\&quot;:/files/img/getAPIKeyBackground.png\&quot;);
- background-position: center;
+ border-image: url(:/files/img/getAPIKeyBackground.png) 0 0 0 0 stretch stretch;
 }
 
 #directionLabel, #noticeLabel
@@ -56,6 +55,7 @@
 
 #showInputButton
 {
+	border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;
 	color:transparent;
 }
 
@@ -110,23 +110,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Minimum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_3">
+      <spacer name="bannerVerticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -158,7 +142,7 @@
       <number>10</number>
      </property>
      <item>
-      <spacer name="verticalSpacer_2">
+      <spacer name="loginVerticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -194,6 +178,12 @@
          </property>
          <property name="frame">
           <bool>true</bool>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Enter API Key: </string>
          </property>
         </widget>
        </item>
