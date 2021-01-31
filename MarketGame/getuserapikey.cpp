@@ -9,6 +9,10 @@ GetUserAPIKey::GetUserAPIKey(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->APIKeyInput->setPlaceholderText("Enter API Key: ");
+    this->ui->APIKeyInput->setEchoMode(QLineEdit::Password);
+
+    /*border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;*/
+    this->ui->showInputButton->setStyleSheet("border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;");
 }
 
 GetUserAPIKey::~GetUserAPIKey(){
@@ -52,4 +56,16 @@ void GetUserAPIKey::closeEvent(QCloseEvent *event){
     if(this->status == ApplicationStatus::Status::Unchanged)
         status = ApplicationStatus::Status::UserClosedApplication;
     event->accept();
+}
+
+void GetUserAPIKey::on_showInputButton_clicked()
+{
+    if(this->ui->APIKeyInput->echoMode() == QLineEdit::Normal){
+        this->ui->APIKeyInput->setEchoMode(QLineEdit::Password);
+        this->ui->showInputButton->setStyleSheet("border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;");
+    }
+    else{
+        this->ui->APIKeyInput->setEchoMode(QLineEdit::Normal);
+        this->ui->showInputButton->setStyleSheet("border-image: url(:/files/img/showInput.png) 0 0 0 0 stretch stretch;");
+    }
 }

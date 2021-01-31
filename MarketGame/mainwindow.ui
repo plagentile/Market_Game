@@ -25,7 +25,7 @@
 	Left Side Buttons
 */
 
-#searchButton, #saveButton, #settingsButton, #newButton, #exitButton
+#searchButton, #saveButton, #settingsButton, #newButton, #exitButton, #accountButton
 {
 	border: 1px solid gray;
 	border-bottom: none;
@@ -35,7 +35,7 @@
 	color:black;
 }
 
-#searchButton:hover, #saveButton:hover, #settingsButton:hover, #newButton:hover, #exitButton:hover
+#accountButton:hover,#searchButton:hover, #saveButton:hover, #settingsButton:hover, #newButton:hover, #exitButton:hover
 {
 	background-color:white;
 	color:black;
@@ -131,18 +131,15 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="leftImageLabel">
+       <widget class="QPushButton" name="accountButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>QT MARKET VIEWER</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>Account</string>
         </property>
        </widget>
       </item>

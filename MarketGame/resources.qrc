@@ -2,5 +2,7 @@
     <qresource prefix="/files">
         <file>img/coins.png</file>
         <file>img/getAPIKeyBackground.png</file>
+        <file>img/hideInput.png</file>
+        <file>img/showInput.png</file>
     </qresource>
 </RCC>

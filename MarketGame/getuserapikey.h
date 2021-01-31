@@ -27,6 +27,8 @@ public:
 private slots:
     void on_loginButton_clicked();
 
+    void on_showInputButton_clicked();
+
 private:
     Ui::GetUserAPIKey *ui;
     QString APIKey;

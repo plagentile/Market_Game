@@ -55,7 +55,7 @@
 	font-size:22px;
 	font-family: Verdana;
 	background-color:  #fcfbf9;
-	border-radius: 25px;
+	border-radius: 30px;
 }
 
 /*
@@ -64,7 +64,6 @@
 
 #makeNewSimButton:hover, #loadPreviousSimButton:hover, #aboutButton:hover
 {
-	border-radius: 0;
 	font-weight: 500;
 }
 </string>
