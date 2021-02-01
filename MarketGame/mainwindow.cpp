@@ -12,4 +12,16 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 
+void MainWindow::on_exitButton_clicked(){
+    this->close();
+}
 
+void MainWindow::on_searchButton_clicked()
+{
+    printf("TODO....");
+}
+
+void MainWindow::on_accountButton_clicked()
+{
+    this->account.exec();
+}

@@ -10,9 +10,10 @@ CONFIG += c++11
 
 SOURCES += \
     about.cpp \
+    account.cpp \
     applicationstatus.cpp \
     coordinator.cpp \
-    getuserapikey.cpp \
+    initialaccountsetup.cpp \
     main.cpp \
     mainwindow.cpp \
     signinoptionsdialog.cpp \
@@ -20,16 +21,18 @@ SOURCES += \
 
 HEADERS += \
     about.h \
+    account.h \
     applicationstatus.h \
     coordinator.h \
-    getuserapikey.h \
+    initialaccountsetup.h \
     mainwindow.h \
     signinoptionsdialog.h \
     termsofservice.h
 
 FORMS += \
     about.ui \
-    getuserapikey.ui \
+    account.ui \
+    initialaccountsetup.ui \
     mainwindow.ui \
     signinoptionsdialog.ui \
     termsofservice.ui

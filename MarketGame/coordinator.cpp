@@ -42,8 +42,8 @@ int32_t Coordinator::run(const QApplication &coreApp)
     }
     else if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         /*Run Get API Key*/
-        GetUserAPIKey  getUserAPIKey;
-        if(getUserAPIKey.run() != ApplicationStatus::Status::ExitSuccessfully){
+        InitialAccountSetup  initialAccountSetup;
+        if(initialAccountSetup.run() != ApplicationStatus::Status::ExitSuccessfully){
             return -1;
         }
     }

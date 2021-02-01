@@ -1,24 +1,23 @@
-#ifndef GETUSERAPIKEY_H
-#define GETUSERAPIKEY_H
+#ifndef INITIALACCOUNTSETUP_H
+#define INITIALACCOUNTSETUP_H
 
 #include <QDialog>
 #include <QCloseEvent>
 #include "applicationstatus.h"
 
 namespace Ui {
-class GetUserAPIKey;
+class InitialAccountSetup;
 }
 
-class GetUserAPIKey : public QDialog
+class InitialAccountSetup : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit GetUserAPIKey(QWidget *parent = nullptr);
-
-    GetUserAPIKey(const GetUserAPIKey & assignThis) =delete;
-    GetUserAPIKey & operator = (const GetUserAPIKey & assignThis) =delete;
-    ~GetUserAPIKey();
+    explicit InitialAccountSetup(QWidget *parent = nullptr);
+    InitialAccountSetup(const InitialAccountSetup & assignThis) =delete;
+    InitialAccountSetup & operator = (const InitialAccountSetup & assignThis) =delete;
+    ~InitialAccountSetup();
 
     const QString getAPIKey() const;
     bool keyOk() const;
@@ -26,11 +25,10 @@ public:
 
 private slots:
     void on_loginButton_clicked();
-
     void on_showInputButton_clicked();
 
 private:
-    Ui::GetUserAPIKey *ui;
+     Ui::InitialAccountSetup *ui;
     QString APIKey;
     ApplicationStatus::Status status;
 
@@ -39,4 +37,4 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 };
 
-#endif // GETUSERAPIKEY_H
+#endif // INITIALACCOUNTSETUP_H

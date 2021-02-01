@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
-#include "getuserapikey.h"
+#include "account.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +19,15 @@ public:
     MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
 
+private slots:
+    void on_exitButton_clicked();
+    void on_searchButton_clicked();
+
+    void on_accountButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString key;
+    Account account;
 };
 #endif // MAINWINDOW_H

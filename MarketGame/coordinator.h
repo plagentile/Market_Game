@@ -2,7 +2,7 @@
 #define COORDINATOR_H
 
 #include "mainwindow.h"
-#include "getuserapikey.h"
+#include "initialaccountsetup.h"
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
