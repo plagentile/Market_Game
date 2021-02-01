@@ -5,6 +5,7 @@
 #include "getuserapikey.h"
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
+#include "about.h"
 #include <QApplication>
 #include <future>
 /*

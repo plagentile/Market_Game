@@ -32,3 +32,9 @@ void SignInOptionsDialog::on_termsOfServiceButton_clicked()
     this->userSelectedOption = Options::TermsOfService;
     this->close();
 }
+
+void SignInOptionsDialog::on_aboutButton_clicked()
+{
+    this->userSelectedOption = Options::About;
+    this->close();
+}

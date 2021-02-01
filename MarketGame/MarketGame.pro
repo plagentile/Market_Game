@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     applicationstatus.cpp \
     coordinator.cpp \
     getuserapikey.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
     termsofservice.cpp
 
 HEADERS += \
+    about.h \
     applicationstatus.h \
     coordinator.h \
     getuserapikey.h \
@@ -26,6 +28,7 @@ HEADERS += \
     termsofservice.h
 
 FORMS += \
+    about.ui \
     getuserapikey.ui \
     mainwindow.ui \
     signinoptionsdialog.ui \

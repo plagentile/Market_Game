@@ -4,5 +4,6 @@
         <file>img/hideInput.png</file>
         <file>img/showInput.png</file>
         <file>img/welcomeBackground.png</file>
+        <file>img/aboutBackground.png</file>
     </qresource>
 </RCC>

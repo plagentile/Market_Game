@@ -17,18 +17,22 @@ int32_t Coordinator::run(const QApplication &coreApp)
     MainWindow  mainWindow;
     SignInOptionsDialog  signInOptionsDialog;
     TermsOfService termsOfService;
+    About about;
 
 
     //ApplicationErrors::App_Status coreStatus = ApplicationErrors::APP_ERRORS::ExitSuccessfully;
 
     /*Run Get Sign In Options*/
     SignInOptionsDialog::Options signInOption;
-    do
-    {
+    do{
          signInOption = signInOptionsDialog.run();
          if(signInOption == SignInOptionsDialog::Options::TermsOfService){
              /*Show Terms of Service*/
              termsOfService.exec();
+         }
+         else if(signInOption==SignInOptionsDialog::Options::About){
+             /*Show About*/
+             about.exec();
          }
     } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
 

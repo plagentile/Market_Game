@@ -32,6 +32,8 @@ private slots:
     void on_makeNewSimButton_clicked();
     void on_termsOfServiceButton_clicked();
 
+    void on_aboutButton_clicked();
+
 private:
     Ui::SignInOptionsDialog *ui;
     Options userSelectedOption;
