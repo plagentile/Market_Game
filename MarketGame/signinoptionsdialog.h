@@ -14,6 +14,8 @@ public:
     enum class Options
     {
        NoOptionSelected,
+       TermsOfService,
+       About,
        NewSimulation,
        LoadPreviousSave
     };
@@ -28,6 +30,7 @@ public:
 
 private slots:
     void on_makeNewSimButton_clicked();
+    void on_termsOfServiceButton_clicked();
 
 private:
     Ui::SignInOptionsDialog *ui;

@@ -16,6 +16,7 @@ SignInOptionsDialog::~SignInOptionsDialog()
 
 SignInOptionsDialog::Options SignInOptionsDialog::run()
 {
+    this->userSelectedOption = Options::NoOptionSelected;       //could run the same frame more than once
     this->setModal(true);
     this->exec();
     return this->userSelectedOption;
@@ -23,5 +24,11 @@ SignInOptionsDialog::Options SignInOptionsDialog::run()
 
 void SignInOptionsDialog::on_makeNewSimButton_clicked(){
     this->userSelectedOption = Options::NewSimulation;
+    this->close();
+}
+
+void SignInOptionsDialog::on_termsOfServiceButton_clicked()
+{
+    this->userSelectedOption = Options::TermsOfService;
     this->close();
 }

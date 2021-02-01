@@ -30,38 +30,38 @@
 	font-family: Georgia;
 }
 
+
+#aboutButton
+{
+	background-color: white;
+}
+
+#termsOfServiceButton
+{
+	background-color:  #fcfbf9;
+}
+
+
 #makeNewSimButton
 {
 	color: white;
 	background-color: #bc9662;
-	font-size:22px;
-	font-family: Verdana;
-	border-radius: 25px;
 }
 
 #loadPreviousSimButton
 {
 	background-color: #e3d4bf;
-	color: black;
-	font-size:22px;
-	font-family: Verdana;
-	border-radius: 25px;
 }
 
-#aboutButton
+#aboutButton, #termsOfServiceButton, #loadPreviousSimButton, #makeNewSimButton
 {
-	color: black;
 	font-size:22px;
 	font-family: Verdana;
-	background-color:  #fcfbf9;
 	border-radius: 30px;
 }
 
-/*
-	Hover effects
-*/
-
-#makeNewSimButton:hover, #loadPreviousSimButton:hover, #aboutButton:hover
+/*Hover effects*/
+#makeNewSimButton:hover, #loadPreviousSimButton:hover, #aboutButton:hover, #termsOfServiceButton:hover
 {
 	font-weight: 500;
 }
@@ -84,27 +84,17 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="labelVerticalLayout">
-     <property name="spacing">
-      <number>0</number>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::MinimumExpanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <layout class="QVBoxLayout" name="buttonVerticalLayout">
@@ -121,20 +111,7 @@
       <number>10</number>
      </property>
      <item>
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_2">
+      <spacer name="buttonVerticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -165,6 +142,19 @@
        </property>
        <property name="text">
         <string>About</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="termsOfServiceButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Terms Of Service</string>
        </property>
       </widget>
      </item>

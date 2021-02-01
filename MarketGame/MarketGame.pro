@@ -14,19 +14,22 @@ SOURCES += \
     getuserapikey.cpp \
     main.cpp \
     mainwindow.cpp \
-    signinoptionsdialog.cpp
+    signinoptionsdialog.cpp \
+    termsofservice.cpp
 
 HEADERS += \
     applicationstatus.h \
     coordinator.h \
     getuserapikey.h \
     mainwindow.h \
-    signinoptionsdialog.h
+    signinoptionsdialog.h \
+    termsofservice.h
 
 FORMS += \
     getuserapikey.ui \
     mainwindow.ui \
-    signinoptionsdialog.ui
+    signinoptionsdialog.ui \
+    termsofservice.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

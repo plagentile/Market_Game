@@ -16,12 +16,23 @@ int32_t Coordinator::run(const QApplication &coreApp)
     int num = 0;
     MainWindow  mainWindow;
     SignInOptionsDialog  signInOptionsDialog;
+    TermsOfService termsOfService;
 
 
     //ApplicationErrors::App_Status coreStatus = ApplicationErrors::APP_ERRORS::ExitSuccessfully;
 
     /*Run Get Sign In Options*/
-    SignInOptionsDialog::Options signInOption = signInOptionsDialog.run();
+    SignInOptionsDialog::Options signInOption;
+    do
+    {
+         signInOption = signInOptionsDialog.run();
+         if(signInOption == SignInOptionsDialog::Options::TermsOfService){
+             /*Show Terms of Service*/
+             termsOfService.exec();
+         }
+    } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
+
+
     if(signInOption == SignInOptionsDialog::Options::NoOptionSelected){
         return -1;                                                          //User Terminated the Progam
     }
@@ -31,13 +42,14 @@ int32_t Coordinator::run(const QApplication &coreApp)
         if(getUserAPIKey.run() != ApplicationStatus::Status::ExitSuccessfully){
             return -1;
         }
-
     }
     else
     {
         /*Load Previous Save*/
-        printf("\nTodo...");
+        printf("ToDo...\n");
     }
+
+
 
     /*Run the Main Window*/
     mainWindow.show();
