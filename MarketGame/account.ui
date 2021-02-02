@@ -30,6 +30,12 @@
 #changeAvailableFundsButton:hover, #changeAPIKeyButton:hover
 {
 	font-weight:600;
+}
+
+#availableFundsBanner, #APIKeyBanner
+{
+	font-size: 22px;
+	font-family: Georgia;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -50,142 +56,173 @@
     </widget>
    </item>
    <item>
-    <spacer name="bannerTopVerticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QStackedWidget" name="accountOverviewStackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::MinimumExpanding</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
+     <widget class="QWidget" name="accountOverviewPage_1">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::MinimumExpanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>160</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="APIKeyBanner">
+         <property name="text">
+          <string>API Key</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="APIKeyHorizontalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="APIKeyLineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="changeAPIKeyButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Change</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="availableFundsBanner">
+         <property name="text">
+          <string>Available Funds</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="balanceHorizontalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QDoubleSpinBox" name="availableFundsSpinBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="maximum">
+            <double>1000000000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="changeAvailableFundsButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Change</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="accountOverviewPage_2">
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>100</y>
+         <width>55</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Page 2</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="overViewVerticalLayout">
-     <property name="bottomMargin">
+    <layout class="QHBoxLayout" name="nextAndBackhorizontalLayout">
+     <property name="topMargin">
       <number>10</number>
      </property>
      <item>
-      <spacer name="overViewVerticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
        </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::MinimumExpanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="APIKeyHorizontalLayout">
-       <property name="spacing">
-        <number>10</number>
+      <widget class="QPushButton" name="backButton">
+       <property name="text">
+        <string>Back</string>
        </property>
-       <property name="leftMargin">
-        <number>10</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLineEdit" name="APIKeyLineEdit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="changeAPIKeyButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Change</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="balanceHorizontalLayout">
-       <property name="spacing">
-        <number>10</number>
+      <widget class="QPushButton" name="nextButton">
+       <property name="text">
+        <string>Next</string>
        </property>
-       <property name="leftMargin">
-        <number>10</number>
-       </property>
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
-       <item>
-        <widget class="QDoubleSpinBox" name="availableFundsSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::NoButtons</enum>
-         </property>
-         <property name="maximum">
-          <double>1000000000.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="changeAvailableFundsButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Change</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="tradingMethodHorizontalLayout">
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>Current Strategy</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
     </layout>
    </item>
