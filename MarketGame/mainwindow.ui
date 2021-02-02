@@ -48,8 +48,9 @@
 	sharesAndCurrentPriceHorizontalLayout
 */
 
-#staticUnrealizedTotalLabel, #dynamicUnrealizedTotalLabel, #staticSharesOwnedLabel, #dynamicSharesOwnedLabel
+#staticUnrealizedTotalLabel, #dynamicUnrealizedTotalLabel, #staticSharesOwnedLabel, #dynamicSharesOwnedLabel, #staticAccountBalanceLabel, #staticAvailableFundsLabel, #dynamicAccountBalanceLabel, #dynamicAvailableFundsLabel
 {
+	border: 1px solid gray;
 	font-size:20px;
 	font-family: Calibri;
 	font-style: normal;
@@ -376,6 +377,9 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="margin">
+             <number>10</number>
+            </property>
            </widget>
           </item>
           <item>
@@ -385,6 +389,9 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="margin">
+             <number>10</number>
             </property>
            </widget>
           </item>
@@ -396,6 +403,9 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="margin">
+             <number>10</number>
+            </property>
            </widget>
           </item>
           <item>
@@ -405,6 +415,9 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="margin">
+             <number>10</number>
             </property>
            </widget>
           </item>
@@ -416,6 +429,9 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="margin">
+             <number>10</number>
+            </property>
            </widget>
           </item>
           <item>
@@ -426,6 +442,9 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="margin">
+             <number>10</number>
+            </property>
            </widget>
           </item>
          </layout>
@@ -433,8 +452,61 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="accountSnapshotHorizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="staticAvailableFundsLabel">
+          <property name="text">
+           <string>Available Funds:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dynamicAvailableFundsLabel">
+          <property name="text">
+           <string>0.0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="staticAccountBalanceLabel">
+          <property name="text">
+           <string>AccountBalance:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dynamicAccountBalanceLabel">
+          <property name="text">
+           <string>0.0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="sharesAndCurrentPriceHorizontalLayout">
         <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
          <number>0</number>
         </property>
         <item>
@@ -480,16 +552,6 @@
          </widget>
         </item>
         <item>
-         <widget class="Line" name="positionVerticleSeperator">
-          <property name="frameShadow">
-           <enum>QFrame::Sunken</enum>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="staticUnrealizedTotalLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -523,7 +585,7 @@
            </font>
           </property>
           <property name="text">
-           <string>0</string>
+           <string>0.0</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
