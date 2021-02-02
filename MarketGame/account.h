@@ -24,15 +24,12 @@ public:
     void run();
 private slots:
     void on_changeAPIKeyButton_clicked();
-
     void on_changeBalanceButton_clicked();
 
 private:
     double accountBalance;
     Ui::Account *ui;
     QString APIKey;
-
-
 };
 
 #endif // ACCOUNT_H

@@ -103,39 +103,21 @@
      </spacer>
     </item>
     <item>
-     <widget class="QSpinBox" name="accountBalanceInput">
+     <widget class="QDoubleSpinBox" name="accountBalanceInput">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="font">
-       <font>
-        <family>Verdana</family>
-        <pointsize>-1</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
       <property name="buttonSymbols">
        <enum>QAbstractSpinBox::NoButtons</enum>
       </property>
-      <property name="specialValueText">
-       <string/>
-      </property>
       <property name="prefix">
-       <string>Start Balance: $</string>
+       <string>Starting $</string>
       </property>
       <property name="maximum">
-       <number>1000000000</number>
-      </property>
-      <property name="singleStep">
-       <number>1000</number>
-      </property>
-      <property name="value">
-       <number>0</number>
+       <double>1000000000.000000000000000</double>
       </property>
      </widget>
     </item>

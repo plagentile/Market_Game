@@ -34,6 +34,7 @@ void Account::on_changeAPIKeyButton_clicked(){
     if(this->ui->APIKeyLineEdit->isReadOnly()){
         this->ui->APIKeyLineEdit->setReadOnly(false);
         this->ui->changeAPIKeyButton->setText("Save");
+        this->ui->changeAPIKeyButton->setFocus();
         return;
     }
     else{
