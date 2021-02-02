@@ -20,6 +20,7 @@ public:
     ~InitialAccountSetup();
 
     const QString getAPIKey() const;
+    double getInitBalance() const;
     bool keyOk() const;
     ApplicationStatus::Status run();
 
@@ -28,7 +29,8 @@ private slots:
     void on_showInputButton_clicked();
 
 private:
-     Ui::InitialAccountSetup *ui;
+    double initBalance;
+    Ui::InitialAccountSetup *ui;
     QString APIKey;
     ApplicationStatus::Status status;
 

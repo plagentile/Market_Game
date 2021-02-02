@@ -9,13 +9,17 @@ InitialAccountSetup::InitialAccountSetup(QWidget *parent) :
     ui->setupUi(this);
 }
 
-InitialAccountSetup::~InitialAccountSetup()
-{
+InitialAccountSetup::~InitialAccountSetup(){
     delete ui;
 }
 
 const QString InitialAccountSetup::getAPIKey() const{
     return this->APIKey;
+}
+
+double InitialAccountSetup::getInitBalance() const
+{
+    return this->initBalance;
 }
 
 /**
@@ -30,7 +34,6 @@ bool InitialAccountSetup::keyOk() const{
 
 ApplicationStatus::Status InitialAccountSetup::run()
 {
-    printf("In Run.,...");
     while(this->status == ApplicationStatus::Status::Unchanged){
         this->setModal(true);
         this->exec();
@@ -40,6 +43,7 @@ ApplicationStatus::Status InitialAccountSetup::run()
 
 
 void InitialAccountSetup::on_loginButton_clicked(){
+    this->initBalance = this->ui->accountBalanceInput->value();
     this->APIKey = this->ui->APIKeyInput->text();
     if(this->keyOk()){
          this->status = ApplicationStatus::Status::ExitSuccessfully;
