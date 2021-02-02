@@ -19,6 +19,8 @@ public:
     MainWindow(const MainWindow & window) = delete;
     MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
+private:
+    void refresh(void);
 
 private slots:
     void on_exitButton_clicked();

@@ -613,6 +613,9 @@
           <property name="text">
            <string>Simulate Buy</string>
           </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
         <item>

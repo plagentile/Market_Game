@@ -20,14 +20,16 @@ public:
 
     const QString getAPIKey() const;
     double getAccountBalance() const;
+    double getAvailableFunds() const;
 
     void run();
 private slots:
     void on_changeAPIKeyButton_clicked();
-    void on_changeBalanceButton_clicked();
+    void on_changeAvailableFundsButton_clicked();
 
 private:
     double accountBalance;
+    double availableFunds;
     Ui::Account *ui;
     QString APIKey;
 };

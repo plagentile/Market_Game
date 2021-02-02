@@ -5,6 +5,7 @@
 Account::Account(QWidget *parent, const double balance, const QString APIKey):
      QDialog(parent),
      accountBalance(balance),
+     availableFunds(balance),
      ui(new Ui::Account),
      APIKey(APIKey)
 {
@@ -23,8 +24,13 @@ double Account::getAccountBalance() const{
     return this->accountBalance;
 }
 
+double Account::getAvailableFunds() const
+{
+    return this->availableFunds;
+}
+
 void Account::run(){
-    ui->balanceSpinBox->setValue(accountBalance);
+    ui->availableFundsSpinBox->setValue(availableFunds);
     ui->APIKeyLineEdit->setText(APIKey);
     this->exec();
 }
@@ -44,17 +50,17 @@ void Account::on_changeAPIKeyButton_clicked(){
     }
 }
 
-void Account::on_changeBalanceButton_clicked()
+void Account::on_changeAvailableFundsButton_clicked()
 {
-    if(this->ui->balanceSpinBox->isReadOnly()){
-        this->ui->balanceSpinBox->setReadOnly(false);
-        this->ui->changeBalanceButton->setText("Save");
-        this->ui->balanceSpinBox->setFocus();
+    if(this->ui->availableFundsSpinBox->isReadOnly()){
+        this->ui->availableFundsSpinBox->setReadOnly(false);
+        this->ui->changeAvailableFundsButton->setText("Save");
+        this->ui->availableFundsSpinBox->setFocus();
         return;
     }
     else{
-        this->ui->changeBalanceButton->setText("Change");
-        this->accountBalance = this->ui->balanceSpinBox->value();
-        this->ui->balanceSpinBox->setReadOnly(true);
+        this->ui->changeAvailableFundsButton->setText("Change");
+        this->availableFunds = this->ui->availableFundsSpinBox->value();
+        this->ui->availableFundsSpinBox->setReadOnly(true);
     }
 }
