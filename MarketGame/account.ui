@@ -14,10 +14,10 @@
    <string>Account Overview</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#APIKeyLabel, #balanceLabel
+   <string notr="true">#APIKeyLineEdit, #balanceSpinBox
 {
 	background-color: white;
-	font-size: 12px;
+	font-size: 18px;
 	font-family: Georgia;
 }</string>
   </property>
@@ -113,22 +113,22 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="APIKeyLabel">
+        <widget class="QLineEdit" name="APIKeyLineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
-          <string>API KEY</string>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="chnageAPIKeyButton">
+        <widget class="QPushButton" name="changeAPIKeyButton">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -178,7 +178,20 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="balanceLabel">
+        <widget class="QDoubleSpinBox" name="balanceSpinBox">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <double>1000000000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="changeBalanceButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -186,20 +199,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Balance</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="changeBalanceButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>change</string>
+          <string>Change</string>
          </property>
         </widget>
        </item>
