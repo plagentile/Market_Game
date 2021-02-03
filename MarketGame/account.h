@@ -28,9 +28,9 @@ private:
 private slots:
     void on_changeAPIKeyButton_clicked();
     void on_changeAvailableFundsButton_clicked();
-    void on_nextButton_clicked();
+    void on_viewAccountPositionsButton_clicked();
     void on_cancelButton_clicked();
-    void on_backButton_clicked();
+    void on_viewAccountSnapshotButton_clicked();
 
 private:
     double accountBalance;

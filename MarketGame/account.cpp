@@ -39,19 +39,20 @@ void Account::enableDisableButton()
 {
     //first page
     if(this->ui->accountOverviewStackedWidget->currentIndex() == 0){
-        this->ui->nextButton->setEnabled(true);
-        this->ui->backButton->setEnabled(false);
+        this->ui->viewAccountPositionsButton->setEnabled(true);
+        this->ui->viewAccountPositionsButton->show();
+
+        this->ui->viewAccountSnapshotButton->setEnabled(false);
+        this->ui->viewAccountSnapshotButton->hide();
         return;
     }
-    //last page
-    if(this->ui->accountOverviewStackedWidget->currentIndex() == this->ui->accountOverviewStackedWidget->count() -1){
-        this->ui->nextButton->setEnabled(false);
-        this->ui->backButton->setEnabled(true);
-        return;
-    }
-    //middle
-    this->ui->backButton->setEnabled(true);
-    this->ui->nextButton->setEnabled(true);
+    //second page, there are no other pages
+    this->ui->viewAccountPositionsButton->setEnabled(false);
+    this->ui->viewAccountPositionsButton->hide();
+
+    this->ui->viewAccountSnapshotButton->setEnabled(true);
+    this->ui->viewAccountSnapshotButton->show();
+    return;
 }
 
 void Account::on_changeAPIKeyButton_clicked(){
@@ -82,15 +83,8 @@ void Account::on_changeAvailableFundsButton_clicked(){
     }
 }
 
-void Account::on_nextButton_clicked(){
-    int index = this->ui->accountOverviewStackedWidget->currentIndex();
-    index++;
-
-    if(index >= this->ui->accountOverviewStackedWidget->count()){
-       index = this->ui->accountOverviewStackedWidget->count();
-       index--;
-    }
-    this->ui->accountOverviewStackedWidget->setCurrentIndex(index);
+void Account::on_viewAccountPositionsButton_clicked(){
+    this->ui->accountOverviewStackedWidget->setCurrentIndex(1);
     this->enableDisableButton();
 }
 
@@ -98,12 +92,7 @@ void Account::on_cancelButton_clicked(){
     this->close();
 }
 
-void Account::on_backButton_clicked(){
-    int index = this->ui->accountOverviewStackedWidget->currentIndex();
-    index--;
-    if(index <= 0){
-       index = 0;
-    }
-    this->ui->accountOverviewStackedWidget->setCurrentIndex(index);
+void Account::on_viewAccountSnapshotButton_clicked(){
+    this->ui->accountOverviewStackedWidget->setCurrentIndex(0);
     this->enableDisableButton();
 }

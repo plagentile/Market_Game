@@ -30,7 +30,7 @@
 	background-color: DodgerBlue;
 }
 
-#changeAvailableFundsButton, #changeAPIKeyButton, #APIKeyLineEdit, #availableFundsSpinBox, #bannerLabel
+#changeAvailableFundsButton, #changeAPIKeyButton, #APIKeyLineEdit, #availableFundsSpinBox, #page_1_BannerLabel
 {
 	font-size: 22px;
 	font-family: Georgia;
@@ -48,20 +48,20 @@
 	font-family: Georgia;
 }
 
-#backButton, #nextButton, #cancelButton
+#viewAccountSnapshotButton, #viewAccountPositionsButton, #cancelButton
 {
 	border-radius: 20px;
 	font-size: 20px;
 	font-family: Georgia;
 }
 
-#nextButton
+#viewAccountPositionsButton
 {
 	color:white;
 	background-color: #4CAF50;
 }
 
-#backButton
+#viewAccountSnapshotButton
 {
 	color:white;
 	background-color: DodgerBlue;
@@ -71,43 +71,10 @@
 {
 	color:white;
 	background-color: #f44336;
-	opacity: 223
 }
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <spacer name="bannerVerticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Preferred</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <widget class="QLabel" name="bannerLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Your Account</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QStackedWidget" name="accountOverviewStackedWidget">
      <property name="sizePolicy">
@@ -121,19 +88,28 @@
      </property>
      <widget class="QWidget" name="accountOverviewPage_1">
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
        </property>
        <property name="bottomMargin">
         <number>10</number>
        </property>
        <item>
-        <spacer name="page_1_VerticalSpacerTop">
+        <spacer name="bannerVerticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
+          <enum>QSizePolicy::Preferred</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -144,7 +120,23 @@
         </spacer>
        </item>
        <item>
-        <spacer name="page_1_VerticalSpacerMid">
+        <widget class="QLabel" name="page_1_BannerLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Your Account Snapshot</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="page_1_VerticalSpacerTop">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -293,9 +285,67 @@
      <widget class="QWidget" name="accountOverviewPage_2">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QPushButton" name="pushButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
-          <string>Page 2</string>
+          <string>placeholder</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>placeholder</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>placeholder</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>placeholder</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>placeHolder</string>
          </property>
         </widget>
        </item>
@@ -321,7 +371,7 @@
       <number>0</number>
      </property>
      <item>
-      <spacer name="navigationVerticalSpacer">
+      <spacer name="navigationVerticalSpacerTop">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -337,7 +387,39 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="nextButton">
+      <spacer name="navigationVerticalSpacerMid">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <spacer name="navigationVerticalSpacerBottom">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="viewAccountPositionsButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -350,7 +432,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="backButton">
+      <widget class="QPushButton" name="viewAccountSnapshotButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -358,7 +440,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Back</string>
+        <string>View Account Snapshot</string>
        </property>
       </widget>
      </item>
