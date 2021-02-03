@@ -37,10 +37,6 @@
 	border-radius: 20px;
 }
 
-#changeAvailableFundsButton:hover, #changeAPIKeyButton:hover
-{
-	font-weight:600;
-}
 
 #availableFundsBanner, #APIKeyBanner
 {
@@ -53,25 +49,29 @@
 	border-radius: 20px;
 	font-size: 20px;
 	font-family: Georgia;
+	color:white;
 }
 
 #viewAccountPositionsButton
 {
-	color:white;
 	background-color: #4CAF50;
 }
 
 #viewAccountSnapshotButton
 {
-	color:white;
 	background-color: DodgerBlue;
 }
 
 #cancelButton
 {
-	color:white;
 	background-color: #f44336;
 }
+
+#cancelButton:hover, #viewAccountSnapshotButton:hover, #viewAccountPositionsButton:hover, #changeAvailableFundsButton:hover, #changeAPIKeyButton:hover
+{
+	font-weight: 500;
+}
+
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -84,7 +84,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="accountOverviewPage_1">
       <layout class="QVBoxLayout" name="verticalLayout_2">
