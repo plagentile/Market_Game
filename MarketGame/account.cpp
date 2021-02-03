@@ -24,8 +24,7 @@ double Account::getAccountBalance() const{
     return this->accountBalance;
 }
 
-double Account::getAvailableFunds() const
-{
+double Account::getAvailableFunds() const{
     return this->availableFunds;
 }
 
@@ -56,7 +55,6 @@ void Account::enableDisableButton()
 }
 
 void Account::on_changeAPIKeyButton_clicked(){
-
     if(this->ui->APIKeyLineEdit->isReadOnly()){
         this->ui->APIKeyLineEdit->setReadOnly(false);
         this->ui->changeAPIKeyButton->setText("Save");
@@ -67,7 +65,6 @@ void Account::on_changeAPIKeyButton_clicked(){
         this->ui->changeAPIKeyButton->setText("Change");
         this->APIKey = this->ui->APIKeyLineEdit->text();
         this->ui->APIKeyLineEdit->setReadOnly(true);
-
     }
 }
 

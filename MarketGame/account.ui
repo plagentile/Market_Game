@@ -14,7 +14,17 @@
    <string>Account Overview</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#changeAvailableFundsButton, #changeAPIKeyButton
+   <string notr="true">#Account
+{
+ 	border-image: url(:/files/img/accountOverviewBackground.png) 0 0 0 0 stretch stretch;
+}
+
+#accountOverviewStackedWidget, #accountOverviewPage_1
+{
+	background-color: transparent;
+}
+
+#changeAvailableFundsButton, #changeAPIKeyButton
 {
 	color:white;
 	background-color: DodgerBlue;
@@ -36,9 +46,52 @@
 {
 	font-size: 22px;
 	font-family: Georgia;
-}</string>
+}
+
+#backButton, #nextButton, #cancelButton
+{
+	border-radius: 20px;
+	font-size: 20px;
+	font-family: Georgia;
+}
+
+#nextButton
+{
+	color:white;
+	background-color: #4CAF50;
+}
+
+#backButton
+{
+	color:white;
+	background-color: DodgerBlue;
+}
+
+#cancelButton
+{
+	color:white;
+	background-color: #f44336;
+	opacity: 223
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <spacer name="bannerVerticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item>
     <widget class="QLabel" name="bannerLabel">
      <property name="sizePolicy">
@@ -57,13 +110,25 @@
    </item>
    <item>
     <widget class="QStackedWidget" name="accountOverviewStackedWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
      <widget class="QWidget" name="accountOverviewPage_1">
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="page_1_VerticalSpacerTop">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -73,20 +138,26 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>160</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="APIKeyBanner">
-         <property name="text">
-          <string>API Key</string>
+        <spacer name="page_1_VerticalSpacerMid">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+         <property name="sizeType">
+          <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-        </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="APIKeyHorizontalLayout">
@@ -96,6 +167,22 @@
          <property name="topMargin">
           <number>0</number>
          </property>
+         <item>
+          <widget class="QLabel" name="APIKeyBanner">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>API Key:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QLineEdit" name="APIKeyLineEdit">
            <property name="sizePolicy">
@@ -112,7 +199,7 @@
          <item>
           <widget class="QPushButton" name="changeAPIKeyButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -125,16 +212,6 @@
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="availableFundsBanner">
-         <property name="text">
-          <string>Available Funds</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="balanceHorizontalLayout">
          <property name="spacing">
           <number>0</number>
@@ -145,6 +222,22 @@
          <property name="rightMargin">
           <number>0</number>
          </property>
+         <item>
+          <widget class="QLabel" name="availableFundsBanner">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Available Funds:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QDoubleSpinBox" name="availableFundsSpinBox">
            <property name="sizePolicy">
@@ -167,7 +260,7 @@
          <item>
           <widget class="QPushButton" name="changeAvailableFundsButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -179,48 +272,106 @@
          </item>
         </layout>
        </item>
+       <item>
+        <spacer name="page__VerticalSpacerBottom">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="accountOverviewPage_2">
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>100</y>
-         <width>55</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Page 2</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Page 2</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="nextAndBackhorizontalLayout">
-     <property name="topMargin">
+    <layout class="QVBoxLayout" name="navigationButtonsVerticalLayout">
+     <property name="spacing">
       <number>10</number>
      </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
      <item>
-      <widget class="QPushButton" name="cancelButton">
+      <spacer name="navigationVerticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="nextButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Cancel</string>
+        <string>View Account Positions</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="backButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Back</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="nextButton">
+      <widget class="QPushButton" name="cancelButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Next</string>
+        <string>Cancel</string>
        </property>
       </widget>
      </item>
