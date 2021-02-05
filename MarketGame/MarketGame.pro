@@ -16,7 +16,11 @@ SOURCES += \
     initialaccountsetup.cpp \
     main.cpp \
     mainwindow.cpp \
+    readknownsymbols.cpp \
     signinoptionsdialog.cpp \
+    singleuseqstringqueue.cpp \
+    symbol.cpp \
+    symbolbst.cpp \
     termsofservice.cpp
 
 HEADERS += \
@@ -26,7 +30,11 @@ HEADERS += \
     coordinator.h \
     initialaccountsetup.h \
     mainwindow.h \
+    readknownsymbols.h \
     signinoptionsdialog.h \
+    singleuseqstringqueue.h \
+    symbol.h \
+    symbolbst.h \
     termsofservice.h
 
 FORMS += \

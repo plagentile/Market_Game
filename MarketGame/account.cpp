@@ -10,6 +10,7 @@ Account::Account(QWidget *parent, const double balance, const QString APIKey):
      APIKey(APIKey)
 {
     ui->setupUi(this);
+    this->enableDisableButton();
 }
 
 Account::~Account(){
@@ -31,8 +32,8 @@ double Account::getAvailableFunds() const{
 void Account::run(){
     ui->availableFundsSpinBox->setValue(availableFunds);
     ui->APIKeyLineEdit->setText(APIKey);
-    this->enableDisableButton();
     this->exec();
+    this->enableDisableButton();
 }
 
 void Account::enableDisableButton()
@@ -44,14 +45,21 @@ void Account::enableDisableButton()
 
         this->ui->viewAccountSnapshotButton->setEnabled(false);
         this->ui->viewAccountSnapshotButton->hide();
-        return;
     }
-    //second page, there are no other pages
-    this->ui->viewAccountPositionsButton->setEnabled(false);
-    this->ui->viewAccountPositionsButton->hide();
+    else{
+      //second page, there are no other pages
+      this->ui->viewAccountPositionsButton->setEnabled(false);
+      this->ui->viewAccountPositionsButton->hide();
 
-    this->ui->viewAccountSnapshotButton->setEnabled(true);
-    this->ui->viewAccountSnapshotButton->show();
+      this->ui->viewAccountSnapshotButton->setEnabled(true);
+      this->ui->viewAccountSnapshotButton->show();
+    }
+    this->ui->changeAPIKeyButton->setText("Change");
+    this->ui->APIKeyLineEdit->setReadOnly(true);
+
+    this->ui->changeAvailableFundsButton->setText("Change");
+    this->ui->availableFundsSpinBox->setReadOnly(true);
+
     return;
 }
 

@@ -16,6 +16,8 @@ int32_t Coordinator::run(const QApplication &coreApp)
     SignInOptionsDialog  signInOptionsDialog;
     TermsOfService termsOfService;
     About about;
+    ReadKnownSymbols readKnownSymbols;
+    readKnownSymbols.run();
 
     /*Run Get Sign In Options*/
     SignInOptionsDialog::Options signInOption;
@@ -47,6 +49,8 @@ int32_t Coordinator::run(const QApplication &coreApp)
         /*Load Previous Save*/
         printf("ToDo...\n");
     }
+
+
     return num;
 }
 
