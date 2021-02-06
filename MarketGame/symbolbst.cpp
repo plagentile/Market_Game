@@ -1,30 +1,28 @@
 #include "symbolbst.h"
 
 SymbolBST::SymbolBST()
-    :pRight(0), pLeft(0)
+    :pRoot(0)
 {
 }
 
-SymbolBST::SymbolBST(Symbol *pSymbol)
-    :pRight(0), pLeft(0), pSymbol(pSymbol)
-{
+SymbolBST::~SymbolBST(){
+    delete pRoot;
 }
 
-void SymbolBST::insert(SymbolBST *pRoot, Symbol *pItem){
+void SymbolBST::insert(Node *pItem){
 
     if(!pRoot){
-        printf("\nInserting: %ls, at root", qUtf16Printable(pItem->name));
-        pRoot = new SymbolBST(pItem);
+        pRoot = pItem;
         return;
     }
 
    //Make new item to be inserted
-   SymbolBST *pParent = nullptr;
-   SymbolBST *pCurrent = pRoot;
+   Node *pParent = nullptr;
+   Node *pCurrent = pRoot;
 
    while(pCurrent){
        pParent = pCurrent;
-       if(pCurrent->pSymbol->symbol > pItem->symbol){
+       if(pCurrent->symbol > pItem->symbol){
            pCurrent = pCurrent->pLeft;
        }
        else{
@@ -32,22 +30,25 @@ void SymbolBST::insert(SymbolBST *pRoot, Symbol *pItem){
        }
    }
 
-   if(pParent->pSymbol->symbol > pItem->symbol){
-        printf("Inserting: %ls, to the left of: %ls\n", qUtf16Printable(pItem->symbol), qUtf16Printable(pParent->pSymbol->symbol));
-        pParent->pLeft = new SymbolBST(pItem);
+   if(pParent->symbol > pItem->symbol){
+        pParent->pLeft = pItem;
    }
    else{
-       printf("Inserting: %ls, to the right of: %ls\n", qUtf16Printable(pItem->symbol), qUtf16Printable(pParent->pSymbol->symbol));
-       pParent->pRight = new SymbolBST(pItem);
-  }
+       pParent->pRight = pItem;
+   }
 }
 
-void SymbolBST::print(SymbolBST *pRoot)
+void SymbolBST::print(SymbolBST::Node *pRoot)
 {
     if(pRoot == nullptr){
         return;
     }
+
     print(pRoot->pLeft);
-    printf("Order: %ls\n", qUtf16Printable(pRoot->pSymbol->symbol));
+    printf("\n%ls", qUtf16Printable(pRoot->symbol));
     print(pRoot->pRight);
+}
+
+SymbolBST::Node *SymbolBST::getRoot(){
+    return this->pRoot;
 }

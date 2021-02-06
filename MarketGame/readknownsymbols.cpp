@@ -1,25 +1,23 @@
 #include "readknownsymbols.h"
 
+//Total file size is 5656 lines
+#define MAX_FILE_LINE_SIZE 5656
+
 ReadKnownSymbols::ReadKnownSymbols()
-    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE))
+    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST())
 {
 }
 
-ReadKnownSymbols::~ReadKnownSymbols()
-{
-    //wait for threads...
+ReadKnownSymbols::~ReadKnownSymbols(){
+    delete pSymbolBST;
 }
 
 void ReadKnownSymbols::run(){
-   QElapsedTimer timer;
-   timer.start();
-
    std::thread t_ReadSymbolFileThread(&ReadKnownSymbols::readKnownSymbolsFile, this);
-   std::thread t_ConvertSymbols(&ReadKnownSymbols::convertFileStrings, this);
-   t_ReadSymbolFileThread.join();
-   t_ConvertSymbols.join();
+   t_ReadSymbolFileThread.detach();
 
-   printf("\nDuration in time:%lli\n", timer.elapsed());
+   std::thread t_ConvertSymbols(&ReadKnownSymbols::convertFileStrings, this);
+   t_ConvertSymbols.detach();
 }
 
 void ReadKnownSymbols::readKnownSymbolsFile()
@@ -39,7 +37,7 @@ void ReadKnownSymbols::readKnownSymbolsFile()
      uint32_t x =0;
 
      while (!file.atEnd() && x < MAX_FILE_LINE_SIZE) {
-            this->pQStringQueue->enqueue(std::move(file.readLine()));
+            this->pQStringQueue->enqueue(file.readLine());
             x++;
      }
 
@@ -47,13 +45,24 @@ void ReadKnownSymbols::readKnownSymbolsFile()
 }
 
 void ReadKnownSymbols::convertFileStrings(){
-    for(uint32_t x = 0; x < MAX_FILE_LINE_SIZE; x++)
-    {
-        this->pQStringQueue->dequeue();
-       //printf("Dequeue: %ls", qUtf16Printable(this->pQStringQueue->dequeue()));
+
+    QElapsedTimer timer;
+    timer.start();
+
+    for(uint32_t x = 0; x < MAX_FILE_LINE_SIZE; x++){
+        QStringList list = this->pQStringQueue->dequeue().split(',');
+
+        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);
+        this->pSymbolBST->insert(pNode);
 
     }
+    printf("\nDuration in time:%lli\n", timer.elapsed());
 }
+
+void ReadKnownSymbols::print() const{
+    this->pSymbolBST->print(this->pSymbolBST->getRoot());
+}
+
 
 
 

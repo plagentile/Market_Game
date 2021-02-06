@@ -14,13 +14,16 @@ public:
     ~ReadKnownSymbols();
 
     void run();
+
 private:
     void readKnownSymbolsFile();
     void convertFileStrings();
 
+    void print() const;
+
 private:
     SingleUseQStringQueue * pQStringQueue;
-    static const uint32_t MAX_FILE_LINE_SIZE = 0;
+    SymbolBST *pSymbolBST;
 };
 
 #endif // READKNOWNSYMBOLS_H

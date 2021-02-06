@@ -1,6 +1,6 @@
 #include "singleuseqstringqueue.h"
 
-SingleUseQStringQueue::SingleUseQStringQueue(uint32_t size)
+SingleUseQStringQueue::SingleUseQStringQueue(const uint32_t size)
     :pQueue(new QString[size]), size(size), dequeueIndex(0),enqueueIndex(0)
 {
 }
@@ -23,20 +23,4 @@ const QString SingleUseQStringQueue::dequeue(){
         cv_Dequeue.wait(lock, [&]{return isDoneOrReady();});
     }
     return this->pQueue[dequeueIndex++];
-}
-
-
-bool SingleUseQStringQueue::isDoneOrReady() {
-
-    //quick check to see if we are trailing the enqueuing thread
-    if(this->dequeueIndex.load() < this->enqueueIndex.load()){
-        return true;
-    }
-
-    //check for all items to have been enqued
-    else if(this->enqueueIndex.load() == this->size){
-        return true;
-    }
-
-    return false;
 }

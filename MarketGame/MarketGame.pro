@@ -19,7 +19,6 @@ SOURCES += \
     readknownsymbols.cpp \
     signinoptionsdialog.cpp \
     singleuseqstringqueue.cpp \
-    symbol.cpp \
     symbolbst.cpp \
     termsofservice.cpp
 
@@ -33,7 +32,6 @@ HEADERS += \
     readknownsymbols.h \
     signinoptionsdialog.h \
     singleuseqstringqueue.h \
-    symbol.h \
     symbolbst.h \
     termsofservice.h
 

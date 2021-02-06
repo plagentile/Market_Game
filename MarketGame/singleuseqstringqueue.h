@@ -6,17 +6,30 @@
 class SingleUseQStringQueue
 {
 public:
-    SingleUseQStringQueue(uint32_t size);
+    SingleUseQStringQueue(const uint32_t size);
     SingleUseQStringQueue() = delete;
     SingleUseQStringQueue(const SingleUseQStringQueue & assign) = delete;
     SingleUseQStringQueue & operator = (const SingleUseQStringQueue & assign) = delete;
     ~SingleUseQStringQueue();
 
-    void enqueue(QString item);
+    void enqueue(const QString item);
     const QString dequeue();
 
 private:
-    bool isDoneOrReady();
+    inline bool isDoneOrReady() const
+    {
+        //quick check to see if we are trailing the enqueuing thread
+        if(this->dequeueIndex < this->enqueueIndex.load()){
+            return true;
+        }
+
+        //check for all items to have been enqued
+        else if(this->enqueueIndex == this->size){
+            return true;
+        }
+
+        return false;
+    }
 
 private:
     std::mutex mutex;
