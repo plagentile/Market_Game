@@ -2,16 +2,21 @@
 #define SYMBOLBST_H
 
 #include<QString>
+#include <QStringList>
 class SymbolBST{
 
 public:
     struct Node{
-        Node(const QString symbol, const QString name, const QString country, const QString sector, const QString industry)
+        Node(const QString& symbol, const QString& name, const QString& country, const QString& sector, const QString& industry)
              :pLeft(0), pRight(0), symbol(symbol), name(name), country(country), sector(sector), industry(industry)
         {
         }
         /*Check other operators*/
-        Node() = delete;
+        Node():
+            pLeft(0), pRight(0)
+        {
+
+        }
         ~Node()
         {
             delete pLeft;

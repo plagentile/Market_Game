@@ -10,6 +10,7 @@ ReadKnownSymbols::ReadKnownSymbols()
 
 ReadKnownSymbols::~ReadKnownSymbols(){
     delete pSymbolBST;
+    delete pQStringQueue;
 }
 
 void ReadKnownSymbols::run(){
@@ -50,13 +51,13 @@ void ReadKnownSymbols::convertFileStrings(){
     timer.start();
 
     for(uint32_t x = 0; x < MAX_FILE_LINE_SIZE; x++){
-        QStringList list = this->pQStringQueue->dequeue().split(',');
-
-        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);//this
+        const QStringList list = this->pQStringQueue->dequeue().split(',');
+        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);
         this->pSymbolBST->insert(pNode);
-
     }
+
     printf("\nDuration in time:%lli\n", timer.elapsed());
+    //this->print();
 }
 
 void ReadKnownSymbols::print() const{
