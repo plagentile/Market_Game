@@ -14,13 +14,11 @@ public:
     ~ReadKnownSymbols();
 
     void run();
-
 private:
     void readKnownSymbolsFile();
     void convertFileStrings();
 
     void print() const;
-
 private:
     SingleUseQStringQueue * pQStringQueue;
     SymbolBST *pSymbolBST;

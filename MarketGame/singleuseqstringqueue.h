@@ -6,29 +6,28 @@
 class SingleUseQStringQueue
 {
 public:
-    SingleUseQStringQueue(const uint32_t size);
+    SingleUseQStringQueue(uint32_t size);
     SingleUseQStringQueue() = delete;
     SingleUseQStringQueue(const SingleUseQStringQueue & assign) = delete;
     SingleUseQStringQueue & operator = (const SingleUseQStringQueue & assign) = delete;
     ~SingleUseQStringQueue();
 
-    void enqueue(const QString item);
+    void enqueueMove(const QString&& item);
     const QString dequeue();
 
 private:
     inline bool isDoneOrReady() const
     {
         //quick check to see if we are trailing the enqueuing thread
-        if(this->dequeueIndex < this->enqueueIndex.load()){
-            return true;
-        }
+        if(this->dequeueIndex.load() < this->enqueueIndex.load()){
+           return true;
+         }
 
-        //check for all items to have been enqued
-        else if(this->enqueueIndex == this->size){
-            return true;
-        }
-
-        return false;
+         //check for all items to have been enqued
+         else if(this->enqueueIndex.load() == this->size){
+             return true;
+         }
+         return false;
     }
 
 private:

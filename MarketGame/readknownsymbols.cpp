@@ -37,7 +37,7 @@ void ReadKnownSymbols::readKnownSymbolsFile()
      uint32_t x =0;
 
      while (!file.atEnd() && x < MAX_FILE_LINE_SIZE) {
-            this->pQStringQueue->enqueue(file.readLine());
+            this->pQStringQueue->enqueueMove(std::move(file.readLine()));
             x++;
      }
 
@@ -52,7 +52,7 @@ void ReadKnownSymbols::convertFileStrings(){
     for(uint32_t x = 0; x < MAX_FILE_LINE_SIZE; x++){
         QStringList list = this->pQStringQueue->dequeue().split(',');
 
-        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);
+        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);//this
         this->pSymbolBST->insert(pNode);
 
     }

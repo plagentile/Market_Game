@@ -9,7 +9,7 @@ SingleUseQStringQueue::~SingleUseQStringQueue(){
     delete[] pQueue;
 }
 
-void SingleUseQStringQueue::enqueue(const QString item){
+void SingleUseQStringQueue::enqueueMove(const QString&& item){
     if(this->enqueueIndex.load() == this->size) return;
     this->pQueue[this->enqueueIndex++] = item;
     this->cv_Dequeue.notify_one();
@@ -24,3 +24,5 @@ const QString SingleUseQStringQueue::dequeue(){
     }
     return this->pQueue[dequeueIndex++];
 }
+
+
