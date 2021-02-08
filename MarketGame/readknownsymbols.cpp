@@ -4,7 +4,7 @@
 #define MAX_FILE_LINE_SIZE 5656
 
 ReadKnownSymbols::ReadKnownSymbols()
-    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST())
+    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST()), syncDequeuing(-1)
 {
 }
 
@@ -13,55 +13,45 @@ ReadKnownSymbols::~ReadKnownSymbols(){
     delete pQStringQueue;
 }
 
-void ReadKnownSymbols::run(){
-   std::thread t_ReadSymbolFileThread(&ReadKnownSymbols::readKnownSymbolsFile, this);
-   t_ReadSymbolFileThread.detach();
+void ReadKnownSymbols::run(){   
+
+   QElapsedTimer timer;
+   timer.start();
+
+   QFile file_1(":/files/coreData/unsortedKnownSymbolsCommaSeperated_1.csv");
+   QFile file_2(":/files/coreData/unsortedKnownSymbolsCommaSeperated_2.csv");
+
+   std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file_1));
+   t_ReadSymbolFileThreadOne.detach();
+
+   std::thread t_ReadSymbolFileThreadTwo(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file_2));
+   t_ReadSymbolFileThreadTwo.detach();
 
    std::thread t_ConvertSymbols(&ReadKnownSymbols::convertFileStrings, this);
-   t_ConvertSymbols.detach();
+   std::thread t_ConvertSymbolsTwo(&ReadKnownSymbols::convertFileStrings, this);
+
+
+   t_ConvertSymbols.join();
+   t_ConvertSymbolsTwo.join();
+   printf("\nTime taken: %lli\n", timer.elapsed());
 }
 
-void ReadKnownSymbols::readKnownSymbolsFile()
+void ReadKnownSymbols::readKnownSymbolsFile(QFile& file) noexcept
 {
-    QFile file(":/files/coreData/knownSymbolsUnsortedCommaSeperated.csv");
-
-    if(!file.exists()){
-        printf("FILE NOT FOUND");
+    if(!file.exists() || !file.open(QIODevice::ReadOnly) ){
         return;
     }
-     if(!file.open(QIODevice::ReadOnly)){
-        printf("COULD NOT OPEN THE FILE");
-        return;
-    }
-
-     //Read Line by Line
-     uint32_t x =0;
-
-     while (!file.atEnd() && x < MAX_FILE_LINE_SIZE) {
-            this->pQStringQueue->enqueueMove(std::move(file.readLine()));
-            x++;
+     while (!file.atEnd()){
+        this->pQStringQueue->enqueueMove(std::move(file.readLine()));
      }
-
-     file.close();
+     if(file.isOpen())file.close();
 }
 
-void ReadKnownSymbols::convertFileStrings(){
-
-    QElapsedTimer timer;
-    timer.start();
-
-    for(uint32_t x = 0; x < MAX_FILE_LINE_SIZE; x++){
-        const QStringList list = this->pQStringQueue->dequeue().split(',');
-        SymbolBST::Node *pNode = new SymbolBST::Node(list[0], list[1],list[2],list[3],list[4]);
+void ReadKnownSymbols::convertFileStrings() noexcept{
+    while(++syncDequeuing < MAX_FILE_LINE_SIZE){
+        SymbolBST::Node *pNode = new SymbolBST::Node(std::move(this->pQStringQueue->dequeue().split(',')));
         this->pSymbolBST->insert(pNode);
     }
-
-    printf("\nDuration in time:%lli\n", timer.elapsed());
-    //this->print();
-}
-
-void ReadKnownSymbols::print() const{
-    this->pSymbolBST->print(this->pSymbolBST->getRoot());
 }
 
 

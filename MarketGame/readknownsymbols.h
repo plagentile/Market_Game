@@ -2,8 +2,8 @@
 #define READKNOWNSYMBOLS_H
 #include "singleuseqstringqueue.h"
 #include <symbolbst.h>
-#include <QElapsedTimer>
 #include <QFile>
+#include <QElapsedTimer>
 
 class ReadKnownSymbols
 {
@@ -15,13 +15,13 @@ public:
 
     void run();
 private:
-    void readKnownSymbolsFile();
-    void convertFileStrings();
-    void print() const;
+    void readKnownSymbolsFile(QFile& file) noexcept;
+    void convertFileStrings() noexcept;
 
 private:
     SingleUseQStringQueue * pQStringQueue;
     SymbolBST *pSymbolBST;
+    std::atomic_uint32_t syncDequeuing;
 };
 
 #endif // READKNOWNSYMBOLS_H

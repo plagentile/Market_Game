@@ -12,26 +12,26 @@ public:
     SingleUseQStringQueue & operator = (const SingleUseQStringQueue & assign) = delete;
     ~SingleUseQStringQueue();
 
-    void enqueueMove(const QString&& item);
-    const QString dequeue();
+    void enqueueMove(const QString&& item) noexcept;
+    const QString dequeue() noexcept;
 
 private:
-    inline bool isDoneOrReady() const
+    inline bool isDoneOrReady() const noexcept
     {
         //quick check to see if we are trailing the enqueuing thread
         if(this->dequeueIndex.load() < this->enqueueIndex.load()){
            return true;
          }
 
-         //check for all items to have been enqued
-         else if(this->enqueueIndex.load() == this->size){
+         //check if the enqueuing is done
+         else if(this->enqueueIndex.load() >= this->size){
              return true;
          }
          return false;
     }
 
 private:
-    std::mutex mutex;
+    std::mutex mDequeue, mEnqueue;
     std::condition_variable cv_Dequeue;
     QString *pQueue;
     const uint32_t size;

@@ -3,20 +3,21 @@
 
 #include<QString>
 #include <QStringList>
+#include <future>
 class SymbolBST{
 
 public:
     struct Node{
-        Node(const QString& symbol, const QString& name, const QString& country, const QString& sector, const QString& industry)
-             :pLeft(0), pRight(0), symbol(symbol), name(name), country(country), sector(sector), industry(industry)
+
+        Node(const QStringList&& val) noexcept
+            :pLeft(0), pRight(0), symbol(std::move(val[0])), name(std::move(val[1])), country(std::move(val[2])),
+              sector(std::move(val[3])), industry(std::move(val[4]))
         {
         }
         /*Check other operators*/
-        Node():
-            pLeft(0), pRight(0)
-        {
-
-        }
+        Node() = delete;
+        Node(const Node &rhs) = delete;
+        Node & operator = (const Node &rhs) = delete;
         ~Node()
         {
             delete pLeft;
@@ -37,11 +38,11 @@ public:
     SymbolBST & operator =(const SymbolBST & assign)= delete;
     ~SymbolBST();
 
-    void insert(Node *pNode);
-    void print(Node *pRoot);
-    Node * getRoot();
+    void insert(Node *pNode) noexcept;
+
 private:
     Node *pRoot;
+    std::mutex rootMutex;
 };
 
 #endif // SYMBOLBST_H

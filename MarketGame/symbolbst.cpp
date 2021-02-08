@@ -9,8 +9,12 @@ SymbolBST::~SymbolBST(){
     delete pRoot;
 }
 
-void SymbolBST::insert(Node *pItem){
+void SymbolBST::insert(Node *pItem) noexcept{
+    if(!pItem){
+        return;
+    }
 
+    std::lock_guard<std::mutex> lock(this->rootMutex);
     if(!pRoot){
         pRoot = pItem;
         return;
@@ -36,19 +40,4 @@ void SymbolBST::insert(Node *pItem){
    else{
        pParent->pRight = pItem;
    }
-}
-
-void SymbolBST::print(SymbolBST::Node *pRoot)
-{
-    if(pRoot == nullptr){
-        return;
-    }
-
-    print(pRoot->pLeft);
-    printf("\n%ls", qUtf16Printable(pRoot->symbol));
-    print(pRoot->pRight);
-}
-
-SymbolBST::Node *SymbolBST::getRoot(){
-    return this->pRoot;
 }

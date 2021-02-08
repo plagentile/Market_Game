@@ -9,16 +9,17 @@ SingleUseQStringQueue::~SingleUseQStringQueue(){
     delete[] pQueue;
 }
 
-void SingleUseQStringQueue::enqueueMove(const QString&& item){
-    if(this->enqueueIndex.load() == this->size) return;
-    this->pQueue[this->enqueueIndex++] = item;
+void SingleUseQStringQueue::enqueueMove(const QString&& item) noexcept{
+    std::lock_guard<std::mutex> lock(this->mEnqueue);
+    if(this->enqueueIndex.load() >= this->size) return;
+    this->pQueue[this->enqueueIndex] = std::move(item);
+    enqueueIndex++;
     this->cv_Dequeue.notify_one();
 }
 
-const QString SingleUseQStringQueue::dequeue(){
-    std::unique_lock<std::mutex> lock(this->mutex);
+const QString SingleUseQStringQueue::dequeue() noexcept{
+    std::unique_lock<std::mutex> lock(this->mDequeue);
     if(this->dequeueIndex.load() >= this->size) return "";
-
     if(!this->isDoneOrReady()){
         cv_Dequeue.wait(lock, [&]{return isDoneOrReady();});
     }
