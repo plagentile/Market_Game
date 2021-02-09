@@ -14,7 +14,9 @@ int32_t Coordinator::run(const QApplication &coreApp)
 {
 
     /*Read the known symbols initially*/
-    readKnownSymbols.run();
+    if(readKnownSymbols.run() != ReadKnownSymbols::Status::Normal){
+        return -1;
+    }
 
     /*Run Sign In Options*/
     SignInOptionsDialog::Options signInOption;

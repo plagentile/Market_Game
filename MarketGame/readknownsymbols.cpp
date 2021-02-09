@@ -1,10 +1,10 @@
 #include "readknownsymbols.h"
 
-//Total file size is 5656 lines
+//Total file size is 5651 lines
 #define MAX_FILE_LINE_SIZE 5561
 
 ReadKnownSymbols::ReadKnownSymbols()
-    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST()), syncDequeuing(-1)
+    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST()), syncDequeuing(-1), symStatus(Status::Normal)
 {
 }
 
@@ -13,14 +13,12 @@ ReadKnownSymbols::~ReadKnownSymbols(){
     delete pQStringQueue;
 }
 
-void ReadKnownSymbols::run(){   
+ReadKnownSymbols::Status ReadKnownSymbols::run(){
 
    QElapsedTimer timer;
    timer.start();
 
-   QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
-
-   std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file));
+   std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this);
    t_ReadSymbolFileThreadOne.detach();
 
    std::thread t_ConvertSymbolsOne(&ReadKnownSymbols::convertFileStrings, this);
@@ -30,25 +28,32 @@ void ReadKnownSymbols::run(){
    t_ConvertSymbolsTwo.join();
 
    printf("\nTime taken..: %lli\n", timer.elapsed());
+   return this->symStatus;
 }
 
 QStringList ReadKnownSymbols::searchSymbols(QString string){
     return this->pSymbolBST->search(string);
 }
 
-void ReadKnownSymbols::readKnownSymbolsFile(QFile& file) noexcept
+void ReadKnownSymbols::readKnownSymbolsFile() noexcept
 {
-    if(!file.exists() || !file.open(QIODevice::ReadOnly) ){
+    QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
+    if(!file.exists()){
+        this->symStatus =Status::FileNotFound;
+        return;
+    }
+    if(!file.open(QIODevice::ReadOnly) ){
+        this->symStatus =Status::CouldNotOpenFile;
         return;
     }
      while (!file.atEnd()){
         this->pQStringQueue->enqueueMove(std::move(file.readLine()));
      }
-     if(file.isOpen())file.close();
+     file.close();
 }
 
 void ReadKnownSymbols::convertFileStrings() noexcept{
-    while(++syncDequeuing < MAX_FILE_LINE_SIZE){
+    while(++syncDequeuing < MAX_FILE_LINE_SIZE && symStatus == Status::Normal){
         SymbolBST::Node *pNode = new SymbolBST::Node(std::move(this->pQStringQueue->dequeue().split(',')));
         this->pSymbolBST->insert(pNode);
     }

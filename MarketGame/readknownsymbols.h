@@ -12,16 +12,24 @@ public:
     ReadKnownSymbols & operator = (const ReadKnownSymbols & assign) = delete;
     ~ReadKnownSymbols();
 
-    void run();
-    QStringList searchSymbols(QString string);
-private:
-    void readKnownSymbolsFile(QFile& file) noexcept;
-    void convertFileStrings() noexcept;
+    enum class Status{
+        Normal,
+        FileNotFound,
+        CouldNotOpenFile
+    };
 
+    Status run();
+    QStringList searchSymbols(QString string);
+
+private:
+    void readKnownSymbolsFile() noexcept;
+    void convertFileStrings() noexcept;
 private:
     SingleUseQStringQueue * pQStringQueue;
     SymbolBST *pSymbolBST;
     std::atomic_uint32_t syncDequeuing;
+    std::atomic<Status> symStatus;
+
 };
 
 #endif // READKNOWNSYMBOLS_H

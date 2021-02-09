@@ -10,7 +10,6 @@ SingleUseQStringQueue::~SingleUseQStringQueue(){
 }
 
 void SingleUseQStringQueue::enqueueMove(const QString&& item) noexcept{
-    std::lock_guard<std::mutex> lock(this->mEnqueue);
     if(this->enqueueIndex.load() >= this->size) return;
     this->pQueue[this->enqueueIndex] = std::move(item);
     enqueueIndex++;

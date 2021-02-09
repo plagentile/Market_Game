@@ -31,7 +31,7 @@ private:
     }
 
 private:
-    std::mutex mDequeue, mEnqueue;
+    std::mutex mDequeue;
     std::condition_variable cv_Dequeue;
     QString *pQueue;
     const uint32_t size;
