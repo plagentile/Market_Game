@@ -31,5 +31,10 @@ public:
 private:
     Coordinator() = default;
 
+private:
+    SignInOptionsDialog  signInOptionsDialog;
+    TermsOfService termsOfService;
+    About about;
+    ReadKnownSymbols readKnownSymbols;
 };
 #endif // COORDINATOR_H

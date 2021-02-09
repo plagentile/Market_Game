@@ -39,6 +39,7 @@ public:
     ~SymbolBST();
 
     void insert(Node *pNode) noexcept;
+    QStringList search(QString symbol);
 
 private:
     Node *pRoot;

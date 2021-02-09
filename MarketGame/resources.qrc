@@ -6,8 +6,7 @@
         <file>img/welcomeBackground.png</file>
         <file>img/aboutBackground.png</file>
         <file>img/accountOverviewBackground.png</file>
-        <file>coreData/unsortedKnownSymbolsCommaSeperated_2.csv</file>
-        <file>coreData/unsortedKnownSymbolsCommaSeperated_1.csv</file>
+        <file>coreData/unsortedKnownSymbolsCommaSeperated.csv</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

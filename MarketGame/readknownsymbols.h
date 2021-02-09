@@ -4,7 +4,6 @@
 #include <symbolbst.h>
 #include <QFile>
 #include <QElapsedTimer>
-
 class ReadKnownSymbols
 {
 public:
@@ -14,6 +13,7 @@ public:
     ~ReadKnownSymbols();
 
     void run();
+    QStringList searchSymbols(QString string);
 private:
     void readKnownSymbolsFile(QFile& file) noexcept;
     void convertFileStrings() noexcept;

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QInputDialog>
 #include "account.h"
+#include "initialaccountsetup.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,7 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, const double balance =0.0, const QString Key ="");
+    MainWindow(QWidget *parent = nullptr, const InitialAccountSetup* initAccountSetup =nullptr );
     MainWindow() = delete;
     MainWindow(const MainWindow & window) = delete;
     MainWindow & operator = (const MainWindow & window) = delete;

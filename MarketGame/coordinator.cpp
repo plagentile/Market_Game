@@ -12,14 +12,11 @@ Coordinator *Coordinator::getInstance(){
 
 int32_t Coordinator::run(const QApplication &coreApp)
 {
-    int num = 0;
-    SignInOptionsDialog  signInOptionsDialog;
-    TermsOfService termsOfService;
-    About about;
-    ReadKnownSymbols readKnownSymbols;
+
+    /*Read the known symbols initially*/
     readKnownSymbols.run();
 
-    /*Run Get Sign In Options*/
+    /*Run Sign In Options*/
     SignInOptionsDialog::Options signInOption;
     do{
          signInOption = signInOptionsDialog.run();
@@ -34,6 +31,7 @@ int32_t Coordinator::run(const QApplication &coreApp)
          }
     } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
 
+    /*Check if the user elected to either make a new sim, or load a previous save*/
      if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         InitialAccountSetup  initialAccountSetup;
         if(initialAccountSetup.run() != ApplicationStatus::Status::ExitSuccessfully){
@@ -41,16 +39,14 @@ int32_t Coordinator::run(const QApplication &coreApp)
         }
 
         /*Run the Main Window*/
-        MainWindow mainWindow(0, initialAccountSetup.getInitBalance(), initialAccountSetup.getAPIKey());
+        MainWindow mainWindow(0, &initialAccountSetup);
         mainWindow.show();
-        num = coreApp.exec();
+        return coreApp.exec();
     }
     else{
         /*Load Previous Save*/
         printf("ToDo...\n");
     }
-
-
-    return num;
+    return 0;
 }
 

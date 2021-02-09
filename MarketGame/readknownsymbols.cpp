@@ -1,7 +1,7 @@
 #include "readknownsymbols.h"
 
 //Total file size is 5656 lines
-#define MAX_FILE_LINE_SIZE 5656
+#define MAX_FILE_LINE_SIZE 5561
 
 ReadKnownSymbols::ReadKnownSymbols()
     :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST()), syncDequeuing(-1)
@@ -18,22 +18,22 @@ void ReadKnownSymbols::run(){
    QElapsedTimer timer;
    timer.start();
 
-   QFile file_1(":/files/coreData/unsortedKnownSymbolsCommaSeperated_1.csv");
-   QFile file_2(":/files/coreData/unsortedKnownSymbolsCommaSeperated_2.csv");
+   QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
 
-   std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file_1));
+   std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file));
    t_ReadSymbolFileThreadOne.detach();
 
-   std::thread t_ReadSymbolFileThreadTwo(&ReadKnownSymbols::readKnownSymbolsFile, this, std::ref(file_2));
-   t_ReadSymbolFileThreadTwo.detach();
-
-   std::thread t_ConvertSymbols(&ReadKnownSymbols::convertFileStrings, this);
+   std::thread t_ConvertSymbolsOne(&ReadKnownSymbols::convertFileStrings, this);
    std::thread t_ConvertSymbolsTwo(&ReadKnownSymbols::convertFileStrings, this);
 
-
-   t_ConvertSymbols.join();
+   t_ConvertSymbolsOne.join();
    t_ConvertSymbolsTwo.join();
-   printf("\nTime taken: %lli\n", timer.elapsed());
+
+   printf("\nTime taken..: %lli\n", timer.elapsed());
+}
+
+QStringList ReadKnownSymbols::searchSymbols(QString string){
+    return this->pSymbolBST->search(string);
 }
 
 void ReadKnownSymbols::readKnownSymbolsFile(QFile& file) noexcept

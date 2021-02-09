@@ -26,12 +26,11 @@ public:
     SignInOptionsDialog & operator =(const SignInOptionsDialog & assignThis) = delete;
    ~SignInOptionsDialog();
 
-    Options run();
+     Options run();
 
 private slots:
     void on_makeNewSimButton_clicked();
     void on_termsOfServiceButton_clicked();
-
     void on_aboutButton_clicked();
 
 private:
