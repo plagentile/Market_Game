@@ -17,6 +17,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     readknownsymbols.cpp \
+    searchsymbol.cpp \
     signinoptionsdialog.cpp \
     singleuseqstringqueue.cpp \
     symbolbst.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     initialaccountsetup.h \
     mainwindow.h \
     readknownsymbols.h \
+    searchsymbol.h \
     signinoptionsdialog.h \
     singleuseqstringqueue.h \
     symbolbst.h \
@@ -40,6 +42,7 @@ FORMS += \
     account.ui \
     initialaccountsetup.ui \
     mainwindow.ui \
+    searchsymbol.ui \
     signinoptionsdialog.ui \
     termsofservice.ui
 

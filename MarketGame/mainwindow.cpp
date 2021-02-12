@@ -1,12 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSetup)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSetup, const SymbolBST *symbolBST)
+    : QMainWindow(parent), ui(new Ui::MainWindow), symbolBST(symbolBST)
 {
     ui->setupUi(this);
     this->account = new Account(0, initAccountSetup->getInitBalance(), initAccountSetup->getAPIKey());
     this->refresh();
+
+    if(this->symbolBST){
+        printf("\nVALID...");
+    }
 }
 
 MainWindow::~MainWindow(){

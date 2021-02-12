@@ -19,11 +19,13 @@ public:
     };
 
     Status run();
-    QStringList searchSymbols(QString string);
+
+public:
+    const SymbolBST * getBST() const noexcept;
 
 private:
     void readKnownSymbolsFile() noexcept;
-    void convertFileStrings() noexcept;
+    void convertFileStrings();
 private:
     SingleUseQStringQueue * pQStringQueue;
     SymbolBST *pSymbolBST;

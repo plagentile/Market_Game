@@ -5,6 +5,7 @@
 #include <QInputDialog>
 #include "account.h"
 #include "initialaccountsetup.h"
+#include "symbolbst.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +16,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, const InitialAccountSetup* initAccountSetup =nullptr );
+    MainWindow(QWidget *parent = nullptr, const InitialAccountSetup* initAccountSetup =nullptr, const SymbolBST *symbolBST = nullptr );
     MainWindow() = delete;
     MainWindow(const MainWindow & window) = delete;
     MainWindow & operator = (const MainWindow & window) = delete;
@@ -31,5 +32,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Account *account;
+    const SymbolBST* symbolBST;
 };
 #endif // MAINWINDOW_H

@@ -12,6 +12,10 @@ Coordinator *Coordinator::getInstance(){
 
 int32_t Coordinator::run(const QApplication &coreApp)
 {
+    //SearchSymbol searchSymbol;
+
+    //searchSymbol.show();
+    //searchSymbol.exec();
 
     /*Read the known symbols initially*/
     if(readKnownSymbols.run() != ReadKnownSymbols::Status::Normal){
@@ -41,7 +45,7 @@ int32_t Coordinator::run(const QApplication &coreApp)
         }
 
         /*Run the Main Window*/
-        MainWindow mainWindow(0, &initialAccountSetup);
+        MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getBST());
         mainWindow.show();
         return coreApp.exec();
     }

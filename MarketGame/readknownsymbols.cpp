@@ -31,8 +31,8 @@ ReadKnownSymbols::Status ReadKnownSymbols::run(){
    return this->symStatus;
 }
 
-QStringList ReadKnownSymbols::searchSymbols(QString string){
-    return this->pSymbolBST->search(string);
+const SymbolBST *ReadKnownSymbols::getBST() const noexcept{
+    return this->pSymbolBST;
 }
 
 void ReadKnownSymbols::readKnownSymbolsFile() noexcept
@@ -52,16 +52,12 @@ void ReadKnownSymbols::readKnownSymbolsFile() noexcept
      file.close();
 }
 
-void ReadKnownSymbols::convertFileStrings() noexcept{
+void ReadKnownSymbols::convertFileStrings() {
     while(++syncDequeuing < MAX_FILE_LINE_SIZE && symStatus == Status::Normal){
         SymbolBST::Node *pNode = new SymbolBST::Node(std::move(this->pQStringQueue->dequeue().split(',')));
         this->pSymbolBST->insert(pNode);
     }
 }
-
-
-
-
 
 
 

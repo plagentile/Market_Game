@@ -8,6 +8,7 @@
 #include "about.h"
 #include <QApplication>
 #include <readknownsymbols.h>
+#include "searchsymbol.h"
 
 /*
     This class is responsible for controlling the flow of the program

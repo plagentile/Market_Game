@@ -47,7 +47,7 @@ void SymbolBST::insert(Node *pItem) noexcept{
  * the symbol (if it exists) and also symbols that are "like" the entered
  * one
  */
-QStringList SymbolBST::search(QString symbol){
+const QStringList SymbolBST::search(const QString symbol) const noexcept{
     QStringList list;
     if(symbol == "" || this->pRoot == nullptr) return list;
     Node *pTemp = pRoot;

@@ -32,6 +32,7 @@ public:
         const QString industry;
     };
 
+
 public:
     SymbolBST();
     SymbolBST(const SymbolBST & assign) =delete;
@@ -39,7 +40,7 @@ public:
     ~SymbolBST();
 
     void insert(Node *pNode) noexcept;
-    QStringList search(QString symbol);
+    const QStringList search(const QString symbol) const noexcept;
 
 private:
     Node *pRoot;
