@@ -1,7 +1,7 @@
 #ifndef READKNOWNSYMBOLS_H
 #define READKNOWNSYMBOLS_H
 #include "singleuseqstringqueue.h"
-#include <symbolbst.h>
+#include "symbolternarysearchtree.h"
 #include <QFile>
 #include <QElapsedTimer>
 class ReadKnownSymbols
@@ -21,14 +21,14 @@ public:
     Status run();
 
 public:
-    const SymbolBST * getBST() const noexcept;
+    const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
 
 private:
     void readKnownSymbolsFile() noexcept;
     void convertFileStrings();
 private:
     SingleUseQStringQueue * pQStringQueue;
-    SymbolBST *pSymbolBST;
+    SymbolTernarySearchTree *pSymbolTernarySearchTree;
     std::atomic_uint32_t syncDequeuing;
     std::atomic<Status> symStatus;
 

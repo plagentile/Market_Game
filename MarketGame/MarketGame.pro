@@ -20,7 +20,7 @@ SOURCES += \
     searchsymbol.cpp \
     signinoptionsdialog.cpp \
     singleuseqstringqueue.cpp \
-    symbolbst.cpp \
+    symbolternarysearchtree.cpp \
     termsofservice.cpp
 
 HEADERS += \
@@ -34,7 +34,7 @@ HEADERS += \
     searchsymbol.h \
     signinoptionsdialog.h \
     singleuseqstringqueue.h \
-    symbolbst.h \
+    symbolternarysearchtree.h \
     termsofservice.h
 
 FORMS += \

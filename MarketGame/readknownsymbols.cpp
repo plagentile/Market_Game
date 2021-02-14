@@ -4,12 +4,12 @@
 #define MAX_FILE_LINE_SIZE 5561
 
 ReadKnownSymbols::ReadKnownSymbols()
-    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolBST(new SymbolBST()), syncDequeuing(-1), symStatus(Status::Normal)
+    :pQStringQueue(new SingleUseQStringQueue(MAX_FILE_LINE_SIZE)), pSymbolTernarySearchTree(new SymbolTernarySearchTree()), syncDequeuing(-1), symStatus(Status::Normal)
 {
 }
 
 ReadKnownSymbols::~ReadKnownSymbols(){
-    delete pSymbolBST;
+    delete pSymbolTernarySearchTree;
     delete pQStringQueue;
 }
 
@@ -21,18 +21,16 @@ ReadKnownSymbols::Status ReadKnownSymbols::run(){
    std::thread t_ReadSymbolFileThreadOne(&ReadKnownSymbols::readKnownSymbolsFile, this);
    t_ReadSymbolFileThreadOne.detach();
 
-   std::thread t_ConvertSymbolsOne(&ReadKnownSymbols::convertFileStrings, this);
-   std::thread t_ConvertSymbolsTwo(&ReadKnownSymbols::convertFileStrings, this);
 
-   t_ConvertSymbolsOne.join();
+   std::thread t_ConvertSymbolsTwo(&ReadKnownSymbols::convertFileStrings, this);
    t_ConvertSymbolsTwo.join();
 
    printf("\nTime taken..: %lli\n", timer.elapsed());
    return this->symStatus;
 }
 
-const SymbolBST *ReadKnownSymbols::getBST() const noexcept{
-    return this->pSymbolBST;
+const SymbolTernarySearchTree *ReadKnownSymbols::getSymbolTernarySearchTree() const noexcept{
+    return this->pSymbolTernarySearchTree;
 }
 
 void ReadKnownSymbols::readKnownSymbolsFile() noexcept
@@ -53,9 +51,10 @@ void ReadKnownSymbols::readKnownSymbolsFile() noexcept
 }
 
 void ReadKnownSymbols::convertFileStrings() {
-    while(++syncDequeuing < MAX_FILE_LINE_SIZE && symStatus == Status::Normal){
-        SymbolBST::Node *pNode = new SymbolBST::Node(std::move(this->pQStringQueue->dequeue().split(',')));
-        this->pSymbolBST->insert(pNode);
+    while(++syncDequeuing < MAX_FILE_LINE_SIZE && symStatus == Status::Normal)
+    {
+        QStringList list = this->pQStringQueue->dequeue().split(',');
+        this->pSymbolTernarySearchTree->insert(list[0], list);
     }
 }
 

@@ -50,6 +50,12 @@
    </item>
    <item>
     <widget class="QLineEdit" name="symbolLineEdit">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhUppercaseOnly</set>
+     </property>
      <property name="placeholderText">
       <string>Please Enter A Symbol:</string>
      </property>

@@ -45,7 +45,7 @@ int32_t Coordinator::run(const QApplication &coreApp)
         }
 
         /*Run the Main Window*/
-        MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getBST());
+        MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
         mainWindow.show();
         return coreApp.exec();
     }
