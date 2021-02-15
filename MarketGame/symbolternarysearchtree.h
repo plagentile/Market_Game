@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QStringList>
+#include <QVector>
 class SymbolTernarySearchTree
 {
 
@@ -17,7 +18,6 @@ public:
            :cData(cData), pMid(0), pLeft(0), pRight(0), completesSymbol(true),symbol(list[0]),
              name(list[1]), country(list[2]), sector(list[3]), industry(list[4])
         {
-
         }
         Node() = delete;
         Node(const Node & assign) = delete;
@@ -42,12 +42,12 @@ public:
     };
 
 public:
-    int numAdds =0;
-    int numDeletes = 0;
-
     SymbolTernarySearchTree();
+    SymbolTernarySearchTree(const SymbolTernarySearchTree & assign) = delete;
+    SymbolTernarySearchTree & operator =(const SymbolTernarySearchTree & assign) = delete;
     ~SymbolTernarySearchTree();
-    const QStringList searchTST(const QString str) const;
+
+    const QVector<Node*> searchTST(const QString str) const;
     void insert(const QString str,const QStringList &list);
 private:
     void insert(Node** root, const QString str, const int32_t strIndex, const QStringList &list);

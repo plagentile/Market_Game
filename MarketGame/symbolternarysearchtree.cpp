@@ -5,22 +5,20 @@ SymbolTernarySearchTree::SymbolTernarySearchTree()
 {
 }
 
-SymbolTernarySearchTree::~SymbolTernarySearchTree()
-{
+SymbolTernarySearchTree::~SymbolTernarySearchTree(){
     delete this->pRoot;
 }
 
-const QStringList SymbolTernarySearchTree::searchTST(const QString str) const
-{
+const QVector<SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST(const QString str) const{
 
-    QStringList listRes;
-    if(!this->pRoot || str.length() == 0) return listRes;
-
-
-    QString res ="";
+    QVector<SymbolTernarySearchTree::Node*> vectRes;
+    if(!this->pRoot || str.length() == 0) return vectRes;
+    vectRes.reserve(4);
     int strIndex = 0;
-
+    int vectIndex = 0;
     Node *pTemp = this->pRoot;
+    QString res ="";
+
     while(pTemp && strIndex < str.length())
     {
         if(pTemp->cData > str[strIndex]){
@@ -37,21 +35,32 @@ const QStringList SymbolTernarySearchTree::searchTST(const QString str) const
             {
                 if(pTemp->completesSymbol)
                 {
-                    //successful query, return the string, may look down the line for similar words
-                    listRes.append(res + "\t" + pTemp->name);
-                    return listRes;
+                    //successful query, return the item
+                    vectRes.insert(vectIndex++,pTemp);
+
+                    //before returning, look one deep in each direction
+                    if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
+                         vectRes.insert(vectIndex++,pTemp->pLeft);
+                    }
+                    if(pTemp->pMid && pTemp->pMid->completesSymbol){
+                         vectRes.insert(vectIndex++,pTemp->pMid);
+                    }
+                    if(pTemp->pRight && pTemp->pRight->completesSymbol){
+                         vectRes.insert(vectIndex++,pTemp->pRight);
+                    }
+                    return vectRes;
                 }
                 else
                 {
                     //Incomplete search query, look down the line to where completed string may be
                     if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
-                        listRes.append(res + pTemp->pLeft->cData);
+                         vectRes.insert(vectIndex++,pTemp->pLeft);
                     }
                     if(pTemp->pMid && pTemp->pMid->completesSymbol){
-                        listRes.append(res + pTemp->pMid->cData);
+                         vectRes.insert(vectIndex++,pTemp->pMid);
                     }
                     if(pTemp->pRight && pTemp->pRight->completesSymbol){
-                        listRes.append(res + pTemp->pRight->cData);
+                         vectRes.insert(vectIndex++,pTemp->pRight);
                     }
                 }
             }
@@ -59,7 +68,7 @@ const QStringList SymbolTernarySearchTree::searchTST(const QString str) const
             strIndex++;
         }
     }
-    return listRes;
+    return vectRes;
 }
 
 void SymbolTernarySearchTree::insert(const QString str, const QStringList &list){
@@ -73,11 +82,9 @@ void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const
     {
         if(strIndex == str.length() -1){
             *root = new Node(str[strIndex], list);
-            numAdds++;
             return;
         }
         *root = new Node(str[strIndex]);
-        numAdds++;
     }
 
     if((str[strIndex]) < (*root)->cData){
