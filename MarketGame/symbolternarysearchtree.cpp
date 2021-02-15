@@ -72,7 +72,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
     return vectRes;
 }
 
-void SymbolTernarySearchTree::insert(const QStringList &list){
+void SymbolTernarySearchTree::insert(const QStringList &&list){
     if(list.size() ^ 0x5) return;     //ensure that the size is 5 (4 elements)
     this->insert(&this->pRoot, list[0], 0, list);
 }

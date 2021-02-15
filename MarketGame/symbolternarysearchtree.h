@@ -1,7 +1,7 @@
 #ifndef SYMBOLTERNARYSEARCHTREE_H
 #define SYMBOLTERNARYSEARCHTREE_H
 
-#include <QString>
+
 #include <QStringList>
 #include <QVector>
 class SymbolTernarySearchTree
@@ -48,7 +48,7 @@ public:
     ~SymbolTernarySearchTree();
 
     const QVector<const Node*> searchTST(const QString str) const;
-    void insert(const QStringList &list);
+    void insert(const QStringList &&list);
 private:
     void insert(Node** root, const QString str, const int32_t strIndex, const QStringList &list);
 private:

@@ -34,7 +34,7 @@ void ReadKnownSymbols::readKnownSymbolsFile() noexcept{
     }
     QTextStream stream(&file);
     while(!stream.atEnd()){
-        this->pSymbolTernarySearchTree->insert(stream.readLine().split(','));
+        this->pSymbolTernarySearchTree->insert(std::move(stream.readLine().split(',')));
     }
     file.close();
 }
