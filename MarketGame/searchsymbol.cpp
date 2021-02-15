@@ -7,9 +7,6 @@ SearchSymbol::SearchSymbol(QWidget *parent, const SymbolTernarySearchTree *symbo
     pSymbolTernarySearchTree(symbolTST)
 {
     ui->setupUi(this);
-    if(this->pSymbolTernarySearchTree){
-        printf("\nValid");
-    }
 }
 
 SearchSymbol::~SearchSymbol(){
@@ -22,9 +19,8 @@ void SearchSymbol::run(){
 
 /*User is searching a symbol*/
 void SearchSymbol::on_symbolLineEdit_textChanged(const QString &arg1){
-    if(arg1 != "")
-    {
-        QVector<SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTernarySearchTree->searchTST(arg1);
+    if(arg1 != ""){
+        QVector<const SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTernarySearchTree->searchTST(arg1);
         for(int x =0; x < vectRes.size(); x++){
              printf("\nSEARCH RES: %ls", qUtf16Printable(vectRes.at(x)->name));
         }

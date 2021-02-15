@@ -1,9 +1,9 @@
 #ifndef READKNOWNSYMBOLS_H
 #define READKNOWNSYMBOLS_H
-#include "singleuseqstringqueue.h"
 #include "symbolternarysearchtree.h"
-#include <QFile>
 #include <QElapsedTimer>
+#include <QFile>
+#include <QTextStream>
 class ReadKnownSymbols
 {
 public:
@@ -22,16 +22,11 @@ public:
 
 public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
-
 private:
     void readKnownSymbolsFile() noexcept;
-    void convertFileStrings();
 private:
-    SingleUseQStringQueue * pQStringQueue;
+    Status symStatus;
     SymbolTernarySearchTree *pSymbolTernarySearchTree;
-    std::atomic_uint32_t syncDequeuing;
-    std::atomic<Status> symStatus;
-
 };
 
 #endif // READKNOWNSYMBOLS_H

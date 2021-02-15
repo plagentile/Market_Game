@@ -47,8 +47,8 @@ public:
     SymbolTernarySearchTree & operator =(const SymbolTernarySearchTree & assign) = delete;
     ~SymbolTernarySearchTree();
 
-    const QVector<Node*> searchTST(const QString str) const;
-    void insert(const QString str,const QStringList &list);
+    const QVector<const Node*> searchTST(const QString str) const;
+    void insert(const QStringList &list);
 private:
     void insert(Node** root, const QString str, const int32_t strIndex, const QStringList &list);
 private:

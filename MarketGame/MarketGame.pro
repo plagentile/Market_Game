@@ -19,7 +19,6 @@ SOURCES += \
     readknownsymbols.cpp \
     searchsymbol.cpp \
     signinoptionsdialog.cpp \
-    singleuseqstringqueue.cpp \
     symbolternarysearchtree.cpp \
     termsofservice.cpp
 
@@ -33,7 +32,6 @@ HEADERS += \
     readknownsymbols.h \
     searchsymbol.h \
     signinoptionsdialog.h \
-    singleuseqstringqueue.h \
     symbolternarysearchtree.h \
     termsofservice.h
 

@@ -9,9 +9,9 @@ SymbolTernarySearchTree::~SymbolTernarySearchTree(){
     delete this->pRoot;
 }
 
-const QVector<SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST(const QString str) const{
+const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST(const QString str) const{
 
-    QVector<SymbolTernarySearchTree::Node*> vectRes;
+    QVector<const SymbolTernarySearchTree::Node*> vectRes;
     if(!this->pRoot || str.length() == 0) return vectRes;
     vectRes.reserve(4);
     int strIndex = 0;
@@ -48,7 +48,7 @@ const QVector<SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST
                     if(pTemp->pRight && pTemp->pRight->completesSymbol){
                          vectRes.insert(vectIndex++,pTemp->pRight);
                     }
-                    return vectRes;
+                    break;
                 }
                 else
                 {
@@ -62,6 +62,7 @@ const QVector<SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST
                     if(pTemp->pRight && pTemp->pRight->completesSymbol){
                          vectRes.insert(vectIndex++,pTemp->pRight);
                     }
+                    break; //saves 1 comparision
                 }
             }
             pTemp = pTemp->pMid;
@@ -71,9 +72,9 @@ const QVector<SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST
     return vectRes;
 }
 
-void SymbolTernarySearchTree::insert(const QString str, const QStringList &list){
-    if(str == "") return;
-    this->insert(&this->pRoot, str, 0, list);
+void SymbolTernarySearchTree::insert(const QStringList &list){
+    if(list.size() ^ 0x5) return;     //ensure that the size is 5 (4 elements)
+    this->insert(&this->pRoot, list[0], 0, list);
 }
 
 void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString str, const int32_t strIndex, const QStringList &list )
@@ -101,7 +102,10 @@ void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const
         }
         else{
             (*root)->completesSymbol = true;
-            (*root)->name =list[1];
+            (*root)->name = list[1];
+            (*root)->country = list[2];
+            (*root)->sector = list[3];
+            (*root)->industry = list[4];
         }
     }
 }
