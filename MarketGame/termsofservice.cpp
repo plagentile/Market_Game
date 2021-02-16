@@ -8,7 +8,6 @@ TermsOfService::TermsOfService(QWidget *parent) :
     ui->setupUi(this);
 }
 
-TermsOfService::~TermsOfService()
-{
+TermsOfService::~TermsOfService(){
     delete ui;
 }

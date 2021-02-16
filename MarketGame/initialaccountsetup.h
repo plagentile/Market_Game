@@ -19,9 +19,9 @@ public:
     InitialAccountSetup & operator = (const InitialAccountSetup & assignThis) =delete;
     ~InitialAccountSetup();
 
-    const QString getAPIKey() const;
-    double getInitBalance() const;
-    bool keyOk() const;
+    const QString getAPIKey() const noexcept;
+    double getInitBalance() const noexcept;
+    bool keyOk() const noexcept;
     ApplicationStatus::Status run();
 
 private slots:

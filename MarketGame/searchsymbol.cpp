@@ -22,7 +22,11 @@ void SearchSymbol::on_symbolLineEdit_textChanged(const QString &arg1){
     if(arg1 != ""){
         QVector<const SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTernarySearchTree->searchTST(arg1);
         for(int x =0; x < vectRes.size(); x++){
-             printf("\nSEARCH RES: %ls", qUtf16Printable(vectRes.at(x)->name));
+             printf("\nS RES: %ls", qUtf16Printable(vectRes.at(x)->symbol));
+             printf("\nN RES: %ls", qUtf16Printable(vectRes.at(x)->name));
+             printf("\nS RES: %ls", qUtf16Printable(vectRes.at(x)->sector));
+             printf("\nI RES: %ls", qUtf16Printable(vectRes.at(x)->industry));
+             printf("\n");
         }
          printf("\n");
     }

@@ -8,13 +8,13 @@ class SymbolTernarySearchTree
 public:
     struct Node
     {
-        Node(QChar cData)
-            :cData(cData), pMid(0), pLeft(0), pRight(0),completesSymbol(false)
+        Node(const QChar cData)
+            :pLeft(0), pRight(0), pMid(0), cData(cData),completesSymbol(false)
         {
         }
-        Node(QChar cData, const QStringList &list)
-           :cData(cData), pMid(0), pLeft(0), pRight(0), completesSymbol(true),symbol(list[0]),
-             name(list[1]), country(list[2]), sector(list[3]), industry(list[4])
+        Node(const QChar cData, const QStringList &list)
+           :pLeft(0), pRight(0), pMid(0), cData(cData), completesSymbol(true), symbol(list[0]),
+             name(list[1]), sector(list[2]), industry(list[3])
         {
         }
         Node() = delete;
@@ -26,15 +26,16 @@ public:
             delete pMid;
             delete pRight;
         }
-        QChar cData;
-        Node *pMid;
+
         Node *pLeft;
         Node *pRight;
+        Node *pMid;
 
+        const QChar cData;
         bool completesSymbol;
+
         QString symbol;
         QString name;
-        QString country;
         QString sector;
         QString industry;
     };

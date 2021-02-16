@@ -14,11 +14,12 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
     QVector<const SymbolTernarySearchTree::Node*> vectRes;
     if(!this->pRoot || str.length() == 0) return vectRes;
     vectRes.reserve(4);
+
     int strIndex = 0;
     int vectIndex = 0;
+
     Node *pTemp = this->pRoot;
     QString res ="";
-
     while(pTemp && strIndex < str.length())
     {
         if(pTemp->cData > str[strIndex]){
@@ -73,14 +74,13 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 }
 
 void SymbolTernarySearchTree::insert(const QStringList &&list){
-    if(list.size() ^ 0x5) return;     //ensure that the size is 5 (4 elements)
+    if(list.size() ^ 0x4) return;     //ensure that the size is 5 (4 elements)
     this->insert(&this->pRoot, list[0], 0, list);
 }
 
 void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString str, const int32_t strIndex, const QStringList &list )
 {
-    if(!(*root))
-    {
+    if(!(*root)){
         if(strIndex == str.length() -1){
             *root = new Node(str[strIndex], list);
             return;
@@ -97,16 +97,15 @@ void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const
     }
 
     else{
-        if((strIndex +1) < str.length()){
-            insert(&((*root)->pMid), str, strIndex+1, list);
+        if((strIndex+1) < str.length()){
+            insert(&((*root)->pMid), str, strIndex +1, list);
         }
         else{
             (*root)->completesSymbol = true;
+            (*root)->symbol = list[0];
             (*root)->name = list[1];
-            (*root)->country = list[2];
-            (*root)->sector = list[3];
-            (*root)->industry = list[4];
+            (*root)->sector = list[2];
+            (*root)->industry = list[3];
         }
     }
 }
-

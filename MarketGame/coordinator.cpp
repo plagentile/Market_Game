@@ -39,7 +39,7 @@ int32_t Coordinator::run(const QApplication &coreApp){
 
         /*Run the Main Window, if the symbols are not done yet, something went terribly wrong*/
         if(this->readKnownSymbols.getStatus() != ReadKnownSymbols::Status::Done){
-            fReadKnownSymbols.cancel();
+            if(!fReadKnownSymbols.isFinished())fReadKnownSymbols.cancel();
             return -1;
         }
 

@@ -13,12 +13,11 @@ InitialAccountSetup::~InitialAccountSetup(){
     delete ui;
 }
 
-const QString InitialAccountSetup::getAPIKey() const{
+const QString InitialAccountSetup::getAPIKey() const noexcept{
     return this->APIKey;
 }
 
-double InitialAccountSetup::getInitBalance() const
-{
+double InitialAccountSetup::getInitBalance() const noexcept{
     return this->initBalance;
 }
 
@@ -27,7 +26,7 @@ double InitialAccountSetup::getInitBalance() const
  * @return
  * Can add (initial) key checks here
  */
-bool InitialAccountSetup::keyOk() const{
+bool InitialAccountSetup::keyOk() const noexcept{
     if(this->APIKey.size() > 5) return true;
     return false;
 }
