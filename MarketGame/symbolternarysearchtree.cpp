@@ -30,7 +30,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
         else
         {
             //hit, follow the chain
-            res.append(pTemp->cData);
+            res+= (pTemp->cData);
             if(res == str)
             {
                 if(pTemp->completesSymbol)

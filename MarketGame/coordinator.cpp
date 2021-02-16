@@ -10,17 +10,10 @@ Coordinator *Coordinator::getInstance(){
     return pCInstance;
 }
 
-int32_t Coordinator::run(const QApplication &coreApp)
-{
-    //SearchSymbol searchSymbol;
-
-    //searchSymbol.show();
-    //searchSymbol.exec();
+int32_t Coordinator::run(const QApplication &coreApp){
 
     /*Read the known symbols initially*/
-    if(readKnownSymbols.run() != ReadKnownSymbols::Status::Normal){
-        return -1;
-    }
+    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&readKnownSymbols, &ReadKnownSymbols::run);
 
     /*Run Sign In Options*/
     SignInOptionsDialog::Options signInOption;
@@ -37,14 +30,19 @@ int32_t Coordinator::run(const QApplication &coreApp)
          }
     } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
 
-    /*Check if the user elected to either make a new sim, or load a previous save*/
+     /*Check if the user elected to either make a new sim, or load a previous save*/
      if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         InitialAccountSetup  initialAccountSetup;
         if(initialAccountSetup.run() != ApplicationStatus::Status::ExitSuccessfully){
             return -1;                                                           //User Terminated the Progam
         }
 
-        /*Run the Main Window*/
+        /*Run the Main Window, if the symbols are not done yet, something went terribly wrong*/
+        if(this->readKnownSymbols.getStatus() != ReadKnownSymbols::Status::Done){
+            fReadKnownSymbols.cancel();
+            return -1;
+        }
+
         MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
         mainWindow.show();
         return coreApp.exec();

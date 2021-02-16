@@ -6,10 +6,10 @@
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
+#include "searchsymbol.h"
 #include <QApplication>
 #include <readknownsymbols.h>
-#include "searchsymbol.h"
-
+#include <QtConcurrent/QtConcurrentRun>
 /*
     This class is responsible for controlling the flow of the program
     It launches the threads that will build the URL list from a raw txt file

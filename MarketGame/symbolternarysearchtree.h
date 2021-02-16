@@ -1,7 +1,5 @@
 #ifndef SYMBOLTERNARYSEARCHTREE_H
 #define SYMBOLTERNARYSEARCHTREE_H
-
-
 #include <QStringList>
 #include <QVector>
 class SymbolTernarySearchTree

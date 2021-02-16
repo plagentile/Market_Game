@@ -1,7 +1,6 @@
 #ifndef READKNOWNSYMBOLS_H
 #define READKNOWNSYMBOLS_H
 #include "symbolternarysearchtree.h"
-#include <QElapsedTimer>
 #include <QFile>
 #include <QTextStream>
 class ReadKnownSymbols
@@ -13,17 +12,19 @@ public:
     ~ReadKnownSymbols();
 
     enum class Status{
-        Normal,
+        Working,
         FileNotFound,
-        CouldNotOpenFile
+        CouldNotOpenFile,
+        Done
     };
 
-    Status run();
+    void run() noexcept;
 
 public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
+    Status getStatus() const noexcept;
 private:
-    void readKnownSymbolsFile() noexcept;
+    Status readKnownSymbolsFile() noexcept;
 private:
     Status symStatus;
     SymbolTernarySearchTree *pSymbolTernarySearchTree;
