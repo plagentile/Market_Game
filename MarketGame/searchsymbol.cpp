@@ -24,6 +24,7 @@ void SearchSymbol::run(){
 void SearchSymbol::on_symbolLineEdit_textChanged(const QString &arg1){
     model.removeRows(0, model.rowCount());
     if(arg1.length() < 0 || arg1.length() > 5) return;
+    //arg1.contains()
 
     QVector<const SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTernarySearchTree->searchTST(arg1);
     const int32_t length = vectRes.length();

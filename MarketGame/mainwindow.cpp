@@ -6,7 +6,9 @@ MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSe
       pAccount(new Account(0, initAccountSetup->getInitBalance(), initAccountSetup->getAPIKey())),
       pSearchSymbol(new SearchSymbol(nullptr, pSymbolTST))
 {
+
     ui->setupUi(this);
+    ui->lineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), 0));
     this->refresh();
 }
 
@@ -14,6 +16,7 @@ MainWindow::~MainWindow(){
     delete ui;
     delete pAccount;
 }
+
 
 void MainWindow::refresh()
 {

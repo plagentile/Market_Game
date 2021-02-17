@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
+#include <QRegExpValidator>
+#include <QRegExp>
 #include "account.h"
 #include "initialaccountsetup.h"
 #include "searchsymbol.h"

@@ -57,12 +57,17 @@
 	font-weight: 400;
 }
 
+#staticCurrentPriceLabel, #staticHighPriceLabel, #staticLowPriceLabel, #staticVolumeLabel, #staticOpenPriceLabel, #staticClosePriceLabel,
+#dynamicCurrentPriceLabel, #dynamicHighPriceLabel, #dynamicLowPriceLabel, #dynamicVolumeLabel, #dynamicOpenPriceLabel, #dynamicClosePriceLabel
+{
+	border: 1px solid gray;
+}
+
 /*
 	Buy and Sell Buttons
 */
 #buyButton, #sellButton
 {
-	border: 1px solid gray;
 	border-bottom: none;
 	border-top:none;
 	color: white;
@@ -76,12 +81,6 @@
 {
 	background-color:white;
 	color:black;
-}
-
-#staticCurrentPriceLabel, #staticHighPriceLabel, #staticLowPriceLabel, #staticVolumeLabel, #staticOpenPriceLabel, #staticClosePriceLabel,
-#dynamicCurrentPriceLabel, #dynamicHighPriceLabel, #dynamicLowPriceLabel, #dynamicVolumeLabel, #dynamicOpenPriceLabel, #dynamicClosePriceLabel
-{
-	border: 1px solid gray;
 }
 
 #positionVerticleSeperator
@@ -261,9 +260,6 @@
           </property>
           <property name="mouseTracking">
            <bool>true</bool>
-          </property>
-          <property name="inputMask">
-           <string/>
           </property>
           <property name="text">
            <string/>
