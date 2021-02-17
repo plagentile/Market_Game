@@ -3,7 +3,6 @@
 #include "symbolternarysearchtree.h"
 #include <QFile>
 #include <QTextStream>
-#include <QElapsedTimer>
 class ReadKnownSymbols
 {
 public:

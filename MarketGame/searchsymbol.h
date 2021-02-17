@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "symbolternarysearchtree.h"
+#include <QStandardItemModel>
+#include <QElapsedTimer>
 namespace Ui {
 class SearchSymbol;
 }
@@ -25,6 +27,7 @@ private slots:
 private:
     Ui::SearchSymbol *ui;
     const SymbolTernarySearchTree *pSymbolTernarySearchTree;
+    QStandardItemModel model;
 };
 
 #endif // SEARCHSYMBOL_H

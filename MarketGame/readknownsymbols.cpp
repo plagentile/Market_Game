@@ -10,10 +10,7 @@ ReadKnownSymbols::~ReadKnownSymbols(){
 }
 
 void ReadKnownSymbols::run() noexcept{
-    QElapsedTimer timer;
-    timer.start();
     this->symStatus = this->readKnownSymbolsFile();
-    printf("\nTime taken: %lli\n", timer.elapsed());
 }
 
 const SymbolTernarySearchTree *ReadKnownSymbols::getSymbolTernarySearchTree() const noexcept{

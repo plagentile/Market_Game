@@ -74,7 +74,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 }
 
 void SymbolTernarySearchTree::insert(const QStringList &&list){
-    if(list.size() ^ 0x4) return;     //ensure that the size is 5 (4 elements)
+    if(list.size() ^ 0x4) return;     //ensure that there are ONLY 4 elements in the list
     this->insert(&this->pRoot, list[0], 0, list);
 }
 

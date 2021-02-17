@@ -7,6 +7,9 @@ SearchSymbol::SearchSymbol(QWidget *parent, const SymbolTernarySearchTree *symbo
     pSymbolTernarySearchTree(symbolTST)
 {
     ui->setupUi(this);
+
+    model.setColumnCount(4);
+    model.setHorizontalHeaderLabels({"Symbol", "Name", "Sector", "Industry"});
 }
 
 SearchSymbol::~SearchSymbol(){
@@ -19,15 +22,23 @@ void SearchSymbol::run(){
 
 /*User is searching a symbol*/
 void SearchSymbol::on_symbolLineEdit_textChanged(const QString &arg1){
-    if(arg1 != ""){
+    model.removeRows(0, model.rowCount());
+    if(arg1.length() > 0 && arg1.length() < 5)
+    {
+        QElapsedTimer timer;
+        timer.start();
+
         QVector<const SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTernarySearchTree->searchTST(arg1);
-        for(int x =0; x < vectRes.size(); x++){
-             printf("\nS RES: %ls", qUtf16Printable(vectRes.at(x)->symbol));
-             printf("\nN RES: %ls", qUtf16Printable(vectRes.at(x)->name));
-             printf("\nS RES: %ls", qUtf16Printable(vectRes.at(x)->sector));
-             printf("\nI RES: %ls", qUtf16Printable(vectRes.at(x)->industry));
-             printf("\n");
+        const int32_t length = vectRes.length();
+        model.insertRows(0, length);
+        for(int r= 0;  r < length; r++)
+        {
+            model.setItem(r,0, new QStandardItem(vectRes[r]->symbol));
+            model.setItem(r,1, new QStandardItem(vectRes[r]->name));
+            model.setItem(r,2, new QStandardItem(vectRes[r]->sector));
+            model.setItem(r,3, new QStandardItem(vectRes[r]->industry));
         }
-         printf("\n");
+        ui->tableView->setModel(&model);
+        printf("\nTime taken: %lli\n", timer.elapsed());
     }
 }
