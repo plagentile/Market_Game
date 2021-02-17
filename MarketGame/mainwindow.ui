@@ -245,35 +245,50 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="stockNameLabel">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="QStackedWidget" name="searchAndViewSymbolStackedWidget">
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string>Stock: N/A</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="chartPlaceHolderLabel">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>CHART PLACEHOLDER</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
+        <widget class="QWidget" name="searchSymbolPage">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="geometry">
+           <rect>
+            <x>250</x>
+            <y>150</y>
+            <width>171</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>32767</number>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>Search Symbol:</string>
+          </property>
+          <property name="cursorMoveStyle">
+           <enum>Qt::VisualMoveStyle</enum>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="viewSymbolPage"/>
        </widget>
       </item>
       <item>
@@ -287,97 +302,8 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="2" column="2">
-         <widget class="QLabel" name="staticLowPriceLabel">
-          <property name="text">
-           <string>Low</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QLabel" name="staticOpenPriceLabel">
-          <property name="text">
-           <string>Open</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="staticCurrentPriceLabel">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <stylestrategy>PreferDefault</stylestrategy>
-           </font>
-          </property>
-          <property name="text">
-           <string>Current Price</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="staticHighPriceLabel">
-          <property name="font">
-           <font>
-            <stylestrategy>PreferDefault</stylestrategy>
-           </font>
-          </property>
-          <property name="text">
-           <string>High</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLabel" name="staticVolumeLabel">
-          <property name="text">
-           <string>Volume</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QLabel" name="staticClosePriceLabel">
-          <property name="text">
-           <string>Close</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="dynamicCurrentPriceLabel">
-          <property name="text">
-           <string>0.0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="margin">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="dynamicHighPriceLabel">
+        <item row="3" column="4">
+         <widget class="QLabel" name="dynamicOpenPriceLabel">
           <property name="text">
            <string>0.0</string>
           </property>
@@ -402,6 +328,39 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="staticLowPriceLabel">
+          <property name="text">
+           <string>Low</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="dynamicCurrentPriceLabel">
+          <property name="text">
+           <string>0.0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="margin">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QLabel" name="staticClosePriceLabel">
+          <property name="text">
+           <string>Close</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
         <item row="3" column="3">
          <widget class="QLabel" name="dynamicVolumeLabel">
           <property name="text">
@@ -415,8 +374,43 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="4">
-         <widget class="QLabel" name="dynamicOpenPriceLabel">
+        <item row="2" column="1">
+         <widget class="QLabel" name="staticHighPriceLabel">
+          <property name="font">
+           <font>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="text">
+           <string>High</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLabel" name="staticOpenPriceLabel">
+          <property name="text">
+           <string>Open</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="staticVolumeLabel">
+          <property name="text">
+           <string>Volume</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="dynamicHighPriceLabel">
           <property name="text">
            <string>0.0</string>
           </property>
@@ -438,6 +432,27 @@
           </property>
           <property name="margin">
            <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="staticCurrentPriceLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="text">
+           <string>Current Price</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>

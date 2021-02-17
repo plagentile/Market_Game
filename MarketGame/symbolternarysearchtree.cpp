@@ -15,12 +15,13 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
     if(!this->pRoot || str.length() == 0) return vectRes;
     vectRes.reserve(4);
 
-    int strIndex = 0;
-    int vectIndex = 0;
+    const int32_t strLength = str.length();
+    int32_t strIndex = 0;
+    int32_t vectIndex = 0;
 
     Node *pTemp = this->pRoot;
     QString res ="";
-    while(pTemp && strIndex < str.length())
+    while(pTemp && strIndex < strLength)
     {
         if(pTemp->cData > str[strIndex]){
             pTemp = pTemp->pLeft;
@@ -34,40 +35,22 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
             res+= (pTemp->cData);
             if(res == str)
             {
-                if(pTemp->completesSymbol)
-                {
-                    //successful query, return the item
+                if(pTemp->completesSymbol){
                     vectRes.insert(vectIndex++,pTemp);
-
-                    //before returning, look one deep in each direction
-                    if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pLeft);
-                    }
-                    if(pTemp->pMid && pTemp->pMid->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pMid);
-                    }
-                    if(pTemp->pRight && pTemp->pRight->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pRight);
-                    }
-                    break;
                 }
-                else
-                {
-                    //Incomplete search query, look down the line to where completed string may be
-                    if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pLeft);
-                    }
-                    if(pTemp->pMid && pTemp->pMid->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pMid);
-                    }
-                    if(pTemp->pRight && pTemp->pRight->completesSymbol){
-                         vectRes.insert(vectIndex++,pTemp->pRight);
-                    }
-                    break; //saves 1 comparision
+                //before returning, look one deep in each direction
+                if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
+                    vectRes.insert(vectIndex++,pTemp->pLeft);
+                }
+                if(pTemp->pMid && pTemp->pMid->completesSymbol){
+                    vectRes.insert(vectIndex++,pTemp->pMid);
+                }
+                if(pTemp->pRight && pTemp->pRight->completesSymbol){
+                    vectRes.insert(vectIndex++,pTemp->pRight);
                 }
             }
             pTemp = pTemp->pMid;
-            strIndex++;
+            ++strIndex;
         }
     }
     return vectRes;
