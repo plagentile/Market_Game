@@ -6,8 +6,8 @@
         <file>img/welcomeBackground.png</file>
         <file>img/aboutBackground.png</file>
         <file>img/accountOverviewBackground.png</file>
-        <file>img/searchSymbolBackground.png</file>
         <file>coreData/unsortedKnownSymbolsCommaSeperated.csv</file>
+        <file>img/mainWindowBackground.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

@@ -24,18 +24,6 @@ void MainWindow::refresh()
     this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->pAccount->getAvailableFunds(), 'f', 2));
 }
 
-void MainWindow::on_exitButton_clicked(){
-    this->close();
-}
-
-void MainWindow::on_searchButton_clicked(){
-
-}
-
-void MainWindow::on_accountButton_clicked(){
-    this->pAccount->run();
-}
-
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1)
 {
     if(arg1.length() <= 0) return;

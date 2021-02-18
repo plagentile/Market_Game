@@ -27,10 +27,6 @@ private:
     void refresh(void);
 
 private slots:
-    void on_exitButton_clicked();
-    void on_searchButton_clicked();
-    void on_accountButton_clicked();
-
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
 
 private:
