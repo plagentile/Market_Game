@@ -49,6 +49,7 @@ public:
     void insert(const QStringList &&list);
 private:
     void insert(Node** root, const QString str, const int32_t strIndex, const QStringList &list);
+    void continuePath(const Node* pAt, QVector<const Node*>& vec, int32_t& vecPos) const;
 private:
    Node *pRoot;
 };

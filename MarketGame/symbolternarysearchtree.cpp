@@ -13,14 +13,14 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 
     QVector<const SymbolTernarySearchTree::Node*> vectRes;
     if(!this->pRoot || str.length() == 0) return vectRes;
-    vectRes.reserve(4);
+    vectRes.reserve(16);
 
     const int32_t strLength = str.length();
     int32_t strIndex = 0;
     int32_t vectIndex = 0;
-
     Node *pTemp = this->pRoot;
     QString res ="";
+
     while(pTemp && strIndex < strLength)
     {
         if(pTemp->cData > str[strIndex]){
@@ -35,19 +35,10 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
             res+= (pTemp->cData);
             if(res == str)
             {
-                if(pTemp->completesSymbol){
-                    vectRes.insert(vectIndex++,pTemp);
-                }
-                //before returning, look one deep in each direction
-                if(pTemp->pLeft && pTemp->pLeft->completesSymbol){
-                    vectRes.insert(vectIndex++,pTemp->pLeft);
-                }
-                if(pTemp->pMid && pTemp->pMid->completesSymbol){
-                    vectRes.insert(vectIndex++,pTemp->pMid);
-                }
-                if(pTemp->pRight && pTemp->pRight->completesSymbol){
-                    vectRes.insert(vectIndex++,pTemp->pRight);
-                }
+                this->continuePath(pTemp, vectRes, vectIndex );
+                this->continuePath(pTemp->pLeft,vectRes,vectIndex );
+                this->continuePath(pTemp->pMid, vectRes,vectIndex );
+                this->continuePath(pTemp->pRight, vectRes,vectIndex );
             }
             pTemp = pTemp->pMid;
             ++strIndex;
@@ -56,12 +47,36 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
     return vectRes;
 }
 
+
+void SymbolTernarySearchTree::continuePath(const SymbolTernarySearchTree::Node *pAt, QVector<const SymbolTernarySearchTree::Node *> &vec, int32_t &vecPos) const
+{
+    if(!pAt || (vecPos + 3 > vec.capacity())) return;  //current position + 3 (possible) additional checks = 4, so we are checking for 4 possible adds
+
+
+    if(pAt->completesSymbol){
+        vec.insert(vecPos++, pAt);
+    }
+    if(pAt->pLeft &&pAt->pLeft->completesSymbol){
+        vec.insert(vecPos++, pAt->pLeft);
+    }
+
+    if(pAt->pMid && pAt->pMid->completesSymbol){
+        vec.insert(vecPos++, pAt->pMid);
+    }
+
+    if(pAt->pRight && pAt->pRight->completesSymbol){
+        vec.insert(vecPos++, pAt->pRight);
+    }
+
+}
+
+
 void SymbolTernarySearchTree::insert(const QStringList &&list){
     if(list.size() ^ 0x3) return;     //ensure that there are ONLY 3 elements in the list
     this->insert(&this->pRoot, list[0], 0, list);
 }
 
-void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString str, const int32_t strIndex, const QStringList &list )
+void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString str, const int32_t strIndex, const QStringList &list)
 {
     if(!(*root)){
         if(strIndex == str.length() -1){
@@ -91,3 +106,11 @@ void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const
         }
     }
 }
+
+
+
+
+
+
+
+
