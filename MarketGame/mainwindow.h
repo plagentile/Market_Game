@@ -5,10 +5,10 @@
 #include <QInputDialog>
 #include <QRegExpValidator>
 #include <QRegExp>
+#include <QStandardItemModel>
 #include "account.h"
 #include "initialaccountsetup.h"
-#include "searchsymbol.h"
-
+#include "symbolternarysearchtree.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -31,9 +31,12 @@ private slots:
     void on_searchButton_clicked();
     void on_accountButton_clicked();
 
+    void on_symbolSearchLineEdit_textChanged(const QString &arg1);
+
 private:
+    QStandardItemModel model;
     Ui::MainWindow *ui;
     Account * pAccount;
-    SearchSymbol * pSearchSymbol;
+    const SymbolTernarySearchTree * pSymbolTST;
 };
 #endif // MAINWINDOW_H

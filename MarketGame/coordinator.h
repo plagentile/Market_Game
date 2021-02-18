@@ -6,7 +6,6 @@
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
-#include "searchsymbol.h"
 #include <QApplication>
 #include <readknownsymbols.h>
 #include <QtConcurrent/QtConcurrentRun>

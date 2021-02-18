@@ -17,7 +17,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     readknownsymbols.cpp \
-    searchsymbol.cpp \
     signinoptionsdialog.cpp \
     symbolternarysearchtree.cpp \
     termsofservice.cpp
@@ -30,7 +29,6 @@ HEADERS += \
     initialaccountsetup.h \
     mainwindow.h \
     readknownsymbols.h \
-    searchsymbol.h \
     signinoptionsdialog.h \
     symbolternarysearchtree.h \
     termsofservice.h
@@ -40,7 +38,6 @@ FORMS += \
     account.ui \
     initialaccountsetup.ui \
     mainwindow.ui \
-    searchsymbol.ui \
     signinoptionsdialog.ui \
     termsofservice.ui
 

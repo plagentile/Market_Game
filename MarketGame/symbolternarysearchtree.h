@@ -14,7 +14,7 @@ public:
         }
         Node(const QChar cData, const QStringList &list)
            :pLeft(0), pRight(0), pMid(0), cData(cData), completesSymbol(true), symbol(list[0]),
-             name(list[1]), sector(list[2]), industry(list[3])
+             name(list[1]), industry(list[2])
         {
         }
         Node() = delete;
@@ -36,7 +36,6 @@ public:
 
         QString symbol;
         QString name;
-        QString sector;
         QString industry;
     };
 

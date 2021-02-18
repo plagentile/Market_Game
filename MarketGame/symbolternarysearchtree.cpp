@@ -57,7 +57,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 }
 
 void SymbolTernarySearchTree::insert(const QStringList &&list){
-    if(list.size() ^ 0x4) return;     //ensure that there are ONLY 4 elements in the list
+    if(list.size() ^ 0x3) return;     //ensure that there are ONLY 3 elements in the list
     this->insert(&this->pRoot, list[0], 0, list);
 }
 
@@ -87,8 +87,7 @@ void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const
             (*root)->completesSymbol = true;
             (*root)->symbol = list[0];
             (*root)->name = list[1];
-            (*root)->sector = list[2];
-            (*root)->industry = list[3];
+            (*root)->industry = list[2];
         }
     }
 }
