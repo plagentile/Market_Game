@@ -26,12 +26,15 @@
    <string>Qt Market Viewer</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow
+   <string notr="true">#searchSymbolPage
 {
 	border-image: url(:/files/img/mainWindowBackground.png) 0 0 0 0 stretch stretch;
 }
 
-
+#centralWidget
+{
+	background-color:white;
+}
 /*
 	sharesAndCurrentPriceHorizontalLayout
 */
@@ -118,7 +121,7 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="headerHorizontalLayout">
       <item>
        <widget class="QPushButton" name="pushButton_4">
         <property name="sizePolicy">
@@ -223,6 +226,32 @@
           </property>
           <item>
            <spacer name="midBottomSearchSymbolPageVerticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
