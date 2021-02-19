@@ -13,7 +13,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 
     QVector<const SymbolTernarySearchTree::Node*> vectRes;
     if(!this->pRoot || str.length() == 0) return vectRes;
-    vectRes.reserve(16);
+    vectRes.reserve(13);
 
     const int32_t strLength = str.length();
     int32_t strIndex = 0;
