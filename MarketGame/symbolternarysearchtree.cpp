@@ -35,7 +35,9 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
             res+= (pTemp->cData);
             if(res == str)
             {
-                this->continuePath(pTemp, vectRes, vectIndex );
+                if(pTemp->completesSymbol)
+                    vectRes.insert(vectIndex++, pTemp);
+
                 this->continuePath(pTemp->pLeft,vectRes,vectIndex );
                 this->continuePath(pTemp->pMid, vectRes,vectIndex );
                 this->continuePath(pTemp->pRight, vectRes,vectIndex );
