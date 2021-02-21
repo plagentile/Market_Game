@@ -31,10 +31,6 @@
 	border-image: url(:/files/img/mainWindowBackground.png) 0 0 0 0 stretch stretch;
 }
 
-#MainWindow
-{
-	background-color:white;
-}
 
 /*
 	sharesAndCurrentPriceHorizontalLayout
@@ -84,7 +80,7 @@
 
 #symbolSearchBanner
 {
-	color:white;
+	color:black;
 	font-size: 22px;
 	font-family: Georgia;
 }
@@ -129,63 +125,6 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="headerHorizontalLayout">
-      <item>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
      <widget class="QStackedWidget" name="searchAndViewSymbolStackedWidget">
       <property name="lineWidth">
        <number>0</number>
@@ -211,6 +150,22 @@
          <number>0</number>
         </property>
         <item>
+         <spacer name="topSearchSymbolPageVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="symbolSearchBanner">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -227,7 +182,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer">
+         <spacer name="middleSearchSymbolPageVerticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -380,12 +335,6 @@
                <property name="spacing">
                 <number>10</number>
                </property>
-               <property name="viewMode">
-                <enum>QListView::ListMode</enum>
-               </property>
-               <property name="batchSize">
-                <number>5</number>
-               </property>
                <property name="itemAlignment">
                 <set>Qt::AlignHCenter|Qt::AlignJustify</set>
                </property>
@@ -413,12 +362,12 @@
          </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer_2">
+         <spacer name="bottomSearchSymbolPageVerticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -437,7 +386,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>*Note: Accepted Symbol Format are Alphabetic, Upper Case</string>
+           <string>*Note: The Accepted Symbol Format is: Alphabetic, Upper Case</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -827,36 +776,6 @@
     </item>
    </layout>
   </widget>
-  <action name="actionAbout_Qt_Widget_Market_Game">
-   <property name="text">
-    <string>About Qt Widget Market Game</string>
-   </property>
-  </action>
-  <action name="actionTerms_Of_Service">
-   <property name="text">
-    <string>Terms Of Service</string>
-   </property>
-  </action>
-  <action name="actionSave">
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </action>
-  <action name="actionSettings">
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </action>
-  <action name="actionNew">
-   <property name="text">
-    <string>New</string>
-   </property>
-  </action>
-  <action name="actionExit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

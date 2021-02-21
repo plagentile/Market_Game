@@ -29,6 +29,10 @@ private:
 private slots:
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
 
+    void on_symbolListResults_clicked(const QModelIndex &index);
+
+    void on_symbolSearchLineEdit_returnPressed();
+
 private:
     QStandardItemModel model;
     Ui::MainWindow *ui;
