@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSe
 {
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), 0));
-    this->ui->symbolListResults->hide();                                                                            //Hide list of recommendations initially
+    this->ui->symbolListResults->hide();        //Hide list of recommendations initially
+    vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
 }
 
 MainWindow::~MainWindow(){
@@ -26,15 +27,14 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
     if(arg1.length() <= 0) return;
     if(this->ui->symbolListResults->isHidden()) this->ui->symbolListResults->show();                                //Show the recommendations only if we have valid input
 
-    QVector<const SymbolTernarySearchTree::Node *> vectRes = this->pSymbolTST->searchTST(arg1);
-    const int32_t length = vectRes.length();
-    if(length == 0) return;                                                                                         //Keep previous recommendations if going down a non existant symbol path
+    this->vSearchResults = this->pSymbolTST->searchTST(arg1);                                                              //A move here would prevent RVO
+    if(this->vSearchResults.length() == 0) return;                                                                         //Keep previous recommendations if going down a non existant symbol path
 
     QStandardItem *pRoot = model.invisibleRootItem();
     pRoot->removeRows(0, model.rowCount());
 
-    for(int32_t r =0 ; r < length; ++r){
-        pRoot->appendRow(new QStandardItem(vectRes[r]->symbol +", " +vectRes[r]->name + ", " +vectRes[r]->industry));
+    for(int32_t r =0 ; r < this->vSearchResults.length(); ++r){
+        pRoot->appendRow(new QStandardItem(vSearchResults[r]->symbol +", " +vSearchResults[r]->name + ", " +vSearchResults[r]->industry));
     }
     ui->symbolListResults->setModel(&model);
 }
@@ -57,5 +57,12 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){        
 
 
 void MainWindow::on_symbolSearchLineEdit_returnPressed(){
-    printf("\nClicked enter with: %ls", qUtf16Printable(this->ui->symbolSearchLineEdit->text()));
+    //Check if the current text exists in this->vectSearchResults;
+    for(int32_t x = 0; x < this->vSearchResults.length(); ++x){
+        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
+            //Valid symbol, set and show the next page
+            this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
+        }
+    }
 }
+

@@ -6,6 +6,7 @@
 #include <QRegExpValidator>
 #include <QRegExp>
 #include <QStandardItemModel>
+#include <QElapsedTimer>
 #include "account.h"
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
@@ -38,5 +39,6 @@ private:
     Ui::MainWindow *ui;
     Account * pAccount;
     const SymbolTernarySearchTree * pSymbolTST;
+    QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
 };
 #endif // MAINWINDOW_H

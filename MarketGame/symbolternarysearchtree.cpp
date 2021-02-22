@@ -1,7 +1,7 @@
 #include "symbolternarysearchtree.h"
 
 SymbolTernarySearchTree::SymbolTernarySearchTree()
-    :pRoot(0)
+    :pRoot(0), SYMBOL_SEARCH_VECTOR_RESERVE_SIZE(13)
 {
 }
 
@@ -13,7 +13,7 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 
     QVector<const SymbolTernarySearchTree::Node*> vectRes;
     if(!this->pRoot || str.length() == 0) return vectRes;
-    vectRes.reserve(13);
+    vectRes.reserve(SYMBOL_SEARCH_VECTOR_RESERVE_SIZE);
 
     const int32_t strLength = str.length();
     int32_t strIndex = 0;
@@ -70,6 +70,10 @@ void SymbolTernarySearchTree::continuePath(const SymbolTernarySearchTree::Node *
         vec.insert(vecPos++, pAt->pRight);
     }
 
+}
+
+int32_t SymbolTernarySearchTree::getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE() const{
+    return SYMBOL_SEARCH_VECTOR_RESERVE_SIZE;
 }
 
 

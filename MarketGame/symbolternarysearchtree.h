@@ -47,11 +47,14 @@ public:
 
     const QVector<const Node*> searchTST(const QString str) const;
     void insert(const QStringList &&list);
+    int32_t getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE() const;
+
 private:
     void insert(Node** root, const QString str, const int32_t strIndex, const QStringList &list);
     void continuePath(const Node* pAt, QVector<const Node*>& vec, int32_t& vecPos) const;
 private:
    Node *pRoot;
+   const int32_t SYMBOL_SEARCH_VECTOR_RESERVE_SIZE;
 };
 
 #endif // SYMBOLTERNARYSEARCHTREE_H
