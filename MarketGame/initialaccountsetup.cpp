@@ -41,7 +41,7 @@ ApplicationStatus::Status InitialAccountSetup::run()
 }
 
 
-void InitialAccountSetup::on_loginButton_clicked(){
+void InitialAccountSetup::on_loginButton_clicked() noexcept{
     this->initBalance = this->ui->accountBalanceInput->value();
     this->APIKey = this->ui->APIKeyInput->text();
     if(this->keyOk()){

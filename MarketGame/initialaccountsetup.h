@@ -25,7 +25,7 @@ public:
     ApplicationStatus::Status run();
 
 private slots:
-    void on_loginButton_clicked();
+    void on_loginButton_clicked() noexcept;
     void on_showInputButton_clicked();
 
 private:

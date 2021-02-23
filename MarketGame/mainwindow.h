@@ -6,10 +6,11 @@
 #include <QRegExpValidator>
 #include <QRegExp>
 #include <QStandardItemModel>
-#include <QElapsedTimer>
 #include "account.h"
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
+
+#include <QElapsedTimer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

@@ -21,7 +21,7 @@ ReadKnownSymbols::Status ReadKnownSymbols::getStatus() const noexcept{
     return this->symStatus;
 }
 
-ReadKnownSymbols::Status ReadKnownSymbols::readKnownSymbolsFile() noexcept{
+ReadKnownSymbols::Status ReadKnownSymbols::readKnownSymbolsFile() {
     QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
     if(!file.exists()){
         return Status::FileNotFound;
@@ -36,11 +36,5 @@ ReadKnownSymbols::Status ReadKnownSymbols::readKnownSymbolsFile() noexcept{
     file.close();
     return Status::Done;
 }
-
-
-
-
-
-
 
 

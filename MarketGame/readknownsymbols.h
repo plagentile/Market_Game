@@ -24,7 +24,7 @@ public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
     Status getStatus() const noexcept;
 private:
-    Status readKnownSymbolsFile() noexcept;
+    Status readKnownSymbolsFile();
 private:
     Status symStatus;
     SymbolTernarySearchTree *pSymbolTernarySearchTree;
