@@ -76,14 +76,13 @@ int32_t SymbolTernarySearchTree::getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE() const{
 }
 
 
-void SymbolTernarySearchTree::insert(const QStringList&& list){
+void SymbolTernarySearchTree::insert(const QStringList& list){
     if(list.size() ^ 0x3) return;     //ensure that there are ONLY 3 elements in the list
     this->insert(&this->pRoot, list[0], 0, list);
 }
 
 
-void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString& str, const int32_t strIndex, const QStringList& list)
-{
+void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString& str, const int32_t strIndex, const QStringList& list){
     if(!(*root)){
         if(strIndex == str.length() -1){
             *root = new Node(str[strIndex], list);

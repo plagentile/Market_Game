@@ -9,7 +9,7 @@ ReadKnownSymbols::~ReadKnownSymbols(){
     delete pSymbolTernarySearchTree;
 }
 
-void ReadKnownSymbols::run() noexcept{
+void ReadKnownSymbols::run() {
     this->symStatus = this->readKnownSymbolsFile();
 }
 
@@ -31,7 +31,7 @@ ReadKnownSymbols::Status ReadKnownSymbols::readKnownSymbolsFile() {
     }
     QTextStream stream(&file);
     while(!stream.atEnd()){
-        this->pSymbolTernarySearchTree->insert(std::move(stream.readLine().split(',')));
+        this->pSymbolTernarySearchTree->insert(stream.readLine().split(','));
     }
     file.close();
     return Status::Done;

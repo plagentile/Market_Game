@@ -25,15 +25,16 @@ public:
     MainWindow(const MainWindow & window) = delete;
     MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
+
 private:
     void refresh(void);
+    void showViewSymbolPage();
 
 private slots:
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
-
     void on_symbolListResults_clicked(const QModelIndex &index);
-
     void on_symbolSearchLineEdit_returnPressed();
+    void on_searchSymbolButton_clicked();
 
 private:
     QStandardItemModel model;

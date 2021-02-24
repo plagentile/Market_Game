@@ -18,7 +18,7 @@ public:
         Done
     };
 
-    void run() noexcept;
+    void run() ;
 
 public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;

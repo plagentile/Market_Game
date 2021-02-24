@@ -9,13 +9,11 @@ SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
-SignInOptionsDialog::~SignInOptionsDialog()
-{
+SignInOptionsDialog::~SignInOptionsDialog(){
     delete ui;
 }
 
-SignInOptionsDialog::Options SignInOptionsDialog::run()
-{
+SignInOptionsDialog::Options SignInOptionsDialog::run(){
     this->userSelectedOption = Options::NoOptionSelected;       //could run the same frame more than once
     this->setModal(true);
     this->exec();
@@ -27,14 +25,12 @@ void SignInOptionsDialog::on_makeNewSimButton_clicked(){
     this->close();
 }
 
-void SignInOptionsDialog::on_termsOfServiceButton_clicked()
-{
+void SignInOptionsDialog::on_termsOfServiceButton_clicked(){
     this->userSelectedOption = Options::TermsOfService;
     this->close();
 }
 
-void SignInOptionsDialog::on_aboutButton_clicked()
-{
+void SignInOptionsDialog::on_aboutButton_clicked(){
     this->userSelectedOption = Options::About;
     this->close();
 }
