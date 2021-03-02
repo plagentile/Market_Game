@@ -19,7 +19,7 @@ MainWindow::~MainWindow(){
 }
 
 
-void MainWindow::refresh(){
+void MainWindow::refreshSymbolInformation(){
     this->ui->dynamicAccountBalanceLabel->setText(QString::number(this->pAccount->getAccountBalance(), 'f', 2));
     this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->pAccount->getAvailableFunds(), 'f', 2));
 }
@@ -30,7 +30,7 @@ void MainWindow::showViewSymbolPage(){
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(currTextEdit == vSearchResults[x]->symbol){
             //Valid symbol, set and show the next page
-            this->refresh();
+            this->refreshSymbolInformation();
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
         }
     }
@@ -38,8 +38,7 @@ void MainWindow::showViewSymbolPage(){
 
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
     if(arg1.length() <= 0) return;
-    QElapsedTimer timer;
-    timer.start();
+
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->show();
 
@@ -53,7 +52,6 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
         pRoot->appendRow(new QStandardItem(vSearchResults[r]->symbol +", " +vSearchResults[r]->name + ", " +vSearchResults[r]->industry));
     }
     ui->symbolListResults->setModel(&model);
-    printf("\nTime taken: %lli\n", timer.elapsed());
 }
 
 void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){                                              //User clicked on a recommendation in the symbol list results fill the line edit, hide other recommendations
@@ -73,11 +71,9 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){        
     }
 }
 
-
 void MainWindow::on_symbolSearchLineEdit_returnPressed(){
     this->showViewSymbolPage();
 }
-
 
 void MainWindow::on_searchSymbolButton_clicked(){
     this->showViewSymbolPage();

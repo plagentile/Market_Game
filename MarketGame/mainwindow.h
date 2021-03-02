@@ -9,8 +9,6 @@
 #include "account.h"
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
-
-#include <QElapsedTimer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -27,7 +25,7 @@ public:
     ~MainWindow();
 
 private:
-    void refresh(void);
+    void refreshSymbolInformation(void);
     void showViewSymbolPage();
 
 private slots:
