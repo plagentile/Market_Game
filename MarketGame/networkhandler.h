@@ -15,16 +15,22 @@ public:
 public:
     enum class Status
     {
-        NotStarted = 0,
-        Started =1,
-        InGet =2,
-        InEncypted =3,
-        InReadyRead = 4,
-        Internal_Errors  =5,
-        FailedEncrypt
+        NotStarted,
+        Started,
+        PassedGet,
+        PassedEncypted,
+        PassedReadyRead,
+        PassedMoveReply,
+        PassedFinshed,
+        FailedFinishedCheck,
+        FailedEncryptCheck,
+        FailedReadyReadCheck,
+        FailedMoveReplyCheck,
+        Internal_Errors,
+        BadReply
     };
 
-
+    Status getStatus() const;
 
 public slots:
     void get(QString location);
@@ -37,8 +43,11 @@ private slots:
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
-   QNetworkAccessManager qNetworkAccessManager;
+    void moveReplyToFile(QNetworkReply* reply);
 
+private:
+   QNetworkAccessManager qNetworkAccessManager;
+   Status status;
 };
 
 #endif // NETWORKHANDLER_H

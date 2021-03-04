@@ -29,7 +29,7 @@ void MainWindow::showViewSymbolPage(){
     const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(currTextEdit == vSearchResults[x]->symbol){
-            //Valid symbol, set and show the next page
+            //Valid symbol, set and show the next page, default view is one year of data with price points set at once per week
             this->requestEncapsulator.getPriceHistory(this->pAccount->getAPIKey(), currTextEdit, "year", 1, "weekly", 1);
             this->refreshSymbolInformation();
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
