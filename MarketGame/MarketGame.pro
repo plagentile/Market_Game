@@ -4,11 +4,7 @@ QT       += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
-
 INCLUDEPATH += C:/OpenSSL-Win64/include/
-
-LIBS += -LC:/OpenSSL-Win64/lib -llibssl_static
-LIBS += -LC:/OpenSSL-Win64/lib -llibcrypto_static
 
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -25,6 +21,7 @@ SOURCES += \
     mainwindow.cpp \
     networkhandler.cpp \
     readknownsymbols.cpp \
+    requestencapsulator.cpp \
     signinoptionsdialog.cpp \
     symbolternarysearchtree.cpp \
     termsofservice.cpp
@@ -38,6 +35,7 @@ HEADERS += \
     mainwindow.h \
     networkhandler.h \
     readknownsymbols.h \
+    requestencapsulator.h \
     signinoptionsdialog.h \
     symbolternarysearchtree.h \
     termsofservice.h

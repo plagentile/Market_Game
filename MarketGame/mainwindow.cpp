@@ -30,6 +30,7 @@ void MainWindow::showViewSymbolPage(){
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(currTextEdit == vSearchResults[x]->symbol){
             //Valid symbol, set and show the next page
+            this->requestEncapsulator.getPriceHistory(this->pAccount->getAPIKey(), currTextEdit, "year", 1, "weekly", 1);
             this->refreshSymbolInformation();
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
         }

@@ -9,6 +9,8 @@
 #include "account.h"
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
+#include "requestencapsulator.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -38,6 +40,7 @@ private:
     QStandardItemModel model;
     Ui::MainWindow *ui;
     Account * pAccount;
+    RequestEncapsulator requestEncapsulator;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
 };
