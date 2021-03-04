@@ -13,7 +13,7 @@ void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString sy
     priceHistoryRequest += "&" + QString::number(fAmount);
 
     printf("\nRequest: %ls\n", qUtf16Printable(priceHistoryRequest));
-    this->networkHandler.get(priceHistoryRequest);
+    this->networkHandler.get(priceHistoryRequest, symbol);
 }
 
 QString RequestEncapsulator::getPeriodType(const QString pType) noexcept{

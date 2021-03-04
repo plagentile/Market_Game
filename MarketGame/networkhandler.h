@@ -6,6 +6,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QAuthenticator>
+#include <QFile>
+#include <QDir>
 class NetworkHandler : public QObject
 {
     Q_OBJECT
@@ -22,7 +24,6 @@ public:
         PassedReadyRead,
         PassedMoveReply,
         PassedFinshed,
-        FailedFinishedCheck,
         FailedEncryptCheck,
         FailedReadyReadCheck,
         FailedMoveReplyCheck,
@@ -33,7 +34,7 @@ public:
     Status getStatus() const;
 
 public slots:
-    void get(QString location);
+    void get(const QString location, const QString currSymbol);
 
 private slots:
     void readyRead();
@@ -47,6 +48,7 @@ private:
 
 private:
    QNetworkAccessManager qNetworkAccessManager;
+   QString currentSymbol;
    Status status;
 };
 

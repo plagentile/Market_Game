@@ -8,17 +8,22 @@ NetworkHandler::NetworkHandler(QObject *parent) : QObject(parent), status(Status
     connect(&qNetworkAccessManager, &QNetworkAccessManager::finished, this, &NetworkHandler::finished);
 }
 
-void NetworkHandler::get(QString location){
+void NetworkHandler::get(const QString location, const QString currSymbol){
     this->status =Status::Started;
+    this->currentSymbol = currSymbol;
     QNetworkReply * reply = qNetworkAccessManager.get(QNetworkRequest(QUrl(location)));
     connect(reply, &QNetworkReply::readyRead, this, &NetworkHandler::readyRead);
 }
 
 void NetworkHandler::readyRead(){
-    if(this->status == Status::PassedEncypted){
+    if(this->status == Status::PassedEncypted)
+    {
         this->status = Status::PassedReadyRead;
         this->moveReplyToFile(qobject_cast<QNetworkReply*>(sender()));
-    }else{
+    }
+    else
+    {
+        qobject_cast<QNetworkReply*>(sender())->abort();
         this->status = Status::FailedReadyReadCheck;
     }
 }
@@ -31,7 +36,7 @@ void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator
 
 void NetworkHandler::encrypted(QNetworkReply *reply)
 {
-    if(status == Status::NotStarted)
+    if(status == Status::Started)
     {
         status = Status::PassedEncypted;
     }
@@ -42,46 +47,36 @@ void NetworkHandler::encrypted(QNetworkReply *reply)
     }
 }
 
-void NetworkHandler::finished(QNetworkReply *reply)
-{
-    if(this->status == Status::PassedMoveReply)
-    {
-        this->status = Status::PassedFinshed;
-    }
-    else
-    {
-        this->status = Status::FailedFinishedCheck;
+void NetworkHandler::finished(QNetworkReply *reply){
+    if(this->status != Status::PassedMoveReply){
         reply->abort();
+        return;
     }
+
+    this->status = Status::PassedFinshed;
 }
 
-void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
-{
+void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
     reply->abort();
     Q_UNUSED(errors);
 }
 
-
-
 void NetworkHandler::moveReplyToFile(QNetworkReply* reply)
 {
-    if(this->status == Status::PassedEncypted)
-    {
-        if(reply)
-        {
-            qInfo() << reply->readAll() << "\n";
-            this->status = Status::PassedMoveReply;
-        }
-        else
-        {
-            reply->abort();
-            status = Status::BadReply;
-        }
+    if(!reply) {this->status = Status::BadReply; return;}
+    if(this->status != Status::PassedReadyRead){ reply->abort(); this->status = Status::FailedMoveReplyCheck;  return;}
+
+    QFile file(QDir::currentPath() + currentSymbol+".txt");
+    if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QIODevice::Text)) {
+        this->status = Status::Internal_Errors;
+        reply->abort();
+        return;
     }
-    else
-    {
-        this->status = Status::FailedMoveReplyCheck;
-    }
+
+    file.write(reply->readAll());
+    file.close();
+
+    this->status = Status::PassedMoveReply;
 }
 
 NetworkHandler::Status NetworkHandler::getStatus() const{
