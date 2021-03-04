@@ -24,6 +24,8 @@ public:
         PassedReadyRead,
         PassedMoveReply,
         PassedFinshed,
+        NeedAuthentication,
+        SSLError,
         FailedEncryptCheck,
         FailedReadyReadCheck,
         FailedMoveReplyCheck,

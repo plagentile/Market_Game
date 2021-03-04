@@ -28,23 +28,20 @@ void NetworkHandler::readyRead(){
     }
 }
 
-void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator)
-{
-    Q_UNUSED(reply);
+void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator){
+    this->status = Status::NeedAuthentication;
+    reply->abort();
     Q_UNUSED(authenticator);
 }
 
-void NetworkHandler::encrypted(QNetworkReply *reply)
-{
-    if(status == Status::Started)
-    {
-        status = Status::PassedEncypted;
-    }
-    else
+void NetworkHandler::encrypted(QNetworkReply *reply){
+    if(status != Status::Started)
     {
         status = Status::FailedEncryptCheck;
         reply->abort();
+        return;
     }
+    status = Status::PassedEncypted;
 }
 
 void NetworkHandler::finished(QNetworkReply *reply){
@@ -58,11 +55,20 @@ void NetworkHandler::finished(QNetworkReply *reply){
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
     reply->abort();
-    Q_UNUSED(errors);
+    this->status = Status::SSLError;
+    QFile file(QDir::currentPath() + "SSL_ERRORS.txt");
+
+    if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QIODevice::Text))
+        return; //no hope...
+
+    for(QSslError err : errors){
+        file.write(err.errorString().toLocal8Bit());
+    }
+
+    file.close();
 }
 
-void NetworkHandler::moveReplyToFile(QNetworkReply* reply)
-{
+void NetworkHandler::moveReplyToFile(QNetworkReply* reply){
     if(!reply) {this->status = Status::BadReply; return;}
     if(this->status != Status::PassedReadyRead){ reply->abort(); this->status = Status::FailedMoveReplyCheck;  return;}
 
