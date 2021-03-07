@@ -8,6 +8,8 @@
 #include <QAuthenticator>
 #include <QFile>
 #include <QDir>
+#include "chartbuilder.h"
+#include <QDateTime>
 class NetworkHandler : public QObject
 {
     Q_OBJECT
@@ -46,9 +48,7 @@ private slots:
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
-    void moveReplyToFile(QNetworkReply* reply);
 
-private:
    QNetworkAccessManager qNetworkAccessManager;
    QString currentSymbol;
    Status status;

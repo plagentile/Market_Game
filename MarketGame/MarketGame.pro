@@ -17,6 +17,7 @@ SOURCES += \
     about.cpp \
     account.cpp \
     applicationstatus.cpp \
+    chartbuilder.cpp \
     coordinator.cpp \
     initialaccountsetup.cpp \
     main.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     about.h \
     account.h \
     applicationstatus.h \
+    chartbuilder.h \
     coordinator.h \
     initialaccountsetup.h \
     mainwindow.h \
