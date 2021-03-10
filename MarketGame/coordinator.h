@@ -26,9 +26,6 @@ public:
     static Coordinator * getInstance();
     int32_t run(const QApplication &coreApp);
 
-
-
-
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;

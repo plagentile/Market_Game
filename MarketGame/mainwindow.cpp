@@ -4,7 +4,8 @@
 MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSetup, const SymbolTernarySearchTree *pSymbolTST)
     : QMainWindow(parent), ui(new Ui::MainWindow),
       pAccount(new Account(0, initAccountSetup->getInitBalance(), initAccountSetup->getAPIKey())),
-      pSymbolTST(pSymbolTST)
+      pSymbolTST(pSymbolTST),
+      status(Status::Normal)
 {
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), 0));

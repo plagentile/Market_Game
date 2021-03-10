@@ -29,8 +29,7 @@ public:
 
     enum class Status
     {
-        NotStarted,
-        Working,
+        Normal,
         NewSimulation,
         LoadSimulation,
         ExitNormal,
@@ -55,5 +54,6 @@ private:
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
     ChartBuilder chartBuilder;
+    Status status;
 };
 #endif // MAINWINDOW_H

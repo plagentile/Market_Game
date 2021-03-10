@@ -3,7 +3,9 @@
 
 InitialAccountSetup::InitialAccountSetup(QWidget *parent) :
     QDialog(parent),
+    initBalance(0.0),
     ui(new Ui::InitialAccountSetup),
+    APIKey(""),
     status(Status::Unchanged)
 {
     ui->setupUi(this);
@@ -32,6 +34,7 @@ bool InitialAccountSetup::keyOk() const noexcept{
 }
 
 InitialAccountSetup::Status InitialAccountSetup::run(){
+    this->status = Status::Unchanged;
     this->exec();
     return this->status;
 }

@@ -24,15 +24,19 @@ int32_t Coordinator::run(const QApplication &coreApp){
         return -1;
     }
 
-     /*Check if the user elected to either make a new sim, or load a previous save*/
-     if(selectedOption == SignInOptionsDialog::Options::NewSimulation){
-        this->runNewSetup(coreApp);
+    /*Check if the user elected to either make a new sim, or load a previous save*/
+    if(selectedOption == SignInOptionsDialog::Options::NewSimulation)
+    {
+       if(this->initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
+           return 0; //User Terminated the Progam
+       }
+       this->runMainWindow(coreApp);
     }
-    else{
-        /*Load Previous Save*/
+    else if(selectedOption == SignInOptionsDialog::Options::LoadPreviousSave)
+    {
         printf("ToDo...\n");
     }
-     return 0;
+    return 0;
 }
 
 SignInOptionsDialog::Options Coordinator::runSignInOptions()
@@ -52,21 +56,15 @@ SignInOptionsDialog::Options Coordinator::runSignInOptions()
     return signInOption;
 }
 
-int32_t Coordinator::runNewSetup(const QApplication &coreApp)
-{
-    InitialAccountSetup  initialAccountSetup;
-    if(initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
-        return 0;                                                           //User Terminated the Progam
-    }
+InitialAccountSetup::Status Coordinator::runInitialAccountSetup(){
+    return initialAccountSetup.run();
+}
 
-    MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
+MainWindow::Status Coordinator::runMainWindow(const QApplication &coreApp){
+    MainWindow mainWindow(0,&this->initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
     mainWindow.show();
-    int32_t returnVal =  coreApp.exec();
+    coreApp.exec();
 
-    //Check if the user terminated the program, or maybe clicked on an action like load or new simulation...
-
-
-
-    return returnVal;
+    return mainWindow.getStatus();
 }
 
