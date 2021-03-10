@@ -25,18 +25,15 @@ int32_t Coordinator::run(const QApplication &coreApp){
     }
 
     /*Check if the user elected to either make a new sim, or load a previous save*/
-    if(selectedOption == SignInOptionsDialog::Options::NewSimulation)
-    {
-       if(this->initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
-           return 0; //User Terminated the Progam
-       }
-       this->runMainWindow(coreApp);
+    if(selectedOption == SignInOptionsDialog::Options::NewSimulation){
+        return this->runMainWindow(coreApp, MainWindow::Status::NewSimulation);
     }
-    else if(selectedOption == SignInOptionsDialog::Options::LoadPreviousSave)
-    {
-        printf("ToDo...\n");
+    else if(selectedOption == SignInOptionsDialog::Options::LoadPreviousSave){
+        return this->runMainWindow(coreApp, MainWindow::Status::LoadSimulation);
     }
-    return 0;
+
+
+    return 0;   //User Quit Before selecting to either load or make a new simulation.
 }
 
 SignInOptionsDialog::Options Coordinator::runSignInOptions()
@@ -56,15 +53,27 @@ SignInOptionsDialog::Options Coordinator::runSignInOptions()
     return signInOption;
 }
 
-InitialAccountSetup::Status Coordinator::runInitialAccountSetup(){
-    return initialAccountSetup.run();
+int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Status status){
+
+    while(status ==MainWindow::Status::NewSimulation || status == MainWindow::Status::LoadSimulation )
+    {
+        if(this->initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
+            return 0; //User Terminated the Progam
+        }
+
+        if(status == MainWindow::Status::NewSimulation){
+            MainWindow mainWindow(0,&this->initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
+            mainWindow.show();
+            coreApp.exec();
+        }
+        else if(status == MainWindow::Status::LoadSimulation){
+            printf("\nTodo...");
+            break;
+        }
+
+    }
+    if(status == MainWindow::Status::ExitError) return -1;
+    return 0;
 }
 
-MainWindow::Status Coordinator::runMainWindow(const QApplication &coreApp){
-    MainWindow mainWindow(0,&this->initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
-    mainWindow.show();
-    coreApp.exec();
-
-    return mainWindow.getStatus();
-}
 
