@@ -37,6 +37,9 @@ public:
 
     Status getStatus() const;
 
+public:
+   QJsonArray getJSONReponse();
+
 public slots:
     void get(const QString location, const QString currSymbol);
 
@@ -48,10 +51,10 @@ private slots:
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
-
    QNetworkAccessManager qNetworkAccessManager;
    QString currentSymbol;
    Status status;
+   QJsonObject jReposneObject;
 };
 
 #endif // NETWORKHANDLER_H

@@ -18,11 +18,12 @@ public:
         Done
     };
 
-    void run() ;
+
 
 public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
     Status getStatus() const noexcept;
+    void run();
 private:
     Status readKnownSymbolsFile();
 private:

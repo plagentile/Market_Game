@@ -33,7 +33,7 @@ int32_t Coordinator::run(const QApplication &coreApp){
      /*Check if the user elected to either make a new sim, or load a previous save*/
      if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         InitialAccountSetup  initialAccountSetup;
-        if(initialAccountSetup.run() != ApplicationStatus::Status::ExitSuccessfully){
+        if(initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
             return -1;                                                           //User Terminated the Progam
         }
 

@@ -16,7 +16,6 @@ INCLUDEPATH += C:/OpenSSL-Win64/include/
 SOURCES += \
     about.cpp \
     account.cpp \
-    applicationstatus.cpp \
     chartbuilder.cpp \
     coordinator.cpp \
     initialaccountsetup.cpp \
@@ -32,7 +31,6 @@ SOURCES += \
 HEADERS += \
     about.h \
     account.h \
-    applicationstatus.h \
     chartbuilder.h \
     coordinator.h \
     initialaccountsetup.h \

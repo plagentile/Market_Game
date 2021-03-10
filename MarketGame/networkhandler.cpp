@@ -23,20 +23,7 @@ void NetworkHandler::readyRead(){
     if(this->status == Status::PassedEncypted){
         this->status = Status::PassedReadyRead;
         QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
-        QJsonObject jObject = QJsonDocument::fromJson(reply->readAll()).object();
-
-        QJsonValue value = jObject.value("candles");
-        QJsonArray  arr = value.toArray();
-
-        //print out all of the lows....
-        for(const QJsonValue & v : arr){
-            QDateTime tpast = QDateTime::fromMSecsSinceEpoch(v.toObject().value("datetime").toDouble());
-            //QDateTime time = QDateTime::fromTime_t()
-            qDebug() << tpast;
-            //qDebug() << v.toObject().value("datetime").toDouble() << "\n";
-        }
-        //Now have an array of 52 arrays.....
-
+        if(reply) this->jReposneObject = QJsonDocument::fromJson(reply->readAll()).object();
     }
     else{
         qobject_cast<QNetworkReply*>(sender())->abort();
@@ -81,10 +68,14 @@ void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &err
     file.close();
 }
 
-
 NetworkHandler::Status NetworkHandler::getStatus() const{
     return status;
 }
+
+QJsonArray NetworkHandler::getJSONReponse(){
+    return this->jReposneObject.value("candles").toArray();
+}
+
 
 
 

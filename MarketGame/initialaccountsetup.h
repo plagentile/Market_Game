@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <QCloseEvent>
-#include "applicationstatus.h"
 
 namespace Ui {
 class InitialAccountSetup;
@@ -19,10 +18,18 @@ public:
     InitialAccountSetup & operator = (const InitialAccountSetup & assignThis) =delete;
     ~InitialAccountSetup();
 
+    enum class Status
+    {
+        Unchanged,
+        ExitSuccessfully,
+        UserClosedApplication,
+        IncorrectAPIKey
+    };
+
     const QString getAPIKey() const noexcept;
     double getInitBalance() const noexcept;
     bool keyOk() const noexcept;
-    ApplicationStatus::Status run();
+    Status run();
 
 private slots:
     void on_loginButton_clicked() noexcept;
@@ -32,7 +39,7 @@ private:
     double initBalance;
     Ui::InitialAccountSetup *ui;
     QString APIKey;
-    ApplicationStatus::Status status;
+    Status status;
 
     // QWidget interface
 protected:

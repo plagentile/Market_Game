@@ -4,7 +4,7 @@
 InitialAccountSetup::InitialAccountSetup(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::InitialAccountSetup),
-    status(ApplicationStatus::Status::Unchanged)
+    status(Status::Unchanged)
 {
     ui->setupUi(this);
 }
@@ -31,9 +31,9 @@ bool InitialAccountSetup::keyOk() const noexcept{
     return false;
 }
 
-ApplicationStatus::Status InitialAccountSetup::run()
+InitialAccountSetup::Status InitialAccountSetup::run()
 {
-    while(this->status == ApplicationStatus::Status::Unchanged){
+    while(this->status == Status::Unchanged){
         this->setModal(true);
         this->exec();
     }
@@ -45,14 +45,14 @@ void InitialAccountSetup::on_loginButton_clicked() noexcept{
     this->initBalance = this->ui->accountBalanceInput->value();
     this->APIKey = this->ui->APIKeyInput->text();
     if(this->keyOk()){
-         this->status = ApplicationStatus::Status::ExitSuccessfully;
+         this->status = Status::ExitSuccessfully;
         this->close();
     }
 }
 
 void InitialAccountSetup::closeEvent(QCloseEvent *event){
-    if(this->status == ApplicationStatus::Status::Unchanged)
-        status = ApplicationStatus::Status::UserClosedApplication;
+    if(this->status == Status::Unchanged)
+        status = Status::UserClosedApplication;
     event->accept();
 }
 

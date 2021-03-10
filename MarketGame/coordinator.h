@@ -20,14 +20,15 @@
 class Coordinator{
 
 public:
-       static Coordinator * pCInstance;                                         //The singleton instance
-public:
-       static Coordinator * getInstance();
-       int32_t run(const QApplication &coreApp);
+    static Coordinator * pCInstance;                                         //The singleton instance
 
-       Coordinator(const Coordinator & assignThis) =delete;
-       Coordinator & operator =(const Coordinator &assignThis)=delete;
-       ~Coordinator() =default;
+public:
+    static Coordinator * getInstance();
+    int32_t run(const QApplication &coreApp);
+
+    Coordinator(const Coordinator & assignThis) =delete;
+    Coordinator & operator =(const Coordinator &assignThis)=delete;
+    ~Coordinator() =default;
 private:
     Coordinator() = default;
 

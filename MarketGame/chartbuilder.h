@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QtCharts>
 class ChartBuilder
 {
 public:
@@ -12,6 +13,8 @@ public:
 
 public:
     void buildBoxWhiskersChart(const QJsonArray & arr);
+
+    QChart* buildLineChart(const QJsonArray & arr);
 };
 
 #endif // CHARTBUILDER_H

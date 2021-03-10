@@ -10,6 +10,7 @@
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
+#include "chartbuilder.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,7 +28,7 @@ public:
     ~MainWindow();
 
 private:
-    void refreshSymbolInformation(void);
+    void refreshSymbolInformation();
     void showViewSymbolPage();
 
 private slots:
@@ -43,5 +44,6 @@ private:
     RequestEncapsulator requestEncapsulator;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
+    ChartBuilder chartBuilder;
 };
 #endif // MAINWINDOW_H
