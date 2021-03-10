@@ -26,7 +26,7 @@ int32_t Coordinator::run(const QApplication &coreApp){
              about.exec();                                                       //Show About
          }
          else if(signInOption == SignInOptionsDialog::Options::NoOptionSelected){
-             return -1;                                                          //User Terminated the Progam
+             return 0;                                                          //User Terminated the Progam
          }
     } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
 
@@ -34,7 +34,7 @@ int32_t Coordinator::run(const QApplication &coreApp){
      if(signInOption == SignInOptionsDialog::Options::NewSimulation){
         InitialAccountSetup  initialAccountSetup;
         if(initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
-            return -1;                                                           //User Terminated the Progam
+            return 0;                                                           //User Terminated the Progam
         }
 
         /*Run the Main Window, if the symbols are not done yet, something went terribly wrong*/

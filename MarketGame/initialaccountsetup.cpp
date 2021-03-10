@@ -31,12 +31,8 @@ bool InitialAccountSetup::keyOk() const noexcept{
     return false;
 }
 
-InitialAccountSetup::Status InitialAccountSetup::run()
-{
-    while(this->status == Status::Unchanged){
-        this->setModal(true);
-        this->exec();
-    }
+InitialAccountSetup::Status InitialAccountSetup::run(){
+    this->exec();
     return this->status;
 }
 
@@ -56,8 +52,7 @@ void InitialAccountSetup::closeEvent(QCloseEvent *event){
     event->accept();
 }
 
-void InitialAccountSetup::on_showInputButton_clicked()
-{
+void InitialAccountSetup::on_showInputButton_clicked(){
     if(this->ui->APIKeyInput->echoMode() == QLineEdit::Normal){
         this->ui->APIKeyInput->setEchoMode(QLineEdit::Password);
         this->ui->showInputButton->setStyleSheet("border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;");
