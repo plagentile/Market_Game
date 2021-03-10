@@ -28,12 +28,14 @@ public:
 
     const QString getAPIKey() const noexcept;
     double getInitBalance() const noexcept;
-    bool keyOk() const noexcept;
     Status run();
 
 private slots:
     void on_loginButton_clicked() noexcept;
     void on_showInputButton_clicked();
+
+private:
+    bool keyOk() const noexcept;
 
 private:
     double initBalance;

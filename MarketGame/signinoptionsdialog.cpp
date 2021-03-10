@@ -14,8 +14,7 @@ SignInOptionsDialog::~SignInOptionsDialog(){
 }
 
 SignInOptionsDialog::Options SignInOptionsDialog::run(){
-    this->userSelectedOption = Options::NoOptionSelected;       //could run the same frame more than once
-    this->setModal(true);
+    this->userSelectedOption = Options::NoOptionSelected;
     this->exec();
     return this->userSelectedOption;
 }

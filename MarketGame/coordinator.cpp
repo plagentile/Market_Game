@@ -12,9 +12,31 @@ Coordinator *Coordinator::getInstance(){
 
 int32_t Coordinator::run(const QApplication &coreApp){
 
-    /*Read the known symbols initially*/
+    /*Read the known symbols initially, in a seperate thread*/
     QFuture<void> fReadKnownSymbols = QtConcurrent::run(&readKnownSymbols, &ReadKnownSymbols::run);
 
+    /*Get the sign-in option from the user*/
+    SignInOptionsDialog::Options selectedOption = this->runSignInOptions();
+
+    /*If the symbols are not done yet, something went terribly wrong (takes 50-60ms at most)*/
+    if(this->readKnownSymbols.getStatus() != ReadKnownSymbols::Status::Done){
+        if(!fReadKnownSymbols.isFinished())fReadKnownSymbols.cancel();
+        return -1;
+    }
+
+     /*Check if the user elected to either make a new sim, or load a previous save*/
+     if(selectedOption == SignInOptionsDialog::Options::NewSimulation){
+        this->runNewSetup(coreApp);
+    }
+    else{
+        /*Load Previous Save*/
+        printf("ToDo...\n");
+    }
+     return 0;
+}
+
+SignInOptionsDialog::Options Coordinator::runSignInOptions()
+{
     /*Run Sign In Options*/
     SignInOptionsDialog::Options signInOption;
     do{
@@ -25,32 +47,26 @@ int32_t Coordinator::run(const QApplication &coreApp){
          else if(signInOption==SignInOptionsDialog::Options::About){
              about.exec();                                                       //Show About
          }
-         else if(signInOption == SignInOptionsDialog::Options::NoOptionSelected){
-             return 0;                                                          //User Terminated the Progam
-         }
-    } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
+   } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
 
-     /*Check if the user elected to either make a new sim, or load a previous save*/
-     if(signInOption == SignInOptionsDialog::Options::NewSimulation){
-        InitialAccountSetup  initialAccountSetup;
-        if(initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
-            return 0;                                                           //User Terminated the Progam
-        }
+    return signInOption;
+}
 
-        /*Run the Main Window, if the symbols are not done yet, something went terribly wrong*/
-        if(this->readKnownSymbols.getStatus() != ReadKnownSymbols::Status::Done){
-            if(!fReadKnownSymbols.isFinished())fReadKnownSymbols.cancel();
-            return -1;
-        }
-
-        MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
-        mainWindow.show();
-        return coreApp.exec();
+int32_t Coordinator::runNewSetup(const QApplication &coreApp)
+{
+    InitialAccountSetup  initialAccountSetup;
+    if(initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
+        return 0;                                                           //User Terminated the Progam
     }
-    else{
-        /*Load Previous Save*/
-        printf("ToDo...\n");
-    }
-    return 0;
+
+    MainWindow mainWindow(0,&initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
+    mainWindow.show();
+    int32_t returnVal =  coreApp.exec();
+
+    //Check if the user terminated the program, or maybe clicked on an action like load or new simulation...
+
+
+
+    return returnVal;
 }
 

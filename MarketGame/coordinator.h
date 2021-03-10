@@ -26,12 +26,17 @@ public:
     static Coordinator * getInstance();
     int32_t run(const QApplication &coreApp);
 
+
+
+
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
 private:
     Coordinator() = default;
 
+    SignInOptionsDialog::Options runSignInOptions();
+    int32_t runNewSetup(const QApplication &coreApp);
 private:
     SignInOptionsDialog  signInOptionsDialog;
     TermsOfService termsOfService;

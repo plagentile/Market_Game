@@ -27,6 +27,16 @@ public:
     MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
 
+    enum class Status
+    {
+        NotStarted,
+        Working,
+        NewSimulation,
+        LoadSimulation,
+        ExitNormal,
+        ExitError
+    };
+
 private:
     void refreshSymbolInformation();
     void showViewSymbolPage();
