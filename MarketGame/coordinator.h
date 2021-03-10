@@ -31,11 +31,12 @@ public:
     ~Coordinator() =default;
 private:
     Coordinator() = default;
-
     SignInOptionsDialog::Options runSignInOptions();
-    int32_t runNewSetup(const QApplication &coreApp);
+    int32_t runMainWindow(const QApplication &coreApp, MainWindow::Status);
+
 private:
-    SignInOptionsDialog  signInOptionsDialog;
+    InitialAccountSetup initialAccountSetup;
+    SignInOptionsDialog signInOptionsDialog;
     TermsOfService termsOfService;
     About about;
     ReadKnownSymbols readKnownSymbols;

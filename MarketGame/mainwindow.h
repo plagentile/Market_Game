@@ -10,7 +10,6 @@
 #include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
-#include "chartbuilder.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +35,8 @@ public:
         ExitError
     };
 
+    Status getStatus() const;
+
 private:
     void refreshSymbolInformation();
     void showViewSymbolPage();
@@ -47,13 +48,12 @@ private slots:
     void on_searchSymbolButton_clicked();
 
 private:
+    RequestEncapsulator requestEncapsulator;
     QStandardItemModel model;
     Ui::MainWindow *ui;
     Account * pAccount;
-    RequestEncapsulator requestEncapsulator;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
-    ChartBuilder chartBuilder;
     Status status;
 };
 #endif // MAINWINDOW_H

@@ -32,7 +32,6 @@ int32_t Coordinator::run(const QApplication &coreApp){
         return this->runMainWindow(coreApp, MainWindow::Status::LoadSimulation);
     }
 
-
     return 0;   //User Quit Before selecting to either load or make a new simulation.
 }
 
@@ -65,6 +64,7 @@ int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Stat
             MainWindow mainWindow(0,&this->initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
             mainWindow.show();
             coreApp.exec();
+            status = mainWindow.getStatus();
         }
         else if(status == MainWindow::Status::LoadSimulation){
             printf("\nTodo...");

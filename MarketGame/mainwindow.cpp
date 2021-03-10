@@ -19,7 +19,6 @@ MainWindow::~MainWindow(){
     delete pAccount;
 }
 
-
 void MainWindow::refreshSymbolInformation(){
     this->ui->dynamicAccountBalanceLabel->setText(QString::number(this->pAccount->getAccountBalance(), 'f', 2));
     this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->pAccount->getAvailableFunds(), 'f', 2));
@@ -80,4 +79,8 @@ void MainWindow::on_symbolSearchLineEdit_returnPressed(){
 
 void MainWindow::on_searchSymbolButton_clicked(){
     this->showViewSymbolPage();
+}
+
+MainWindow::Status MainWindow::getStatus() const{
+    return status;
 }
