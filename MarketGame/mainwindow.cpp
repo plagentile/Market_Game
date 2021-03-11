@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSetup, const SymbolTernarySearchTree *pSymbolTST)
-    : QMainWindow(parent), ui(new Ui::MainWindow),
-      pAccount(new Account(0, initAccountSetup->getInitBalance(), initAccountSetup->getAPIKey())),
-      pSymbolTST(pSymbolTST),
+MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString initAPIKey, const SymbolTernarySearchTree *pTST)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      pAccount(new Account(0, initBalance, initAPIKey)),
+      pSymbolTST(pTST),
       status(Status::Normal)
 {
     this->ui->setupUi(this);
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent, const InitialAccountSetup* initAccountSe
     this->ui->searchSymbolButton->hide();
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
 }
+
 
 MainWindow::~MainWindow(){
     delete ui;

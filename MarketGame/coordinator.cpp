@@ -61,7 +61,7 @@ int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Stat
         }
 
         if(status == MainWindow::Status::NewSimulation){
-            MainWindow mainWindow(0,&this->initialAccountSetup, readKnownSymbols.getSymbolTernarySearchTree());
+            MainWindow mainWindow(0,this->initialAccountSetup.getInitBalance(),this->initialAccountSetup.getAPIKey(), this->readKnownSymbols.getSymbolTernarySearchTree());
             mainWindow.show();
             coreApp.exec();
             status = mainWindow.getStatus();
@@ -70,7 +70,6 @@ int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Stat
             printf("\nTodo...");
             break;
         }
-
     }
     if(status == MainWindow::Status::ExitError) return -1;
     return 0;

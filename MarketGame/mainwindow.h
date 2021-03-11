@@ -7,7 +7,6 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 #include "account.h"
-#include "initialaccountsetup.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
 
@@ -20,7 +19,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, const InitialAccountSetup* initAccountSetup =nullptr, const SymbolTernarySearchTree *pSymbolTST = nullptr );
+    MainWindow(QWidget *parent = nullptr, const int32_t initBalance = 0, const QString initAPIKey = "", const SymbolTernarySearchTree *pTST = nullptr );
     MainWindow() = delete;
     MainWindow(const MainWindow & window) = delete;
     MainWindow & operator = (const MainWindow & window) = delete;
