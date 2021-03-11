@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString initAPIKey, const SymbolTernarySearchTree *pTST)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      pAccount(new Account(0, initBalance, initAPIKey)),
+      account(0, initBalance, initAPIKey),
       pSymbolTST(pTST),
       status(Status::Normal)
 {
@@ -18,12 +18,11 @@ MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString
 
 MainWindow::~MainWindow(){
     delete ui;
-    delete pAccount;
 }
 
 void MainWindow::refreshSymbolInformation(){
-    this->ui->dynamicAccountBalanceLabel->setText(QString::number(this->pAccount->getAccountBalance(), 'f', 2));
-    this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->pAccount->getAvailableFunds(), 'f', 2));
+    this->ui->dynamicAccountBalanceLabel->setText(QString::number(this->account.getAccountBalance(), 'f', 2));
+    this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->account.getAvailableFunds(), 'f', 2));
 }
 
 void MainWindow::showViewSymbolPage(){
@@ -33,7 +32,7 @@ void MainWindow::showViewSymbolPage(){
         if(currTextEdit == vSearchResults[x]->symbol){
             //Valid symbol, set and show the next page, default view is one year of data with price points set at once per week
             //this->ui->graphicsView->setChart(chartBuilder.buildLineChart(this))
-            this->requestEncapsulator.getPriceHistory(this->pAccount->getAPIKey(), currTextEdit, "year", 1, "weekly", 1);
+            this->requestEncapsulator.getPriceHistory(this->account.getAPIKey(), currTextEdit, "year", 1, "weekly", 1);
             this->refreshSymbolInformation();
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
         }

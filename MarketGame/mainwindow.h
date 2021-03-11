@@ -48,9 +48,9 @@ private slots:
 
 private:
     RequestEncapsulator requestEncapsulator;
+    Account account;
     QStandardItemModel model;
     Ui::MainWindow *ui;
-    Account * pAccount;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
     Status status;
