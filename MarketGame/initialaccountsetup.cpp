@@ -3,9 +3,9 @@
 
 InitialAccountSetup::InitialAccountSetup(QWidget *parent) :
     QDialog(parent),
-    initBalance(0.0),
     ui(new Ui::InitialAccountSetup),
     APIKey(""),
+    initBalance(0),
     status(Status::Unchanged)
 {
     ui->setupUi(this);
@@ -19,7 +19,7 @@ const QString InitialAccountSetup::getAPIKey() const noexcept{
     return this->APIKey;
 }
 
-double InitialAccountSetup::getInitBalance() const noexcept{
+int32_t InitialAccountSetup::getInitBalance() const noexcept{
     return this->initBalance;
 }
 
@@ -41,6 +41,7 @@ InitialAccountSetup::Status InitialAccountSetup::run(){
 
 
 void InitialAccountSetup::on_loginButton_clicked() noexcept{
+    //Init balance is capped between 0 <-> 1-billion in the .ui, so impossible for an overflow
     this->initBalance = this->ui->accountBalanceInput->value();
     this->APIKey = this->ui->APIKeyInput->text();
     if(this->keyOk()){

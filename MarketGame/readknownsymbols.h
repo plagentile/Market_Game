@@ -9,7 +9,7 @@ public:
     ReadKnownSymbols();
     ReadKnownSymbols(const ReadKnownSymbols & assign) =delete;
     ReadKnownSymbols & operator = (const ReadKnownSymbols & assign) = delete;
-    ~ReadKnownSymbols();
+    ~ReadKnownSymbols() =default;
 
     enum class Status{
         Working,
@@ -17,8 +17,6 @@ public:
         CouldNotOpenFile,
         Done
     };
-
-
 
 public:
     const SymbolTernarySearchTree * getSymbolTernarySearchTree() const noexcept;
@@ -28,7 +26,7 @@ private:
     Status readKnownSymbolsFile();
 private:
     Status symStatus;
-    SymbolTernarySearchTree *pSymbolTernarySearchTree;
+    SymbolTernarySearchTree symbolTernarySearchTree;
 };
 
 #endif // READKNOWNSYMBOLS_H

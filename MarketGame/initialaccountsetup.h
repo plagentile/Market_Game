@@ -27,7 +27,7 @@ public:
     };
 
     const QString getAPIKey() const noexcept;
-    double getInitBalance() const noexcept;
+    int32_t getInitBalance() const noexcept;
     Status run();
 
 private slots:
@@ -38,9 +38,9 @@ private:
     bool keyOk() const noexcept;
 
 private:
-    double initBalance;
     Ui::InitialAccountSetup *ui;
     QString APIKey;
+    int32_t initBalance;
     Status status;
 
     // QWidget interface

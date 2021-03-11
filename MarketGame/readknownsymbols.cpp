@@ -1,12 +1,8 @@
 #include "readknownsymbols.h"
 
 ReadKnownSymbols::ReadKnownSymbols()
-    :symStatus(Status::Working), pSymbolTernarySearchTree(new SymbolTernarySearchTree())
+    :symStatus(Status::Working)
 {
-}
-
-ReadKnownSymbols::~ReadKnownSymbols(){
-    delete pSymbolTernarySearchTree;
 }
 
 void ReadKnownSymbols::run() {
@@ -14,7 +10,7 @@ void ReadKnownSymbols::run() {
 }
 
 const SymbolTernarySearchTree *ReadKnownSymbols::getSymbolTernarySearchTree() const noexcept{
-    return this->pSymbolTernarySearchTree;
+    return &this->symbolTernarySearchTree;
 }
 
 ReadKnownSymbols::Status ReadKnownSymbols::getStatus() const noexcept{
@@ -31,7 +27,7 @@ ReadKnownSymbols::Status ReadKnownSymbols::readKnownSymbolsFile() {
     }
     QTextStream stream(&file);
     while(!stream.atEnd()){
-        this->pSymbolTernarySearchTree->insert(stream.readLine().split(','));
+        this->symbolTernarySearchTree.insert(stream.readLine().split(','));
     }
     file.close();
     return Status::Done;

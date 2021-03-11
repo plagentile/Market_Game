@@ -103,21 +103,27 @@
      </spacer>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="accountBalanceInput">
+     <widget class="QSpinBox" name="accountBalanceInput">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+       <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
       </property>
       <property name="buttonSymbols">
        <enum>QAbstractSpinBox::NoButtons</enum>
       </property>
       <property name="prefix">
-       <string>Starting $</string>
+       <string>Starting Balance: $</string>
       </property>
       <property name="maximum">
-       <double>1000000000.000000000000000</double>
+       <number>1000000000</number>
       </property>
      </widget>
     </item>
@@ -280,7 +286,6 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>accountBalanceInput</tabstop>
   <tabstop>APIKeyInput</tabstop>
   <tabstop>loginButton</tabstop>
   <tabstop>showInputButton</tabstop>
