@@ -13,13 +13,13 @@ Coordinator *Coordinator::getInstance(){
 int32_t Coordinator::run(const QApplication &coreApp){
 
     /*Read the known symbols initially, in a seperate thread*/
-    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&readKnownSymbols, &ReadKnownSymbols::run);
+    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::init);
 
     /*Get the sign-in option from the user*/
     SignInOptionsDialog::Options selectedOption = this->runSignInOptions();
 
     /*If the symbols are not done yet, something went terribly wrong (takes 50-60ms at most)*/
-    if(this->readKnownSymbols.getStatus() != ReadKnownSymbols::Status::Done){
+    if(this->symbolTernarySearchTree.getStatus() != SymbolTernarySearchTree::Status::Ready){
         if(!fReadKnownSymbols.isFinished())fReadKnownSymbols.cancel();
         return -1;
     }
@@ -61,7 +61,7 @@ int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Stat
         }
 
         if(status == MainWindow::Status::NewSimulation){
-            MainWindow mainWindow(0,this->initialAccountSetup.getInitBalance(),this->initialAccountSetup.getAPIKey(), this->readKnownSymbols.getSymbolTernarySearchTree());
+            MainWindow mainWindow(0,this->initialAccountSetup.getInitBalance(),this->initialAccountSetup.getAPIKey(), &this->symbolTernarySearchTree);
             mainWindow.show();
             coreApp.exec();
             status = mainWindow.getStatus();

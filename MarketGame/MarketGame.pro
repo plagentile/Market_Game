@@ -22,7 +22,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     networkhandler.cpp \
-    readknownsymbols.cpp \
     requestencapsulator.cpp \
     signinoptionsdialog.cpp \
     symbolternarysearchtree.cpp \
@@ -36,7 +35,6 @@ HEADERS += \
     initialaccountsetup.h \
     mainwindow.h \
     networkhandler.h \
-    readknownsymbols.h \
     requestencapsulator.h \
     signinoptionsdialog.h \
     symbolternarysearchtree.h \

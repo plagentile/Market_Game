@@ -1,12 +1,65 @@
 #include "symbolternarysearchtree.h"
 
 SymbolTernarySearchTree::SymbolTernarySearchTree()
-    :pRoot(0), SYMBOL_SEARCH_VECTOR_RESERVE_SIZE(13)
+    :pRoot(0), status(Status::NotStarted),SYMBOL_SEARCH_VECTOR_RESERVE_SIZE(13)
 {
 }
 
 SymbolTernarySearchTree::~SymbolTernarySearchTree(){
     delete this->pRoot;
+}
+
+void SymbolTernarySearchTree::init(){
+    QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
+    if(!file.exists()){
+        this->status = Status::FileNotFound;
+        return;
+    }
+    if(!file.open(QIODevice::ReadOnly) ){
+        this->status =Status::CouldNotOpenFile;
+        return;
+    }
+    QTextStream stream(&file);
+    while(!stream.atEnd()){
+       this->insert(stream.readLine().split(','));
+    }
+    file.close();
+    this->status = Status::Ready;
+}
+
+void SymbolTernarySearchTree::insert(const QStringList& list){
+    if(list.size() ^ 0x3) return;     //ensure that there are ONLY 3 (no more, no less) elements in the list
+    this->insert(&this->pRoot, list[0], 0, list);
+}
+
+void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString& str, const int32_t strIndex, const QStringList& list){
+    if(!(*root)){
+        if(strIndex == str.length() -1){
+            *root = new Node(str[strIndex], list);
+            return;
+        }
+        *root = new Node(str[strIndex]);
+    }
+
+    if((str[strIndex]) < (*root)->cData){
+        insert(&((*root)->pLeft), str, strIndex, list);
+    }
+
+    else if((str[strIndex]) > (*root)->cData){
+        insert(&((*root)->pRight), str, strIndex, list);
+    }
+
+    else{
+        if((strIndex+1) < str.length()){
+            insert(&((*root)->pMid), str, strIndex +1, list);
+        }
+        else{
+            (*root)->completesSymbol = true;
+            (*root)->symbol = list[0];
+            (*root)->name = list[1];
+            (*root)->industry = list[2];
+        }
+    }
 }
 
 const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::searchTST(const QString& str) const{
@@ -49,10 +102,9 @@ const QVector<const SymbolTernarySearchTree::Node*> SymbolTernarySearchTree::sea
 }
 
 
-void SymbolTernarySearchTree::continuePath(const SymbolTernarySearchTree::Node *pAt, QVector<const SymbolTernarySearchTree::Node *> &vec, int32_t &vecPos) const
-{
-    if(!pAt || (vecPos + 3 > vec.capacity())) return;  //current position + 3 (possible) additional checks = 4, so we are checking for 4 possible adds
-
+void SymbolTernarySearchTree::continuePath(const SymbolTernarySearchTree::Node *pAt, QVector<const SymbolTernarySearchTree::Node *> &vec, int32_t &vecPos) const{
+    if(!pAt || (vecPos + 3 > vec.capacity()))
+        return;  //current position + 3 (possible) additional checks = 4, so we are checking for 4 possible adds
 
     if(pAt->completesSymbol){
         vec.insert(vecPos++, pAt);
@@ -71,51 +123,12 @@ void SymbolTernarySearchTree::continuePath(const SymbolTernarySearchTree::Node *
 
 }
 
+SymbolTernarySearchTree::Status SymbolTernarySearchTree::getStatus() const{
+    return status;
+}
+
 int32_t SymbolTernarySearchTree::getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE() const{
     return SYMBOL_SEARCH_VECTOR_RESERVE_SIZE;
 }
-
-
-void SymbolTernarySearchTree::insert(const QStringList& list){
-    if(list.size() ^ 0x3) return;     //ensure that there are ONLY 3 elements in the list
-    this->insert(&this->pRoot, list[0], 0, list);
-}
-
-
-void SymbolTernarySearchTree::insert(SymbolTernarySearchTree::Node **root, const QString& str, const int32_t strIndex, const QStringList& list){
-    if(!(*root)){
-        if(strIndex == str.length() -1){
-            *root = new Node(str[strIndex], list);
-            return;
-        }
-        *root = new Node(str[strIndex]);
-    }
-
-    if((str[strIndex]) < (*root)->cData){
-        insert(&((*root)->pLeft), str, strIndex, list);
-    }
-
-    else if((str[strIndex]) > (*root)->cData){
-        insert(&((*root)->pRight), str, strIndex, list);
-    }
-
-    else{
-        if((strIndex+1) < str.length()){
-            insert(&((*root)->pMid), str, strIndex +1, list);
-        }
-        else{
-            (*root)->completesSymbol = true;
-            (*root)->symbol = list[0];
-            (*root)->name = list[1];
-            (*root)->industry = list[2];
-        }
-    }
-}
-
-
-
-
-
-
 
 

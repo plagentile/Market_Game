@@ -2,10 +2,20 @@
 #define SYMBOLTERNARYSEARCHTREE_H
 #include <QStringList>
 #include <QVector>
+#include <QFile>
+#include <QTextStream>
 class SymbolTernarySearchTree
 {
 
 public:
+
+    enum class Status{
+        NotStarted,
+        FileNotFound,
+        CouldNotOpenFile,
+        Ready
+    };
+
     struct Node
     {
         Node(const QChar cData)
@@ -44,17 +54,21 @@ public:
     SymbolTernarySearchTree(const SymbolTernarySearchTree & assign) = delete;
     SymbolTernarySearchTree & operator =(const SymbolTernarySearchTree & assign) = delete;
     ~SymbolTernarySearchTree();
+    void init();
 
     const QVector<const Node*> searchTST(const QString& str) const;
-    void insert(const QStringList& list);
     int32_t getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE() const;
+    Status getStatus() const;
 
 private:
+    void insert(const QStringList& list);
     void insert(Node** root, const QString& str, const int32_t strIndex,const QStringList& list);
     void continuePath(const Node* pAt, QVector<const Node*>& vec, int32_t& vecPos) const;
 private:
    Node *pRoot;
+   Status status;
    const int32_t SYMBOL_SEARCH_VECTOR_RESERVE_SIZE;
+
 
 };
 

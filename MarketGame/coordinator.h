@@ -6,8 +6,8 @@
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
+#include "symbolternarysearchtree.h"
 #include <QApplication>
-#include <readknownsymbols.h>
 #include <QtConcurrent/QtConcurrentRun>
 /*
     This class is responsible for controlling the flow of the program
@@ -39,6 +39,6 @@ private:
     SignInOptionsDialog signInOptionsDialog;
     TermsOfService termsOfService;
     About about;
-    ReadKnownSymbols readKnownSymbols;
+    SymbolTernarySearchTree symbolTernarySearchTree;
 };
 #endif // COORDINATOR_H
