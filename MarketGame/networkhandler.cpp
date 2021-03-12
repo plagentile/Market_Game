@@ -8,9 +8,8 @@ NetworkHandler::NetworkHandler(QObject *parent) : QObject(parent), status(Status
     connect(&qNetworkAccessManager, &QNetworkAccessManager::finished, this, &NetworkHandler::finished);
 }
 
-void NetworkHandler::get(const QString location, const QString currSymbol){
+void NetworkHandler::get(const QString location){
     this->status =Status::Started;
-    this->currentSymbol = currSymbol;
     QNetworkReply * reply = qNetworkAccessManager.get(QNetworkRequest(QUrl(location)));
     if(!reply){
         this->status = Status::BadReply;

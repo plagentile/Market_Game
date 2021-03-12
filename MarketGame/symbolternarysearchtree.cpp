@@ -9,7 +9,7 @@ SymbolTernarySearchTree::~SymbolTernarySearchTree(){
     delete this->pRoot;
 }
 
-void SymbolTernarySearchTree::init(){
+void SymbolTernarySearchTree::setup(){
     QFile file(":/files/coreData/unsortedKnownSymbolsCommaSeperated.csv");
     if(!file.exists()){
         this->status = Status::FileNotFound;

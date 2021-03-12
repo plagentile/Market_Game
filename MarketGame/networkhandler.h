@@ -9,13 +9,15 @@
 #include <QFile>
 #include <QDir>
 #include "chartbuilder.h"
-#include <QDateTime>
 class NetworkHandler : public QObject
 {
     Q_OBJECT
 public:
-    explicit NetworkHandler(QObject *parent = nullptr);
-
+    NetworkHandler(QObject *parent = nullptr);
+    NetworkHandler() =delete;
+    NetworkHandler(const NetworkHandler & assign) = delete;
+    NetworkHandler & operator =(const NetworkHandler & assign) =delete;
+    ~NetworkHandler() = default;
 public:
     enum class Status
     {
@@ -41,7 +43,7 @@ public:
    QJsonArray getJSONReponse();
 
 public slots:
-    void get(const QString location, const QString currSymbol);
+    void get(const QString location);
 
 private slots:
     void readyRead();
@@ -52,9 +54,8 @@ private slots:
 
 private:
    QNetworkAccessManager qNetworkAccessManager;
-   QString currentSymbol;
-   Status status;
    QJsonObject jReposneObject;
+   Status status;
 };
 
 #endif // NETWORKHANDLER_H

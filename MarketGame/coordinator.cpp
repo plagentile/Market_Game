@@ -13,7 +13,7 @@ Coordinator *Coordinator::getInstance(){
 int32_t Coordinator::run(const QApplication &coreApp){
 
     /*Read the known symbols initially, in a seperate thread*/
-    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::init);
+    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
 
     /*Get the sign-in option from the user*/
     SignInOptionsDialog::Options selectedOption = this->runSignInOptions();
@@ -35,8 +35,7 @@ int32_t Coordinator::run(const QApplication &coreApp){
     return 0;   //User Quit Before selecting to either load or make a new simulation.
 }
 
-SignInOptionsDialog::Options Coordinator::runSignInOptions()
-{
+SignInOptionsDialog::Options Coordinator::runSignInOptions(){
     /*Run Sign In Options*/
     SignInOptionsDialog::Options signInOption;
     do{

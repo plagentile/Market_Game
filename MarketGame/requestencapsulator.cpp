@@ -1,6 +1,12 @@
 #include "requestencapsulator.h"
 
 
+RequestEncapsulator::RequestEncapsulator()
+    :networkHandler(0)
+{
+
+}
+
 void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString symbol, const QString pType, int32_t pAmount, const QString fType, int32_t fAmount)
 {
     QString priceHistoryRequest = this->host;
@@ -13,7 +19,7 @@ void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString sy
     priceHistoryRequest += "&" + QString::number(fAmount);
 
     printf("\nRequest: %ls\n", qUtf16Printable(priceHistoryRequest));
-    this->networkHandler.get(priceHistoryRequest, symbol);
+    this->networkHandler.get(priceHistoryRequest);
 }
 
 QString RequestEncapsulator::getPeriodType(const QString pType) noexcept{

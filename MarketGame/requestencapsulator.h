@@ -9,7 +9,7 @@
 class RequestEncapsulator
 {
 public:
-    RequestEncapsulator() = default;
+    RequestEncapsulator();
     RequestEncapsulator(const RequestEncapsulator & assign) =delete;
     RequestEncapsulator & operator =(const RequestEncapsulator & assign) = delete;
     ~RequestEncapsulator() = default;
