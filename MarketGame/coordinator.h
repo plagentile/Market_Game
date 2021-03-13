@@ -30,7 +30,7 @@ public:
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
 private:
-    Coordinator() = default;
+    Coordinator();
     SignInOptionsDialog::Options runSignInOptions();
     int32_t runMainWindow(const QApplication &coreApp, MainWindow::Status);
 

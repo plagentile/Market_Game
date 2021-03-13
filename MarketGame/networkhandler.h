@@ -13,7 +13,7 @@ class NetworkHandler : public QObject
 {
     Q_OBJECT
 public:
-    NetworkHandler(QObject *parent = nullptr);
+    explicit NetworkHandler(QObject *parent = nullptr);
     NetworkHandler() =delete;
     NetworkHandler(const NetworkHandler & assign) = delete;
     NetworkHandler & operator =(const NetworkHandler & assign) =delete;

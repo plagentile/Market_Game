@@ -3,6 +3,11 @@
 /*Enusre that the singleton pointer is null to begin with*/
 Coordinator* Coordinator::pCInstance = 0;
 
+
+Coordinator::Coordinator()
+    :initialAccountSetup(nullptr), signInOptionsDialog(nullptr),termsOfService(nullptr),about(nullptr)
+{}
+
 Coordinator *Coordinator::getInstance(){
     if(!pCInstance){
         pCInstance = new Coordinator();

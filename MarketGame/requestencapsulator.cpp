@@ -1,10 +1,8 @@
 #include "requestencapsulator.h"
 
-
 RequestEncapsulator::RequestEncapsulator()
-    :networkHandler(0)
+    :networkHandler(nullptr)
 {
-
 }
 
 void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString symbol, const QString pType, int32_t pAmount, const QString fType, int32_t fAmount)

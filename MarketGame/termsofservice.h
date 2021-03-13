@@ -12,6 +12,7 @@ class TermsOfService : public QDialog{
 
 public:
     explicit TermsOfService(QWidget *parent = nullptr);
+    TermsOfService() =delete;
     TermsOfService(const TermsOfService & assignThis) = delete;
     TermsOfService & operator = (const TermsOfService & assignThis) = delete;
     ~TermsOfService();

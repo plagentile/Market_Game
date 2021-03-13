@@ -22,6 +22,7 @@ public:
 
 public:
     explicit SignInOptionsDialog(QWidget *parent = nullptr);
+    SignInOptionsDialog() =delete;
     SignInOptionsDialog(const SignInOptionsDialog & assignThis) = delete;
     SignInOptionsDialog & operator =(const SignInOptionsDialog & assignThis) = delete;
    ~SignInOptionsDialog();
