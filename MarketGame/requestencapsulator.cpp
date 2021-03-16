@@ -1,29 +1,32 @@
 #include "requestencapsulator.h"
 
-RequestEncapsulator::RequestEncapsulator()
-    :networkHandler(nullptr)
+RequestEncapsulator::RequestEncapsulator(QObject *parent)
+    :QObject(parent), networkHandler(nullptr)
 {
+    connect(&networkHandler, &NetworkHandler::mySignal, this, &RequestEncapsulator::on_NetworkReplyReady);
 }
 
-QChart* RequestEncapsulator::getPriceHistoryChart(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
-
-
+void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods)
+{
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
 
     this->networkHandler.get(requestURL);
+}
 
-    if(networkHandler.getStatus() == NetworkHandler::Status::PassedFinshed){
-       return this->chartBuilder.buildLineChart(this->networkHandler.getJSONReponse());
+
+void RequestEncapsulator::on_NetworkReplyReady(NetworkHandler::Status status){
+    if(status == NetworkHandler::Status::PassedFinshed){
+        printf("\nReply is good");
+        //return this->chartBuilder.buildLineChart(this->networkHandler.getJSONReponse());
     }
-    return nullptr;
 }
 
 const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept
 {
     if(pType == "day"){
         //For daily periods, frequency is going to be in the span of 30minutes snapshots
-        return  ("&periodType=day&" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");
+        return  ("&periodType=day&period=" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");
     }
     else if(pType == "month"){
         //Monthly requests have a daily frequency snapshot, with a frequncy of once per day
@@ -39,6 +42,7 @@ const QString RequestEncapsulator::getPeriodType(const QString pType, const int3
 
     return "";
 }
+
 
 /*void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString symbol, const QString pType, int32_t pAmount, const QString fType, int32_t fAmount)
 {

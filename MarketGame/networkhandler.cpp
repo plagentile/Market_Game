@@ -46,11 +46,13 @@ void NetworkHandler::encrypted(QNetworkReply *reply){
 }
 
 void NetworkHandler::finished(QNetworkReply *reply){
-    if(this->status != Status::PassedMoveReply){
+    if(this->status != Status::PassedReadyRead){
         if(reply) reply->abort();
+        emit mySignal(this->status);
         return;
     }
     this->status = Status::PassedFinshed;
+    emit mySignal(this->status);
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
@@ -74,8 +76,6 @@ NetworkHandler::Status NetworkHandler::getStatus() const{
 QJsonArray NetworkHandler::getJSONReponse(){
     return this->jReposneObject.value("candles").toArray();
 }
-
-
 
 
 

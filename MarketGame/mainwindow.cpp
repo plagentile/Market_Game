@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString initAPIKey, const SymbolTernarySearchTree *pTST)
     : QMainWindow(parent),
+      requestEncapsulator(0),
       account(0, initBalance, initAPIKey),
       ui(new Ui::MainWindow),
       pSymbolTST(pTST),
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString
     this->ui->symbolListResults->hide();                                                                              //Hide list of recommendations initially
     this->ui->searchSymbolButton->hide();
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
+    connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_PriceHistoryChartRequested);
+    connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
 }
 
 MainWindow::~MainWindow(){
@@ -30,9 +33,7 @@ void MainWindow::showViewSymbolPage(){
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(currTextEdit == vSearchResults[x]->symbol){
             //Valid symbol, set and show the next page, default view is one year of data with price points set at once per week
-            this->ui->graphicsView->setChart(this->requestEncapsulator.getPriceHistoryChart(this->account.getAPIKey(), currTextEdit, "day", 2));
-            this->refreshSymbolInformation();
-            this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
+            emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
         }
     }
 }
@@ -78,6 +79,15 @@ void MainWindow::on_symbolSearchLineEdit_returnPressed(){
 
 void MainWindow::on_searchSymbolButton_clicked(){
     this->showViewSymbolPage();
+}
+
+void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * chart){
+    if(status == RequestEncapsulator::Status::ChartReady && chart){
+        //set and show chart
+        this->ui->graphicsView->setChart(chart);
+    }
+    this->refreshSymbolInformation();
+    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
 }
 
 MainWindow::Status MainWindow::getStatus() const{

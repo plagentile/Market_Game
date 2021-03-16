@@ -7,19 +7,33 @@
  * The class is used for encapuslating user input into a usable string that
  * will be handed off to NetworkHandler to GET a symbol series from NetworkHandler
  */
-class RequestEncapsulator
+class RequestEncapsulator: public QObject
 {
+    Q_OBJECT
 public:
-    RequestEncapsulator();
+
+    explicit RequestEncapsulator(QObject *parent = nullptr);
+    RequestEncapsulator() =delete;
     RequestEncapsulator(const RequestEncapsulator & assign) =delete;
     RequestEncapsulator & operator =(const RequestEncapsulator & assign) = delete;
     ~RequestEncapsulator() = default;
 
-    QChart* getPriceHistoryChart(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+
+    enum class Status
+    {
+        ChartReady,
+        Error
+    };
+
+public slots:
+    void on_NetworkReplyReady(NetworkHandler::Status status);
+    void on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+
+public: signals:
+    void requestReady(Status status);
 
 private:
     const QString getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept;
-
 private:
     NetworkHandler networkHandler;
     ChartBuilder chartBuilder;

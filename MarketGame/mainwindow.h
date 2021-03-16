@@ -36,6 +36,9 @@ public:
 
     Status getStatus() const;
 
+public: signals:
+    void priceHistoryChartReqested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+
 private:
     void refreshSymbolInformation();
     void showViewSymbolPage();
@@ -45,6 +48,7 @@ private slots:
     void on_symbolListResults_clicked(const QModelIndex &index);
     void on_symbolSearchLineEdit_returnPressed();
     void on_searchSymbolButton_clicked();
+    void on_requestReady(RequestEncapsulator::Status status, QChart * chart);
 
 private:
     RequestEncapsulator requestEncapsulator;

@@ -28,13 +28,11 @@ public:
         PassedGet,
         PassedEncypted,
         PassedReadyRead,
-        PassedMoveReply,
         PassedFinshed,
         NeedAuthentication,
         SSLError,
         FailedEncryptCheck,
         FailedReadyReadCheck,
-        FailedMoveReplyCheck,
         Internal_Errors,
         BadReply
     };
@@ -43,6 +41,9 @@ public:
 
 public:
    QJsonArray getJSONReponse();
+
+public: signals:
+    void mySignal(Status status);
 
 public slots:
     void get(const QString location);
