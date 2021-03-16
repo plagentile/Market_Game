@@ -8,7 +8,9 @@
 #include <QAuthenticator>
 #include <QFile>
 #include <QDir>
-#include "chartbuilder.h"
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
 class NetworkHandler : public QObject
 {
     Q_OBJECT

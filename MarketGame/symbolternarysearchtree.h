@@ -19,18 +19,17 @@ public:
     {
         Node(const QChar cData)
             :pLeft(0), pRight(0), pMid(0), cData(cData),completesSymbol(false)
-        {
-        }
+        {}
+
         Node(const QChar cData, const QStringList &list)
-           :pLeft(0), pRight(0), pMid(0), cData(cData), completesSymbol(true), symbol(list[0]),
-             name(list[1]), industry(list[2])
-        {
-        }
+           :pLeft(0), pRight(0), pMid(0), cData(cData), completesSymbol(true),
+             symbol(list[0]), name(list[1]), industry(list[2])
+        {}
+
         Node() = delete;
         Node(const Node & assign) = delete;
         Node & operator =(const Node& assign) =delete;
-        ~Node()
-        {
+        ~Node(){
             delete pLeft;
             delete pMid;
             delete pRight;
@@ -67,8 +66,6 @@ private:
    Node *pRoot;
    Status status;
    const int32_t SYMBOL_SEARCH_VECTOR_RESERVE_SIZE;
-
-
 };
 
 #endif // SYMBOLTERNARYSEARCHTREE_H

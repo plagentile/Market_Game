@@ -8,7 +8,6 @@ About::About(QWidget *parent) :
     ui->setupUi(this);
 }
 
-About::~About()
-{
+About::~About(){
     delete ui;
 }

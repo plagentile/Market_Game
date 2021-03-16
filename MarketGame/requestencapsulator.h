@@ -1,6 +1,7 @@
 #ifndef REQUESTENCAPSULATOR_H
 #define REQUESTENCAPSULATOR_H
 
+#include "chartbuilder.h"
 #include "networkhandler.h"
 /*
  * The class is used for encapuslating user input into a usable string that
@@ -14,17 +15,14 @@ public:
     RequestEncapsulator & operator =(const RequestEncapsulator & assign) = delete;
     ~RequestEncapsulator() = default;
 
-    void getPriceHistory(const QString apiKey, const QString symbol, const QString pType, int32_t pAmount, const QString fType, int32_t fAmount);
+    QChart* getPriceHistoryChart(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
 
 private:
-    QString getPeriodType(const QString pType) noexcept;
-    QString getFrequencyType(const QString fType) noexcept;
+    const QString getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept;
 
 private:
-    const QString postSymbol = "/pricehistory?apikey=";
-    const QString host = "https://api.tdameritrade.com/v1/marketdata/";
-
     NetworkHandler networkHandler;
+    ChartBuilder chartBuilder;
 };
 
 #endif // REQUESTENCAPSULATOR_H
