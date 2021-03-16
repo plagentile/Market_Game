@@ -82,7 +82,7 @@ void MainWindow::on_searchSymbolButton_clicked(){
 }
 
 void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * chart){
-    if(status == RequestEncapsulator::Status::ChartReady && chart){
+    if(status == RequestEncapsulator::Status::ChartOkay && chart){
         //set and show chart
         this->ui->graphicsView->setChart(chart);
     }

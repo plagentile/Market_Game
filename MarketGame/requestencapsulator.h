@@ -19,18 +19,18 @@ public:
     ~RequestEncapsulator() = default;
 
 
-    enum class Status
-    {
-        ChartReady,
+    enum class Status{
+        ChartOkay,
         Error
     };
 
 public slots:
-    void on_NetworkReplyReady(NetworkHandler::Status status);
     void on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void on_NetworkReplyReady(NetworkHandler::Status status);
+    void on_ChartReady(QChart * chart);
 
 public: signals:
-    void requestReady(Status status);
+    void requestReady(Status status, QChart * chart);
 
 private:
     const QString getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept;

@@ -22,6 +22,15 @@ void RequestEncapsulator::on_NetworkReplyReady(NetworkHandler::Status status){
     }
 }
 
+void RequestEncapsulator::on_ChartReady(QChart *chart){
+    if(chart){
+        emit this->requestReady(Status::ChartOkay, chart);
+    }
+    else{
+        emit this->requestReady(Status::Error, nullptr);
+    }
+}
+
 const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept
 {
     if(pType == "day"){
