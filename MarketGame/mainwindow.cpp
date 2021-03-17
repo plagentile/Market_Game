@@ -58,9 +58,8 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
 
 void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){                                              //User clicked on a recommendation in the symbol list results fill the line edit, hide other recommendations
     QStandardItem * item = this->model.itemFromIndex(index);
-
-    /*Find the symbol in the string*/
     if(item){
+        //find the symbol in the string
         QString res = item->data(0).toString();
         QString temp = "";
         for(int32_t x = 0, length = res.length(); x < length; ++x){
@@ -85,6 +84,7 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
     if(status == RequestEncapsulator::Status::ChartOkay && chart){
         //set and show chart
         this->ui->graphicsView->setChart(chart);
+        this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     }
     this->refreshSymbolInformation();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);

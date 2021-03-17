@@ -17,12 +17,12 @@ void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, co
 
 void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
     if(status == NetworkHandler::Status::PassedFinshed){
+        //Need to figure out what type of chart we are requesting...
         emit this->requestLineChart(jResponsePointer);
     }
 }
 
-void RequestEncapsulator::on_LineChartReady(QChart *chart)
-{
+void RequestEncapsulator::on_LineChartReady(QChart *chart){
     if(chart){
         emit this->requestReady(Status::ChartOkay, chart);
     }
@@ -31,7 +31,6 @@ void RequestEncapsulator::on_LineChartReady(QChart *chart)
     }
 }
 
-
 const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept
 {
     if(pType == "day"){
@@ -39,44 +38,15 @@ const QString RequestEncapsulator::getPeriodType(const QString pType, const int3
         return  ("&periodType=day&period=" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");
     }
     else if(pType == "month"){
-        //Monthly requests have a daily frequency snapshot, with a frequncy of once per day
-        return "&periodType=month";
+        return "&periodType=month&period=" + QString::number(amountOfPeriods) + "&frequencyType=daily&frequency=1";
     }
     else if(pType == "year"){
-
-        return "&periodType=year";
+       return "&periodType=year&period="+ QString::number(amountOfPeriods) + "&frequencyType=weekly&frequency=1";
     }
     else if(pType == "ytd"){
-        return "&periodType=ytd";
+        return "&periodType=ytd&period=1&frequencyType=daily&frequency=1";
     }
-
     return "";
 }
-
-
-/*void RequestEncapsulator::getPriceHistory(const QString apiKey, const QString symbol, const QString pType, int32_t pAmount, const QString fType, int32_t fAmount)
-{
-
-    priceHistoryRequest += getPeriodType(pType);
-    priceHistoryRequest += "&" + QString::number(pAmount);
-    priceHistoryRequest += getFrequencyType(fType);
-    priceHistoryRequest += "&" + QString::number(fAmount);
-
-    printf("\nRequest: %ls\n", qUtf16Printable(priceHistoryRequest));
-}*/
-
-
-
-/*QString RequestEncapsulator::getFrequencyType(const QString fType) noexcept
-{
-    if(fType == "minute") return "&frequencyType=minute";
-    else if(fType == "daily") return "&frequencyType=daily";
-    else if(fType == "weekly") return "&frequencyType=weekly";
-    else if(fType == "monthly") return "&frequencyType=monthly";
-    return "";
-}*/
-
-
-
 
 
