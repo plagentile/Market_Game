@@ -13,10 +13,10 @@ void ChartBuilder::on_requestLineChart(const QJsonArray &arr)
     //append series here....
     //QDateTime tpast = QDateTime::fromMSecsSinceEpoch(v.toObject().value("datetime").toDouble());
     //qDebug() << tpast;
-    int y = 0;
+    double x = 0.0;
     for(const QJsonValue & v : arr){
-        series->append(v.toObject().value("close").toDouble(),y);
-        y++;
+        series->append(x, v.toObject().value("close").toDouble());
+        x++;
     }
     chart->legend()->hide();
     chart->addSeries(series);
