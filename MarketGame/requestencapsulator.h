@@ -26,11 +26,11 @@ public:
 
 public slots:
     void on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
-    void on_NetworkReplyReady(NetworkHandler::Status status);
+    void on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jReponsePointer);
     void on_LineChartReady(QChart * chart);
 
 public: signals:
-    void requestLineChart(const QJsonArray & arr);
+    void requestLineChart(const QJsonObject* jReponseObject);
     void requestReady(Status status, QChart * chart);
     void sendNetworkRequest(QString url);
 

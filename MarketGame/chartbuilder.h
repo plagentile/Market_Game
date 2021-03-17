@@ -12,7 +12,7 @@ public:
     explicit ChartBuilder(QObject *parent = nullptr);
 
 public slots:
-    void on_requestLineChart(const QJsonArray & arr);
+    void on_requestLineChart(const QJsonObject* jReponsePointer);
 
 public: signals:
     void lineChartReady(QChart * chart);

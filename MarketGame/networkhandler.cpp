@@ -22,7 +22,7 @@ void NetworkHandler::readyRead(){
     if(this->status == Status::PassedEncypted){
         this->status = Status::PassedReadyRead;
         QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
-        if(reply) this->jReposneObject = QJsonDocument::fromJson(reply->readAll()).object();
+        if(reply) this->jReponseObject = QJsonDocument::fromJson(reply->readAll()).object();
     }
     else{
         qobject_cast<QNetworkReply*>(sender())->abort();
@@ -48,11 +48,11 @@ void NetworkHandler::encrypted(QNetworkReply *reply){
 void NetworkHandler::finished(QNetworkReply *reply){
     if(this->status != Status::PassedReadyRead){
         if(reply) reply->abort();
-        emit done(this->status);
+        emit done(this->status, nullptr);
         return;
     }
     this->status = Status::PassedFinshed;
-    emit done(this->status);
+    emit done(this->status, &this->jReponseObject);
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
@@ -68,23 +68,4 @@ void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &err
 
     file.close();
 }
-
-NetworkHandler::Status NetworkHandler::getStatus() const{
-    return status;
-}
-
-QJsonArray NetworkHandler::getJSONReponse(){
-    return this->jReposneObject.value("candles").toArray();
-}
-
-
-
-
-
-
-
-
-
-
-
 

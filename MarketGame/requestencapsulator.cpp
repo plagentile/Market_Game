@@ -4,7 +4,7 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
     :QObject(parent), networkHandler(nullptr)
 {
     connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
-    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_NetworkReplyReady);
+    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_NetworkReplyFinished);
     connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
     connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_LineChartReady);
 }
@@ -15,9 +15,9 @@ void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, co
     emit this->sendNetworkRequest(requestURL);
 }
 
-void RequestEncapsulator::on_NetworkReplyReady(NetworkHandler::Status status){
+void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
     if(status == NetworkHandler::Status::PassedFinshed){
-        emit this->requestLineChart(networkHandler.getJSONReponse());
+        emit this->requestLineChart(jResponsePointer);
     }
 }
 

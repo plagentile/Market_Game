@@ -10,7 +10,6 @@
 #include <QDir>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QJsonArray>
 class NetworkHandler : public QObject
 {
     Q_OBJECT
@@ -43,7 +42,7 @@ public:
    QJsonArray getJSONReponse();
 
 public: signals:
-    void done(Status status);
+    void done(Status status, const QJsonObject*jReponseObject );
 
 public slots:
     void get(const QString location);
@@ -57,7 +56,7 @@ private slots:
 
 private:
    QNetworkAccessManager qNetworkAccessManager;
-   QJsonObject jReposneObject;
+   QJsonObject jReponseObject;
    Status status;
 };
 
