@@ -3,26 +3,26 @@
 RequestEncapsulator::RequestEncapsulator(QObject *parent)
     :QObject(parent), networkHandler(nullptr)
 {
-    connect(&networkHandler, &NetworkHandler::mySignal, this, &RequestEncapsulator::on_NetworkReplyReady);
+    connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
+    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_NetworkReplyReady);
+    connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
+    connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_LineChartReady);
 }
 
-void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods)
-{
+void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
-
-    this->networkHandler.get(requestURL);
+    emit this->sendNetworkRequest(requestURL);
 }
-
 
 void RequestEncapsulator::on_NetworkReplyReady(NetworkHandler::Status status){
     if(status == NetworkHandler::Status::PassedFinshed){
-        printf("\nReply is good");
-        //return this->chartBuilder.buildLineChart(this->networkHandler.getJSONReponse());
+        emit this->requestLineChart(networkHandler.getJSONReponse());
     }
 }
 
-void RequestEncapsulator::on_ChartReady(QChart *chart){
+void RequestEncapsulator::on_LineChartReady(QChart *chart)
+{
     if(chart){
         emit this->requestReady(Status::ChartOkay, chart);
     }
@@ -30,6 +30,7 @@ void RequestEncapsulator::on_ChartReady(QChart *chart){
         emit this->requestReady(Status::Error, nullptr);
     }
 }
+
 
 const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept
 {

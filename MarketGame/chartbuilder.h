@@ -5,16 +5,18 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QtCharts>
-class ChartBuilder
+class ChartBuilder : public QObject
 {
+     Q_OBJECT
 public:
-    ChartBuilder();
+    explicit ChartBuilder(QObject *parent = nullptr);
 
+public slots:
+    void on_requestLineChart(const QJsonArray & arr);
 
-public:
-    void buildBoxWhiskersChart(const QJsonArray & arr);
+public: signals:
+    void lineChartReady(QChart * chart);
 
-    QChart* buildLineChart(const QJsonArray & arr);
 };
 
 #endif // CHARTBUILDER_H

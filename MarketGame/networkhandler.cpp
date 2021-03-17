@@ -48,11 +48,11 @@ void NetworkHandler::encrypted(QNetworkReply *reply){
 void NetworkHandler::finished(QNetworkReply *reply){
     if(this->status != Status::PassedReadyRead){
         if(reply) reply->abort();
-        emit mySignal(this->status);
+        emit done(this->status);
         return;
     }
     this->status = Status::PassedFinshed;
-    emit mySignal(this->status);
+    emit done(this->status);
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){

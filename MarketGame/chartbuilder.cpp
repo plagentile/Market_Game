@@ -1,11 +1,12 @@
 #include "chartbuilder.h"
 
-ChartBuilder::ChartBuilder()
+ChartBuilder::ChartBuilder(QObject *parent)
+    :QObject(parent)
 {
-
 }
 
-QChart* ChartBuilder::buildLineChart(const QJsonArray &arr){
+void ChartBuilder::on_requestLineChart(const QJsonArray &arr)
+{
     QChart * chart = new QChart();
     QLineSeries *series = new QLineSeries();
 
@@ -22,5 +23,5 @@ QChart* ChartBuilder::buildLineChart(const QJsonArray &arr){
     chart->createDefaultAxes();
     chart->setTitle("Simple line chart example");
 
-    return chart;
+    emit this->lineChartReady(chart);
 }

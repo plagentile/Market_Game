@@ -43,7 +43,7 @@ public:
    QJsonArray getJSONReponse();
 
 public: signals:
-    void mySignal(Status status);
+    void done(Status status);
 
 public slots:
     void get(const QString location);
