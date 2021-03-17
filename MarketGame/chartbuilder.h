@@ -1,18 +1,22 @@
 #ifndef CHARTBUILDER_H
 #define CHARTBUILDER_H
-
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QtCharts>
+
 class ChartBuilder : public QObject
 {
      Q_OBJECT
 public:
     explicit ChartBuilder(QObject *parent = nullptr);
+    ChartBuilder() = delete;
+    ChartBuilder(const ChartBuilder & assign) =delete;
+    ChartBuilder & operator = (const ChartBuilder & assign) =delete;
+    ~ChartBuilder() = default;
 
 public slots:
-    void on_requestLineChart(const QJsonObject* jReponsePointer);
+    void on_requestLineChart(const QJsonObject* jResponsePointer);
 
 public: signals:
     void lineChartReady(QChart * chart);

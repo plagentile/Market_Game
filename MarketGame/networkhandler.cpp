@@ -22,7 +22,7 @@ void NetworkHandler::readyRead(){
     if(this->status == Status::PassedEncypted){
         this->status = Status::PassedReadyRead;
         QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
-        if(reply) this->jReponseObject = QJsonDocument::fromJson(reply->readAll()).object();
+        if(reply) this->jResponseObject = QJsonDocument::fromJson(reply->readAll()).object();
     }
     else{
         qobject_cast<QNetworkReply*>(sender())->abort();
@@ -52,7 +52,7 @@ void NetworkHandler::finished(QNetworkReply *reply){
         return;
     }
     this->status = Status::PassedFinshed;
-    emit done(this->status, &this->jReponseObject);
+    emit done(this->status, &this->jResponseObject);
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){

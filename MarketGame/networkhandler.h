@@ -56,7 +56,7 @@ private slots:
 
 private:
    QNetworkAccessManager qNetworkAccessManager;
-   QJsonObject jReponseObject;
+   QJsonObject jResponseObject;
    Status status;
 };
 

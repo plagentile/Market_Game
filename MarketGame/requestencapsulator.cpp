@@ -1,7 +1,7 @@
 #include "requestencapsulator.h"
 
 RequestEncapsulator::RequestEncapsulator(QObject *parent)
-    :QObject(parent), networkHandler(nullptr)
+    :QObject(parent), requestType(RequestType::Unknown),networkHandler(nullptr), chartBuilder(nullptr)
 {
     connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
     connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_NetworkReplyFinished);
@@ -10,15 +10,31 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
 }
 
 void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
+    this->requestType = RequestType::PriceHistoryLine;
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
     emit this->sendNetworkRequest(requestURL);
 }
 
 void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
-    if(status == NetworkHandler::Status::PassedFinshed){
+    if(status == NetworkHandler::Status::PassedFinshed)
+    {
         //Need to figure out what type of chart we are requesting...
-        emit this->requestLineChart(jResponsePointer);
+
+        switch(requestType)
+        {
+            case(RequestType::PriceHistoryLine):
+            {
+                emit this->requestLineChart(jResponsePointer);
+                break;
+            }
+            case(RequestType::PriceHistoryCandleStick):
+            {
+                break;
+            }
+            default:
+                break;
+        }
     }
 }
 
@@ -31,8 +47,7 @@ void RequestEncapsulator::on_LineChartReady(QChart *chart){
     }
 }
 
-const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept
-{
+const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept{
     if(pType == "day"){
         //For daily periods, frequency is going to be in the span of 30minutes snapshots
         return  ("&periodType=day&period=" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");

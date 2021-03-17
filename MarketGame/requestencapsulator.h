@@ -26,17 +26,26 @@ public:
 
 public slots:
     void on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
-    void on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jReponsePointer);
+    void on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer);
     void on_LineChartReady(QChart * chart);
 
 public: signals:
-    void requestLineChart(const QJsonObject* jReponseObject);
+    void requestLineChart(const QJsonObject* jResponsePointer);
     void requestReady(Status status, QChart * chart);
     void sendNetworkRequest(QString url);
 
 private:
     const QString getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept;
+
 private:
+
+    enum class RequestType{
+        Unknown,
+        PriceHistoryLine,
+        PriceHistoryCandleStick
+    };
+    RequestType requestType;
+
     NetworkHandler networkHandler;
     ChartBuilder chartBuilder;
 };

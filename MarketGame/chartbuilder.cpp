@@ -5,25 +5,24 @@ ChartBuilder::ChartBuilder(QObject *parent)
 {
 }
 
-void ChartBuilder::on_requestLineChart(const QJsonObject* jReponsePointer){
+void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
     QChart * chart = new QChart();
-    if(jReponsePointer)
+    if(jResponsePointer && !jResponsePointer->empty())
     {
         QLineSeries *series = new QLineSeries();
-        //append series here....
-
-        //qDebug() << tpast;
         double x = 0.0;
-        QJsonArray arr =  jReponsePointer->value("candles").toArray();
+        const QJsonArray arr =  jResponsePointer->value("candles").toArray();
         for(const QJsonValue & v : arr){
-            QDateTime tpast = QDateTime::fromMSecsSinceEpoch(v.toObject().value("datetime").toDouble());
-            series->append(tpast, v.toObject().value("close").toDouble());
+            //QDateTime tpast = QDateTime::fromMSecsSinceEpoch(v.toObject().value("datetime").toDouble());
+            series->append(x, v.toObject().value("close").toDouble());
             x++;
         }
         chart->legend()->hide();
         chart->addSeries(series);
         chart->createDefaultAxes();
-        chart->setTitle("Simple line chart example");
+        chart->setTitle(jResponsePointer->value("symbol").toString());
     }
     emit this->lineChartReady(chart);
 }
+
+
