@@ -23,23 +23,43 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
         lowSeries->setName(symbolName + " Low");
         lowSeries->setColor(QColor(Qt::red));
 
-        double x = 0.0;
         const QJsonArray arr =  jResponsePointer->value("candles").toArray();
         for(const QJsonValue & v : arr){
-            //QDateTime tpast = QDateTime::fromMSecsSinceEpoch(v.toObject().value("datetime").toDouble());
-            closeSeries->append(x, v.toObject().value("close").toDouble());
-            highSeries->append(x, v.toObject().value("high").toDouble());
-            lowSeries->append(x,v.toObject().value("low").toDouble());
-            x++;
+            const double epochVal = v.toObject().value("datetime").toDouble();
+            closeSeries->append(epochVal, v.toObject().value("close").toDouble());
+            highSeries->append(epochVal, v.toObject().value("high").toDouble());
+            lowSeries->append(epochVal,v.toObject().value("low").toDouble());
         }
+
+
         chart->addSeries(closeSeries);
         chart->addSeries(highSeries);
         chart->addSeries(lowSeries);
 
-        chart->createDefaultAxes();
+        QDateTimeAxis *axisX = new QDateTimeAxis;
+        axisX->setTickCount(10);
+        axisX->setFormat("MMM yyyy");
+        axisX->setTitleText("Date");
+        chart->addAxis(axisX, Qt::AlignBottom);
+
+
+        QValueAxis *axisY = new QValueAxis;
+        axisY->setLabelFormat("%d");
+        axisY->setTitleText("Price");
+        chart->addAxis(axisY, Qt::AlignLeft);
+
+        closeSeries->attachAxis(axisX);
+        highSeries->attachAxis(axisX);
+        lowSeries->attachAxis(axisX);
+
+
+        closeSeries->attachAxis(axisY);
+        highSeries->attachAxis(axisY);
+        lowSeries->attachAxis(axisY);
+
+        chart->setTitle(symbolName + " Price History");
         chart->legend()->setVisible(true);
         chart->legend()->setAlignment(Qt::AlignBottom);
-        chart->setTitle(jResponsePointer->value("symbol").toString());
     }
     emit this->lineChartReady(chart);
 }
