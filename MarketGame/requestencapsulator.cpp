@@ -19,8 +19,6 @@ void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, co
 void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
     if(status == NetworkHandler::Status::PassedFinshed)
     {
-        //Need to figure out what type of chart we are requesting...
-
         switch(requestType)
         {
             case(RequestType::PriceHistoryLine):
@@ -49,7 +47,6 @@ void RequestEncapsulator::on_LineChartReady(QChart *chart){
 
 const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept{
     if(pType == "day"){
-        //For daily periods, frequency is going to be in the span of 30minutes snapshots
         return  ("&periodType=day&period=" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");
     }
     else if(pType == "month"){

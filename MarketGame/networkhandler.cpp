@@ -37,7 +37,8 @@ void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator
 }
 
 void NetworkHandler::encrypted(QNetworkReply *reply){
-    if(status != Status::Started){
+    if(status != Status::Started)
+    {
         status = Status::FailedEncryptCheck;
         if(reply)reply->abort();
         return;
@@ -65,7 +66,6 @@ void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &err
     for(QSslError err : errors){
         file.write(err.errorString().toLocal8Bit());
     }
-
     file.close();
 }
 
