@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString
 {
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), 0));
+    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
     this->ui->symbolListResults->hide();                                                                              //Hide list of recommendations initially
     this->ui->searchSymbolButton->hide();
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
@@ -27,13 +28,14 @@ void MainWindow::refreshSymbolInformation(){
     this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->account.getAvailableFunds(), 'f', 2));
 }
 
-void MainWindow::showViewSymbolPage(){
+void MainWindow::showViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
-        if(currTextEdit == vSearchResults[x]->symbol){
+        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
             //Valid symbol, set and show the next page, default view is one year of data with price points set at once per week
             emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
+            break;
         }
     }
 }
@@ -59,10 +61,9 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
 void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){                                              //User clicked on a recommendation in the symbol list results fill the line edit, hide other recommendations
     QStandardItem * item = this->model.itemFromIndex(index);
     if(item){
-        //find the symbol in the string
-        QString res = item->data(0).toString();
+        const QString res = item->data(0).toString();
         QString temp = "";
-        for(int32_t x = 0, length = res.length(); x < length; ++x){
+        for(int32_t x = 0, length = res.length(); x < length; ++x){ //find the symbol in the string
             if(res[x] == ',') break;
             temp += res[x];
         }
@@ -73,18 +74,20 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){        
 }
 
 void MainWindow::on_symbolSearchLineEdit_returnPressed(){
-    this->showViewSymbolPage();
+    this->showViewSymbolOverviewPage();
 }
 
 void MainWindow::on_searchSymbolButton_clicked(){
-    this->showViewSymbolPage();
+    this->showViewSymbolOverviewPage();
 }
 
 void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * chart){
-    if(status == RequestEncapsulator::Status::ChartOkay && chart){
-        //set and show chart
+    if(status == RequestEncapsulator::Status::ChartOkay && chart)
+    {
+        QChart * pTemp = this->ui->graphicsView->chart();
         this->ui->graphicsView->setChart(chart);
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+        pTemp->deleteLater();
     }
     this->refreshSymbolInformation();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
@@ -92,4 +95,15 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
 
 MainWindow::Status MainWindow::getStatus() const{
     return status;
+}
+
+void MainWindow::on_goToSymbolSearchPageButton_clicked()
+{
+    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
+    this->ui->searchSymbolButton->hide();
+}
+
+void MainWindow::on_goToTradePageButton_clicked()
+{
+
 }

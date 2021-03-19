@@ -25,7 +25,6 @@ public:
         NotStarted,
         Started,
         PassedGet,
-        PassedEncypted,
         PassedReadyRead,
         PassedFinshed,
         NeedAuthentication,
@@ -58,6 +57,7 @@ private:
    QNetworkAccessManager qNetworkAccessManager;
    QJsonObject jResponseObject;
    Status status;
+   bool handShakeOccurred;
 };
 
 #endif // NETWORKHANDLER_H

@@ -41,7 +41,7 @@ public: signals:
 
 private:
     void refreshSymbolInformation();
-    void showViewSymbolPage();
+    void showViewSymbolOverviewPage();
 
 private slots:
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
@@ -49,6 +49,10 @@ private slots:
     void on_symbolSearchLineEdit_returnPressed();
     void on_searchSymbolButton_clicked();
     void on_requestReady(RequestEncapsulator::Status status, QChart * chart);
+
+    void on_goToSymbolSearchPageButton_clicked();
+
+    void on_goToTradePageButton_clicked();
 
 private:
     RequestEncapsulator requestEncapsulator;

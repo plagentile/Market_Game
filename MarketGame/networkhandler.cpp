@@ -1,6 +1,6 @@
 #include "networkhandler.h"
 
-NetworkHandler::NetworkHandler(QObject *parent) : QObject(parent), status(Status::NotStarted)
+NetworkHandler::NetworkHandler(QObject *parent) : QObject(parent), status(Status::NotStarted), handShakeOccurred(false)
 {
     connect(&qNetworkAccessManager, &QNetworkAccessManager::authenticationRequired, this, &NetworkHandler::authenticationRequired);
     connect(&qNetworkAccessManager, &QNetworkAccessManager::encrypted, this, &NetworkHandler::encrypted);
@@ -19,10 +19,10 @@ void NetworkHandler::get(const QString location){
 }
 
 void NetworkHandler::readyRead(){
-    if(this->status == Status::PassedEncypted){
-        this->status = Status::PassedReadyRead;
+    if(this->handShakeOccurred){
         QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
         if(reply) this->jResponseObject = QJsonDocument::fromJson(reply->readAll()).object();
+        this->status = Status::PassedReadyRead;
     }
     else{
         qobject_cast<QNetworkReply*>(sender())->abort();
@@ -37,13 +37,8 @@ void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator
 }
 
 void NetworkHandler::encrypted(QNetworkReply *reply){
-    if(status != Status::Started)
-    {
-        status = Status::FailedEncryptCheck;
-        if(reply)reply->abort();
-        return;
-    }
-    status = Status::PassedEncypted;
+    this->handShakeOccurred =true;
+    Q_UNUSED(reply);
 }
 
 void NetworkHandler::finished(QNetworkReply *reply){
