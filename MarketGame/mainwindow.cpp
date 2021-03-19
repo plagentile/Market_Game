@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString
       status(Status::Normal)
 {
     this->ui->setupUi(this);
-    this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), 0));
+    this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), this));
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
     this->ui->symbolListResults->hide();                                                                              //Hide list of recommendations initially
     this->ui->searchSymbolButton->hide();

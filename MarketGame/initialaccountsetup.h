@@ -14,7 +14,7 @@ class InitialAccountSetup : public QDialog
 
 public:
     explicit InitialAccountSetup(QWidget *parent = nullptr);
-    InitialAccountSetup() =delete;
+    InitialAccountSetup() = delete;
     InitialAccountSetup(const InitialAccountSetup & assignThis)=delete;
     InitialAccountSetup & operator = (const InitialAccountSetup & assignThis) =delete;
     ~InitialAccountSetup();

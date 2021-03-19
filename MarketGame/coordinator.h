@@ -9,28 +9,19 @@
 #include "symbolternarysearchtree.h"
 #include <QApplication>
 #include <QtConcurrent/QtConcurrentRun>
-/*
-    This class is responsible for controlling the flow of the program
-    It launches the threads that will build the URL list from a raw txt file
-    As well as ensuring that another thread successfully connects to the websites,
-    and extracts the appropiate information.
 
-    Singleton design
-*/
-class Coordinator{
+/*This class is responsible for controlling the (initial) flow of the program*/
 
+class Coordinator
+{
 public:
-    static Coordinator * pCInstance;                                         //The singleton instance
-
-public:
-    static Coordinator * getInstance();
-    int32_t run(const QApplication &coreApp);
-
+    explicit Coordinator(QObject *parent = nullptr);
+    Coordinator() = delete;
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
+    int32_t run(const QApplication &coreApp);
 private:
-    Coordinator();
     SignInOptionsDialog::Options runSignInOptions();
     int32_t runMainWindow(const QApplication &coreApp, MainWindow::Status);
 
