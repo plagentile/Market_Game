@@ -6,8 +6,7 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
       requestEncapsulator(0),
       account(0, 0, ""),
       ui(new Ui::MainWindow),
-      pSymbolTST(pTST),
-      status(Status::Normal)
+      pSymbolTST(pTST)
 {
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), this));
@@ -31,8 +30,8 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
-        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
-            //Valid symbol, set and show the next page, default view is one year of data with price points set at once per week
+        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol)
+        {
             emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
             break;
         }
@@ -50,8 +49,8 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->show();
 
-    this->vSearchResults = this->pSymbolTST->searchTST(arg1);                                                         //A move here would prevent RVO
-    if(this->vSearchResults.length() == 0) return;                                                                    //Keep previous recommendations if going down a non existant symbol path
+    this->vSearchResults = this->pSymbolTST->searchTST(arg1);
+    if(this->vSearchResults.length() == 0) return;
 
     QStandardItem *pRoot = model.invisibleRootItem();
     pRoot->removeRows(0, model.rowCount());
@@ -62,12 +61,13 @@ void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
     ui->symbolListResults->setModel(&model);
 }
 
-void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){                                              //User clicked on a recommendation in the symbol list results fill the line edit, hide other recommendations
+void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){
     QStandardItem * item = this->model.itemFromIndex(index);
     if(item){
         const QString res = item->data(0).toString();
         QString temp = "";
-        for(int32_t x = 0, length = res.length(); x < length; ++x){ //find the symbol in the string
+        for(int32_t x = 0, length = res.length(); x < length; ++x)
+        { //find the symbol in the string
             if(res[x] == ',') break;
             temp += res[x];
         }
@@ -89,11 +89,6 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
 }
 
-MainWindow::Status MainWindow::getStatus() const{
-    return status;
-}
-
-
 void MainWindow::on_goToTradePageButton_clicked(){
 
 }
@@ -113,9 +108,7 @@ void MainWindow::on_actionTerms_Of_Service_triggered(){
     emit this->showTermsOfServicePageRequested();
 }
 
-void MainWindow::on_actionQuit_triggered()
-{
-    /*Close down all running processes*/
+void MainWindow::on_actionQuit_triggered(){
     if(this->account.isActiveWindow()){
         account.close();
     }

@@ -1,27 +1,31 @@
 #ifndef COORDINATOR_H
 #define COORDINATOR_H
 
+#include <QApplication>
+#include <QtConcurrent/QtConcurrentRun>
 #include "mainwindow.h"
 #include "initialaccountsetup.h"
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
 #include "symbolternarysearchtree.h"
-#include <QApplication>
-#include <QtConcurrent/QtConcurrentRun>
 
 /*This class is responsible for controlling the (initial) flow of the program*/
 
 class Coordinator: public QObject
 {
+    Q_OBJECT
 public:
-    Coordinator(QObject *parent = nullptr);
+    explicit Coordinator(QObject *parent = nullptr);
     Coordinator() = delete;
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
 
     int32_t run(QApplication *coreApp);
+
+public: signals:
+    void loginAfterInitialAccount(const QString &key, const int32_t initBalance);
 
 private slots:
     void on_showAboutPageRequested();

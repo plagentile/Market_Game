@@ -1,21 +1,22 @@
 #include "Coordinator.h"
 
 Coordinator::Coordinator(QObject *parent)
-    : QObject(parent), mainWindow(0,&this->symbolTernarySearchTree),
+    : QObject(parent), mainWindow(nullptr,&this->symbolTernarySearchTree),
       initialAccountSetup(nullptr), signInOptionsDialog(nullptr),
       termsOfService(nullptr),about(nullptr)
 {
 
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showAboutPageRequested, this, &Coordinator::on_showAboutPageRequested);
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showTermsOfServicePageRequested, this, &Coordinator::on_showTermsOfServiceRequested);
-
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::makeNewSimulationRequested, this, &Coordinator::on_makeNewSimulationRequested);
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::loadNewSimulationRequested, this, &Coordinator::on_loadPreviousSimulationRequested);
+
     QObject::connect(&initialAccountSetup, &InitialAccountSetup::loginRequested, this, &Coordinator::on_loginRequested);
 
     QObject::connect(&mainWindow, &MainWindow::showAboutPageRequested, this, &Coordinator::on_showAboutPageRequested);
     QObject::connect(&mainWindow, &MainWindow::showTermsOfServicePageRequested, this, &Coordinator::on_showTermsOfServiceRequested);
     QObject::connect(&mainWindow, &MainWindow::exitProgram, this, &Coordinator::on_exitProgramRequested);
+    QObject::connect(this, &Coordinator::loginAfterInitialAccount, &mainWindow, &MainWindow::on_setupInitialAccount);
 }
 
 int32_t Coordinator::run(QApplication *coreApp){
@@ -25,7 +26,6 @@ int32_t Coordinator::run(QApplication *coreApp){
        /*Read the known symbols initially, in a seperate thread*/
        QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
 
-       /*Get the sign-in option from the user*/
        this->signInOptionsDialog.show();
        coreApp->exec();
        return 0;
@@ -56,7 +56,7 @@ void Coordinator::on_loginRequested(const QString& key, const int32_t initBalanc
     if(initialAccountSetup.isActiveWindow()){
         this->initialAccountSetup.close();
     }
-    this->mainWindow.on_setupInitialAccount(key, initBalance);
+    emit this->loginAfterInitialAccount(key, initBalance);
     this->mainWindow.show();
 }
 

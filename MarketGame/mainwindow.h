@@ -25,17 +25,6 @@ public:
     MainWindow & operator = (const MainWindow & window) = delete;
     ~MainWindow();
 
-    enum class Status
-    {
-        Normal,
-        NewSimulation,
-        LoadSimulation,
-        ExitNormal,
-        ExitError
-    };
-
-    Status getStatus() const;
-
 public: signals:
     void priceHistoryChartReqested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
     void searchSymbolPageRequested();
@@ -66,6 +55,5 @@ private:
     Ui::MainWindow *ui;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
-    Status status;
 };
 #endif // MAINWINDOW_H
