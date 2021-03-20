@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString
     this->ui->symbolListResults->hide();                                                                              //Hide list of recommendations initially
     this->ui->searchSymbolButton->hide();
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
-    connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_PriceHistoryChartRequested);
+    connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
     connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
 }
 

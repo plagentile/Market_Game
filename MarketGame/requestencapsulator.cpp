@@ -4,19 +4,19 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
     :QObject(parent), requestType(RequestType::Unknown),networkHandler(nullptr), chartBuilder(nullptr)
 {
     connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
-    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_NetworkReplyFinished);
+    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_networkReplyFinished);
     connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
-    connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_LineChartReady);
+    connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_lineChartReady);
 }
 
-void RequestEncapsulator::on_PriceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
+void RequestEncapsulator::on_priceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
     this->requestType = RequestType::PriceHistoryLine;
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
     emit this->sendNetworkRequest(requestURL);
 }
 
-void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
+void RequestEncapsulator::on_networkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer){
     if(status == NetworkHandler::Status::PassedFinshed)
     {
         switch(requestType)
@@ -36,7 +36,7 @@ void RequestEncapsulator::on_NetworkReplyFinished(NetworkHandler::Status status,
     }
 }
 
-void RequestEncapsulator::on_LineChartReady(QChart *chart){
+void RequestEncapsulator::on_lineChartReady(QChart *chart){
     if(chart){
         emit this->requestReady(Status::ChartOkay, chart);
     }

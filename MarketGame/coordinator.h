@@ -12,7 +12,7 @@
 
 /*This class is responsible for controlling the (initial) flow of the program*/
 
-class Coordinator
+class Coordinator: public QObject
 {
 public:
     explicit Coordinator(QObject *parent = nullptr);
