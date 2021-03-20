@@ -24,7 +24,7 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
 
         QDateTimeAxis *axisX = new QDateTimeAxis;
         axisX->setTickCount(20);
-        axisX->setFormat("dd-MMM");
+        axisX->setFormat("dd MMM");
         axisX->setTitleText("Date");
         chart->addAxis(axisX, Qt::AlignBottom);
         closeSeries->attachAxis(axisX);

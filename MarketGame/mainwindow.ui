@@ -32,39 +32,6 @@
 }
 
 
-/*
-	sharesAndCurrentPriceHorizontalLayout
-*/
-
-#staticUnrealizedTotalLabel, #dynamicUnrealizedTotalLabel, #staticSharesOwnedLabel, #dynamicSharesOwnedLabel, #staticAccountBalanceLabel, #staticAvailableFundsLabel, #dynamicAccountBalanceLabel, #dynamicAvailableFundsLabel
-{
-	border: 1px solid gray;
-	font-size:20px;
-	font-family: Calibri;
-	font-style: normal;
-	font-weight: 400;
-}
-
-#staticCurrentPriceLabel, #staticHighPriceLabel, #staticLowPriceLabel, #staticVolumeLabel, #staticOpenPriceLabel, #staticClosePriceLabel,
-#dynamicCurrentPriceLabel, #dynamicHighPriceLabel, #dynamicLowPriceLabel, #dynamicVolumeLabel, #dynamicOpenPriceLabel, #dynamicClosePriceLabel
-{
-	border: 1px solid gray;
-}
-
-/*
-	Buy and Sell Buttons
-
-#buyButton, #sellButton
-{
-	border-bottom: none;
-	border-top:none;
-	color: white;
-	background-color: Grey;
-	font-size:20px;
-	font-family: Calibri;
-}
-*/
-
 #symbolSearchLineEdit
 {
 	font-size: 28px;
@@ -462,16 +429,81 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="topMargin">
-           <number>10</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>10</number>
+           <number>0</number>
           </property>
           <item>
-           <widget class="QComboBox" name="comboBox_2"/>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="chartViewTypeComboBox">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <item>
+             <property name="text">
+              <string>(Default) Line Chart View Type</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Candlestick</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="chartViewPeriodComboBox">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <item>
+             <property name="text">
+              <string>(Default) Daily Period View</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Weekly</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Monthly</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Year to Date</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Yearly</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </item>
@@ -480,8 +512,14 @@
           <property name="font">
            <font>
             <family>Georgia</family>
-            <pointsize>14</pointsize>
+            <pointsize>20</pointsize>
            </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
           </property>
          </widget>
         </item>
@@ -541,6 +579,15 @@
           </property>
           <item row="3" column="4">
            <widget class="QLabel" name="dynamicOpenPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -556,8 +603,13 @@
            <widget class="QLabel" name="staticHighPriceLabel">
             <property name="font">
              <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
               <stylestrategy>PreferDefault</stylestrategy>
              </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
             </property>
             <property name="text">
              <string>High</string>
@@ -569,6 +621,15 @@
           </item>
           <item row="2" column="4">
            <widget class="QLabel" name="staticOpenPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Open</string>
             </property>
@@ -579,6 +640,15 @@
           </item>
           <item row="3" column="3">
            <widget class="QLabel" name="dynamicVolumeLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -600,8 +670,13 @@
             </property>
             <property name="font">
              <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
               <stylestrategy>PreferDefault</stylestrategy>
              </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
             </property>
             <property name="text">
              <string>Current Price</string>
@@ -613,6 +688,15 @@
           </item>
           <item row="3" column="5">
            <widget class="QLabel" name="dynamicClosePriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -626,6 +710,15 @@
           </item>
           <item row="3" column="1">
            <widget class="QLabel" name="dynamicHighPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -639,6 +732,15 @@
           </item>
           <item row="3" column="2">
            <widget class="QLabel" name="dynamicLowPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -652,6 +754,15 @@
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="staticLowPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Low</string>
             </property>
@@ -662,6 +773,15 @@
           </item>
           <item row="2" column="5">
            <widget class="QLabel" name="staticClosePriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Close</string>
             </property>
@@ -672,6 +792,15 @@
           </item>
           <item row="2" column="3">
            <widget class="QLabel" name="staticVolumeLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Volume</string>
             </property>
@@ -682,6 +811,15 @@
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="dynamicCurrentPriceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -714,6 +852,15 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Unrealized Total: </string>
             </property>
@@ -724,6 +871,15 @@
           </item>
           <item row="0" column="3">
            <widget class="QLabel" name="dynamicAccountBalanceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -740,6 +896,15 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0</string>
             </property>
@@ -750,6 +915,15 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="dynamicAvailableFundsLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>0.0</string>
             </property>
@@ -760,6 +934,15 @@
           </item>
           <item row="0" column="2">
            <widget class="QLabel" name="staticAccountBalanceLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>AccountBalance:</string>
             </property>
@@ -778,12 +961,15 @@
             </property>
             <property name="font">
              <font>
-              <family>Calibri</family>
-              <pointsize>-1</pointsize>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
               <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
             </property>
             <property name="text">
              <string>0.0</string>
@@ -803,13 +989,16 @@
             </property>
             <property name="font">
              <font>
-              <family>Calibri</family>
-              <pointsize>-1</pointsize>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
               <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
             </property>
             <property name="text">
              <string>Shares Owned:</string>
@@ -821,6 +1010,15 @@
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="staticAvailableFundsLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
             <property name="text">
              <string>Available Funds:</string>
             </property>

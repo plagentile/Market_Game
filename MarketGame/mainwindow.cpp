@@ -85,6 +85,7 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
     if(status == RequestEncapsulator::Status::ChartOkay && chart)
     {
         QChart * pTemp = this->ui->graphicsView->chart();
+        chart->layout()->setContentsMargins(0, 0, 0, 0);
         this->ui->graphicsView->setChart(chart);
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
         pTemp->deleteLater();
