@@ -100,7 +100,7 @@
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="searchSymbolPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -426,87 +426,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::MinimumExpanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QComboBox" name="chartViewTypeComboBox">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <item>
-             <property name="text">
-              <string>(Default) Line Chart View Type</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Candlestick</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="chartViewPeriodComboBox">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <item>
-             <property name="text">
-              <string>(Default) Daily Period View</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Weekly</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Monthly</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Year to Date</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Yearly</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item>
          <widget class="QChartView" name="graphicsView">
           <property name="font">
@@ -1067,9 +986,20 @@
     </property>
     <addaction name="actionAccount_Overview"/>
    </widget>
+   <widget class="QMenu" name="menuChart_View">
+    <property name="title">
+     <string>Chart View</string>
+    </property>
+    <addaction name="actionChange_to_CandleStick"/>
+    <addaction name="actionView_As_Line_Chart"/>
+    <addaction name="separator"/>
+    <addaction name="actionChange_Period_View"/>
+    <addaction name="actionChange_Period_Frequency"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
    <addaction name="menuAccount"/>
+   <addaction name="menuChart_View"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -1104,6 +1034,26 @@
   <action name="actionAccount_Overview">
    <property name="text">
     <string>Account Overview</string>
+   </property>
+  </action>
+  <action name="actionChange_to_CandleStick">
+   <property name="text">
+    <string>View As Candle-Stick</string>
+   </property>
+  </action>
+  <action name="actionView_As_Line_Chart">
+   <property name="text">
+    <string>View As Line Chart</string>
+   </property>
+  </action>
+  <action name="actionChange_Period_View">
+   <property name="text">
+    <string>Change Period View</string>
+   </property>
+  </action>
+  <action name="actionChange_Period_Frequency">
+   <property name="text">
+    <string>Change Period Frequency</string>
    </property>
   </action>
  </widget>

@@ -27,7 +27,7 @@ public:
 
 public: signals:
     void priceHistoryChartReqested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
-    void searchSymbolPageRequested();
+    void showSearchSymbolPageRequested();
     void showAboutPageRequested();
     void showTermsOfServicePageRequested();
     void exitProgram();
@@ -41,12 +41,11 @@ public slots:
 private slots:    
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
     void on_symbolListResults_clicked(const QModelIndex &index);
-
     void on_requestReady(RequestEncapsulator::Status status, QChart * chart);;
-    void on_goToTradePageButton_clicked();
 
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
+    void on_goToTradePageButton_clicked();
 
 private:
     RequestEncapsulator requestEncapsulator;

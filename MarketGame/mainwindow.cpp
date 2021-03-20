@@ -3,8 +3,8 @@
 
 MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     : QMainWindow(parent),
-      requestEncapsulator(0),
-      account(0, 0, ""),
+      requestEncapsulator(nullptr),
+      account(nullptr, 0, ""),
       ui(new Ui::MainWindow),
       pSymbolTST(pTST)
 {
@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     QObject::connect(this->ui->symbolSearchLineEdit, &QLineEdit::returnPressed,this, &MainWindow::on_goToViewSymbolOverviewPage);
     QObject::connect(this->ui->searchSymbolButton, &QPushButton::clicked, this, &MainWindow::on_goToViewSymbolOverviewPage);
 
-    QObject::connect(this,&MainWindow::searchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
+    QObject::connect(this,&MainWindow::showSearchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
     QObject::connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
 
@@ -30,9 +30,11 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
-        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol)
-        {
+        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
             emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
+            this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
+            this->ui->menuChart_View->menuAction()->setVisible(true);
+
             break;
         }
     }
@@ -41,6 +43,7 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
 void MainWindow::on_setupInitialAccount(const QString &key, const int32_t balance){
     this->account.setAPIKey(key);
     this->account.setAvailableFunds(balance);
+    emit this->showSearchSymbolPageRequested();
 }
 
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
@@ -86,7 +89,6 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
         pTemp->deleteLater();
     }
-    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_goToTradePageButton_clicked(){
@@ -95,6 +97,8 @@ void MainWindow::on_goToTradePageButton_clicked(){
 
 void MainWindow::on_goToSymbolSearchPageRequested(){
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
+    this->ui->menuChart_View->menuAction()->setVisible(false);
+
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->hide();
     this->ui->searchSymbolButton->hide();
