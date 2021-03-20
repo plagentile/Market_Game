@@ -27,7 +27,6 @@ private slots:
     void on_makeNewSimButton_clicked();
     void on_termsOfServiceButton_clicked();
     void on_aboutButton_clicked();
-
     void on_loadPreviousSimButton_clicked();
 
 private:

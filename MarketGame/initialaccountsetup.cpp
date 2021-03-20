@@ -3,10 +3,7 @@
 
 InitialAccountSetup::InitialAccountSetup(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::InitialAccountSetup),
-    APIKey(""),
-    initBalance(0),
-    status(Status::Unchanged)
+    ui(new Ui::InitialAccountSetup)
 {
     ui->setupUi(this);
 }
@@ -15,13 +12,6 @@ InitialAccountSetup::~InitialAccountSetup(){
     delete ui;
 }
 
-const QString InitialAccountSetup::getAPIKey() const noexcept{
-    return this->APIKey;
-}
-
-int32_t InitialAccountSetup::getInitBalance() const noexcept{
-    return this->initBalance;
-}
 
 /**
  * @brief GetUserAPIKey::keyOk
@@ -29,31 +19,14 @@ int32_t InitialAccountSetup::getInitBalance() const noexcept{
  * Can add (initial) key checks here
  */
 bool InitialAccountSetup::keyOk() const noexcept{
-    if(this->APIKey.size() > 5) return true;
+    if(this->ui->APIKeyInput->text() > 5) return true;
     return false;
 }
 
-InitialAccountSetup::Status InitialAccountSetup::run(){
-    this->status = Status::Unchanged;
-    this->exec();
-    return this->status;
-}
-
-
-void InitialAccountSetup::on_loginButton_clicked() noexcept{
-    //Init balance is capped between 0 <-> 1-billion in the .ui, so impossible for an overflow
-    this->initBalance = this->ui->accountBalanceInput->value();
-    this->APIKey = this->ui->APIKeyInput->text();
+void InitialAccountSetup::on_loginButton_clicked(){
     if(this->keyOk()){
-         this->status = Status::ExitSuccessfully;
-        this->close();
+        emit this-> loginRequested(this->ui->APIKeyInput->text(), this->ui->accountBalanceInput->value());
     }
-}
-
-void InitialAccountSetup::closeEvent(QCloseEvent *event){
-    if(this->status == Status::Unchanged)
-        status = Status::UserClosedApplication;
-    event->accept();
 }
 
 void InitialAccountSetup::on_showInputButton_clicked(){

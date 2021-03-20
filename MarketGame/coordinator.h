@@ -20,6 +20,7 @@ public:
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
+
     int32_t run(QApplication *coreApp);
 
 private slots:
@@ -27,6 +28,8 @@ private slots:
     void on_showTermsOfServiceRequested();
     void on_makeNewSimulationRequested();
     void on_loadPreviousSimulationRequested();
+    void on_loginRequested(const QString& key, const int32_t initBalance);
+    void on_exitProgramRequested();
 
 private:
     MainWindow mainWindow;

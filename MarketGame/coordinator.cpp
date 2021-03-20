@@ -8,9 +8,14 @@ Coordinator::Coordinator(QObject *parent)
 
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showAboutPageRequested, this, &Coordinator::on_showAboutPageRequested);
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showTermsOfServicePageRequested, this, &Coordinator::on_showTermsOfServiceRequested);
+
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::makeNewSimulationRequested, this, &Coordinator::on_makeNewSimulationRequested);
     QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::loadNewSimulationRequested, this, &Coordinator::on_loadPreviousSimulationRequested);
+    QObject::connect(&initialAccountSetup, &InitialAccountSetup::loginRequested, this, &Coordinator::on_loginRequested);
 
+    QObject::connect(&mainWindow, &MainWindow::showAboutPageRequested, this, &Coordinator::on_showAboutPageRequested);
+    QObject::connect(&mainWindow, &MainWindow::showTermsOfServicePageRequested, this, &Coordinator::on_showTermsOfServiceRequested);
+    QObject::connect(&mainWindow, &MainWindow::exitProgram, this, &Coordinator::on_exitProgramRequested);
 }
 
 int32_t Coordinator::run(QApplication *coreApp){
@@ -45,6 +50,20 @@ void Coordinator::on_makeNewSimulationRequested(){
 
 void Coordinator::on_loadPreviousSimulationRequested()
 {
+}
+
+void Coordinator::on_loginRequested(const QString& key, const int32_t initBalance){
+    if(initialAccountSetup.isActiveWindow()){
+        this->initialAccountSetup.close();
+    }
+    this->mainWindow.on_setupInitialAccount(key, initBalance);
+    this->mainWindow.show();
+}
+
+void Coordinator::on_exitProgramRequested(){
+   about.close();
+   termsOfService.close();
+   mainWindow.close();
 }
 
 

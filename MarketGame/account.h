@@ -22,6 +22,9 @@ public:
     double getAvailableFunds() const;
     void run();
 
+    void setAvailableFunds(const double value);
+    void setAPIKey(const QString &value);
+
 private:
     void enableDisableButton();
 

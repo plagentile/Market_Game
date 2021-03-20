@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     QObject::connect(this,&MainWindow::searchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
     QObject::connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
+
 }
 
 MainWindow::~MainWindow(){
@@ -36,6 +37,11 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
             break;
         }
     }
+}
+
+void MainWindow::on_setupInitialAccount(const QString &key, const int32_t balance){
+    this->account.setAPIKey(key);
+    this->account.setAvailableFunds(balance);
 }
 
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
@@ -97,4 +103,21 @@ void MainWindow::on_goToSymbolSearchPageRequested(){
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->hide();
     this->ui->searchSymbolButton->hide();
+}
+
+void MainWindow::on_actionAbout_triggered(){
+    emit this->showAboutPageRequested();
+}
+
+void MainWindow::on_actionTerms_Of_Service_triggered(){
+    emit this->showTermsOfServicePageRequested();
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    /*Close down all running processes*/
+    if(this->account.isActiveWindow()){
+        account.close();
+    }
+    emit this->exitProgram();
 }

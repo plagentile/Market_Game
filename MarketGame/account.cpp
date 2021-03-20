@@ -104,3 +104,12 @@ void Account::on_viewAccountSnapshotButton_clicked(){
     this->ui->accountOverviewStackedWidget->setCurrentIndex(0);
     this->enableDisableButton();
 }
+
+void Account::setAPIKey(const QString &value){
+    this->APIKey = value;
+}
+
+void Account::setAvailableFunds(double value){
+    this->availableFunds = value;
+}
+

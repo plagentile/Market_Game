@@ -39,6 +39,15 @@ public:
 public: signals:
     void priceHistoryChartReqested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
     void searchSymbolPageRequested();
+    void showAboutPageRequested();
+    void showTermsOfServicePageRequested();
+    void exitProgram();
+
+public slots:
+    void on_setupInitialAccount(const QString & key, const int32_t balance);
+    void on_actionAbout_triggered();
+    void on_actionTerms_Of_Service_triggered();
+    void on_actionQuit_triggered();
 
 private slots:    
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
