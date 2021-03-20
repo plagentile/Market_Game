@@ -1,34 +1,32 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, const int32_t initBalance, const QString initAPIKey, const SymbolTernarySearchTree *pTST)
+MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     : QMainWindow(parent),
       requestEncapsulator(0),
-      account(0, initBalance, initAPIKey),
+      account(0, 0, ""),
       ui(new Ui::MainWindow),
       pSymbolTST(pTST),
       status(Status::Normal)
 {
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), this));
-    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
-    this->ui->symbolListResults->hide();                                                                              //Hide list of recommendations initially
-    this->ui->searchSymbolButton->hide();
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
-    connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
-    connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
+
+    QObject::connect(this->ui->goToSymbolSearchPageButton, &QPushButton::clicked, this, &MainWindow::on_goToSymbolSearchPageRequested);
+    QObject::connect(this->ui->symbolSearchLineEdit, &QLineEdit::returnPressed,this, &MainWindow::on_goToViewSymbolOverviewPage);
+    QObject::connect(this->ui->searchSymbolButton, &QPushButton::clicked, this, &MainWindow::on_goToViewSymbolOverviewPage);
+
+    QObject::connect(this,&MainWindow::searchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
+    QObject::connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
+    QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
 }
 
 MainWindow::~MainWindow(){
     delete ui;
 }
 
-void MainWindow::refreshSymbolInformation(){
-    this->ui->dynamicAccountBalanceLabel->setText(QString::number(this->account.getAccountBalance(), 'f', 2));
-    this->ui->dynamicAvailableFundsLabel->setText(QString::number(this->account.getAvailableFunds(), 'f', 2));
-}
-
-void MainWindow::showViewSymbolOverviewPage(){
+void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
@@ -73,14 +71,6 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){        
     }
 }
 
-void MainWindow::on_symbolSearchLineEdit_returnPressed(){
-    this->showViewSymbolOverviewPage();
-}
-
-void MainWindow::on_searchSymbolButton_clicked(){
-    this->showViewSymbolOverviewPage();
-}
-
 void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * chart){
     if(status == RequestEncapsulator::Status::ChartOkay && chart)
     {
@@ -90,7 +80,6 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
         pTemp->deleteLater();
     }
-    this->refreshSymbolInformation();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
 }
 
@@ -98,13 +87,14 @@ MainWindow::Status MainWindow::getStatus() const{
     return status;
 }
 
-void MainWindow::on_goToSymbolSearchPageButton_clicked()
-{
-    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
-    this->ui->searchSymbolButton->hide();
+
+void MainWindow::on_goToTradePageButton_clicked(){
+
 }
 
-void MainWindow::on_goToTradePageButton_clicked()
-{
-
+void MainWindow::on_goToSymbolSearchPageRequested(){
+    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
+    this->ui->searchSymbolButton->hide();
+    this->ui->symbolListResults->hide();
+    this->ui->searchSymbolButton->hide();
 }

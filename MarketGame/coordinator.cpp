@@ -1,72 +1,50 @@
 #include "Coordinator.h"
 
 Coordinator::Coordinator(QObject *parent)
-    : QObject(parent), initialAccountSetup(nullptr), signInOptionsDialog(nullptr),termsOfService(nullptr),about(nullptr)
+    : QObject(parent), mainWindow(0,&this->symbolTernarySearchTree),
+      initialAccountSetup(nullptr), signInOptionsDialog(nullptr),
+      termsOfService(nullptr),about(nullptr)
 {
+
+    QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showAboutPageRequested, this, &Coordinator::on_showAboutPageRequested);
+    QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::showTermsOfServicePageRequested, this, &Coordinator::on_showTermsOfServiceRequested);
+    QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::makeNewSimulationRequested, this, &Coordinator::on_makeNewSimulationRequested);
+    QObject::connect(&signInOptionsDialog, &SignInOptionsDialog::loadNewSimulationRequested, this, &Coordinator::on_loadPreviousSimulationRequested);
+
 }
 
-int32_t Coordinator::run(const QApplication &coreApp){
+int32_t Coordinator::run(QApplication *coreApp){
 
-    /*Read the known symbols initially, in a seperate thread*/
-    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
-
-    /*Get the sign-in option from the user*/
-    SignInOptionsDialog::Options selectedOption = this->runSignInOptions();
-
-    /*If the symbols are not done yet, something went terribly wrong (takes 50-60ms at most)*/
-    if(this->symbolTernarySearchTree.getStatus() != SymbolTernarySearchTree::Status::Ready){
-        if(!fReadKnownSymbols.isFinished())fReadKnownSymbols.cancel();
-        return -1;
-    }
-
-    /*Check if the user elected to either make a new sim, or load a previous save*/
-    if(selectedOption == SignInOptionsDialog::Options::NewSimulation){
-        return this->runMainWindow(coreApp, MainWindow::Status::NewSimulation);
-    }
-    else if(selectedOption == SignInOptionsDialog::Options::LoadPreviousSave){
-        return this->runMainWindow(coreApp, MainWindow::Status::LoadSimulation);
-    }
-
-    return 0;   //User Quit Before selecting to either load or make a new simulation.
-}
-
-SignInOptionsDialog::Options Coordinator::runSignInOptions(){
-    /*Run Sign In Options*/
-    SignInOptionsDialog::Options signInOption;
-    do{
-         signInOption = signInOptionsDialog.run();
-         if(signInOption == SignInOptionsDialog::Options::TermsOfService){
-             termsOfService.exec();                                              //Show Terms of Service
-         }
-         else if(signInOption==SignInOptionsDialog::Options::About){
-             about.exec();                                                       //Show About
-         }
-   } while((signInOption == SignInOptionsDialog::Options::TermsOfService) || (signInOption == SignInOptionsDialog::Options::About));
-
-    return signInOption;
-}
-
-int32_t Coordinator::runMainWindow(const QApplication &coreApp, MainWindow::Status status){
-
-    while(status ==MainWindow::Status::NewSimulation || status == MainWindow::Status::LoadSimulation )
+    if(coreApp)
     {
-        if(this->initialAccountSetup.run() != InitialAccountSetup::Status::ExitSuccessfully){
-            return 0; //User Terminated the Progam
-        }
+       /*Read the known symbols initially, in a seperate thread*/
+       QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
 
-        if(status == MainWindow::Status::NewSimulation){
-            MainWindow mainWindow(0,this->initialAccountSetup.getInitBalance(),this->initialAccountSetup.getAPIKey(), &this->symbolTernarySearchTree);
-            mainWindow.show();
-            coreApp.exec();
-            status = mainWindow.getStatus();
-        }
-        else if(status == MainWindow::Status::LoadSimulation){
-            printf("\nTodo...");
-            break;
-        }
+       /*Get the sign-in option from the user*/
+       this->signInOptionsDialog.show();
+       coreApp->exec();
+       return 0;
     }
-    if(status == MainWindow::Status::ExitError) return -1;
-    return 0;
+    return -1;
+}
+
+void Coordinator::on_showAboutPageRequested(){
+    this->about.show();
+}
+
+void Coordinator::on_showTermsOfServiceRequested(){
+    this->termsOfService.show();
+}
+
+void Coordinator::on_makeNewSimulationRequested(){
+    if(signInOptionsDialog.isActiveWindow()){
+        this->signInOptionsDialog.close();
+    }
+    this->initialAccountSetup.show();
+}
+
+void Coordinator::on_loadPreviousSimulationRequested()
+{
 }
 
 

@@ -100,7 +100,7 @@
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="searchSymbolPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1061,8 +1061,15 @@
     <addaction name="actionAbout"/>
     <addaction name="actionTerms_Of_Service"/>
    </widget>
+   <widget class="QMenu" name="menuAccount">
+    <property name="title">
+     <string>Account</string>
+    </property>
+    <addaction name="actionAccount_Overview"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
+   <addaction name="menuAccount"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -1092,6 +1099,11 @@
   <action name="actionTerms_Of_Service">
    <property name="text">
     <string>Terms Of Service</string>
+   </property>
+  </action>
+  <action name="actionAccount_Overview">
+   <property name="text">
+    <string>Account Overview</string>
    </property>
   </action>
  </widget>

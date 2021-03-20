@@ -15,17 +15,21 @@
 class Coordinator: public QObject
 {
 public:
-    explicit Coordinator(QObject *parent = nullptr);
+    Coordinator(QObject *parent = nullptr);
     Coordinator() = delete;
     Coordinator(const Coordinator & assignThis) =delete;
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
-    int32_t run(const QApplication &coreApp);
-private:
-    SignInOptionsDialog::Options runSignInOptions();
-    int32_t runMainWindow(const QApplication &coreApp, MainWindow::Status);
+    int32_t run(QApplication *coreApp);
+
+private slots:
+    void on_showAboutPageRequested();
+    void on_showTermsOfServiceRequested();
+    void on_makeNewSimulationRequested();
+    void on_loadPreviousSimulationRequested();
 
 private:
+    MainWindow mainWindow;
     InitialAccountSetup initialAccountSetup;
     SignInOptionsDialog signInOptionsDialog;
     TermsOfService termsOfService;

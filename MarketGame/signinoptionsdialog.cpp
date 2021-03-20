@@ -3,8 +3,7 @@
 
 SignInOptionsDialog::SignInOptionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SignInOptionsDialog),
-    userSelectedOption(Options::NoOptionSelected)
+    ui(new Ui::SignInOptionsDialog)
 {
     ui->setupUi(this);
 }
@@ -13,23 +12,18 @@ SignInOptionsDialog::~SignInOptionsDialog(){
     delete ui;
 }
 
-SignInOptionsDialog::Options SignInOptionsDialog::run(){
-    this->userSelectedOption = Options::NoOptionSelected;
-    this->exec();
-    return this->userSelectedOption;
-}
-
 void SignInOptionsDialog::on_makeNewSimButton_clicked(){
-    this->userSelectedOption = Options::NewSimulation;
-    this->close();
+    emit this->makeNewSimulationRequested();
 }
 
 void SignInOptionsDialog::on_termsOfServiceButton_clicked(){
-    this->userSelectedOption = Options::TermsOfService;
-    this->close();
+    emit this->showTermsOfServicePageRequested();
 }
 
 void SignInOptionsDialog::on_aboutButton_clicked(){
-    this->userSelectedOption = Options::About;
-    this->close();
+    emit this->showAboutPageRequested();
+}
+
+void SignInOptionsDialog::on_loadPreviousSimButton_clicked(){
+    emit this->loadNewSimulationRequested();
 }
