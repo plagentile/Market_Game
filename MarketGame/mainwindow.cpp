@@ -26,24 +26,25 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 
-void MainWindow::on_goToViewSymbolOverviewPage(){
-    //Check if the current text exists in this->vectSearchResults;
-    const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
-    for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
-        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
-            emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
-            this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
-            this->ui->menuChart_View->menuAction()->setVisible(true);
-
-            break;
-        }
-    }
-}
-
 void MainWindow::on_setupInitialAccount(const QString &key, const int32_t balance){
     this->account.setAPIKey(key);
     this->account.setAvailableFunds(balance);
     emit this->showSearchSymbolPageRequested();
+}
+
+void MainWindow::on_actionAbout_triggered(){
+    emit this->showAboutPageRequested();
+}
+
+void MainWindow::on_actionTerms_Of_Service_triggered(){
+    emit this->showTermsOfServicePageRequested();
+}
+
+void MainWindow::on_actionQuit_triggered(){
+    if(this->account.isActiveWindow()){
+        account.close();
+    }
+    emit this->exitProgram();
 }
 
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
@@ -91,30 +92,28 @@ void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * ch
     }
 }
 
-void MainWindow::on_goToTradePageButton_clicked(){
-
-}
-
 void MainWindow::on_goToSymbolSearchPageRequested(){
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
-    this->ui->menuChart_View->menuAction()->setVisible(false);
-
+    this->ui->menuChart->menuAction()->setVisible(false);
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->hide();
     this->ui->searchSymbolButton->hide();
 }
 
-void MainWindow::on_actionAbout_triggered(){
-    emit this->showAboutPageRequested();
-}
-
-void MainWindow::on_actionTerms_Of_Service_triggered(){
-    emit this->showTermsOfServicePageRequested();
-}
-
-void MainWindow::on_actionQuit_triggered(){
-    if(this->account.isActiveWindow()){
-        account.close();
+void MainWindow::on_goToViewSymbolOverviewPage(){
+    //Check if the current text exists in this->vectSearchResults;
+    const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
+    for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
+        if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
+            emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
+            this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
+            this->ui->menuChart->menuAction()->setVisible(true);
+            break;
+        }
     }
-    emit this->exitProgram();
 }
+
+void MainWindow::on_goToTradePageButton_clicked(){
+
+}
+

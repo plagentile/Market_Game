@@ -38,13 +38,6 @@
 	font-family: Georgia;
 }
 
-#symbolSearchBanner
-{
-	color:black;
-	font-size: 22px;
-	font-family: Georgia;
-}
-
 #symbolListResults
 {
 
@@ -67,14 +60,6 @@
 	font-size: 28px;
 	font-family: Georgia;
 	border-radius: 30px;
-}
-
-
-#noticeLabel
-{
-	color:white;
-	font-size: 12px;
-	font-family: Verdana;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -100,7 +85,7 @@
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="searchSymbolPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -142,6 +127,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Georgia</family>
+            <pointsize>18</pointsize>
+           </font>
           </property>
           <property name="text">
            <string> Search a Symbol to Lookup</string>
@@ -399,8 +390,14 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
-           <string>*Note: The Accepted Symbol Format is: Alphabetic, Upper Case</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;*Note: The Accepted Symbol Format is: Alphabetic, Upper Case&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -960,8 +957,14 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>26</height>
+     <height>35</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -986,20 +989,24 @@
     </property>
     <addaction name="actionAccount_Overview"/>
    </widget>
-   <widget class="QMenu" name="menuChart_View">
+   <widget class="QMenu" name="menuChart">
     <property name="title">
-     <string>Chart View</string>
+     <string>Chart</string>
     </property>
-    <addaction name="actionChange_to_CandleStick"/>
-    <addaction name="actionView_As_Line_Chart"/>
-    <addaction name="separator"/>
-    <addaction name="actionChange_Period_View"/>
-    <addaction name="actionChange_Period_Frequency"/>
+    <widget class="QMenu" name="menuType">
+     <property name="title">
+      <string>Type</string>
+     </property>
+     <addaction name="actionLinechart"/>
+     <addaction name="actionCandlestick"/>
+    </widget>
+    <addaction name="menuType"/>
+    <addaction name="actionRange"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
    <addaction name="menuAccount"/>
-   <addaction name="menuChart_View"/>
+   <addaction name="menuChart"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -1036,24 +1043,19 @@
     <string>Account Overview</string>
    </property>
   </action>
-  <action name="actionChange_to_CandleStick">
+  <action name="actionLinechart">
    <property name="text">
-    <string>View As Candle-Stick</string>
+    <string>Linechart</string>
    </property>
   </action>
-  <action name="actionView_As_Line_Chart">
+  <action name="actionCandlestick">
    <property name="text">
-    <string>View As Line Chart</string>
+    <string>Candlestick</string>
    </property>
   </action>
-  <action name="actionChange_Period_View">
+  <action name="actionRange">
    <property name="text">
-    <string>Change Period View</string>
-   </property>
-  </action>
-  <action name="actionChange_Period_Frequency">
-   <property name="text">
-    <string>Change Period Frequency</string>
+    <string>Range</string>
    </property>
   </action>
  </widget>

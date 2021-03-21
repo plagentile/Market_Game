@@ -9,7 +9,7 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
     connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_lineChartReady);
 }
 
-void RequestEncapsulator::on_priceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods){
+void RequestEncapsulator::on_priceHistoryChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods){
     this->requestType = RequestType::PriceHistoryLine;
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);

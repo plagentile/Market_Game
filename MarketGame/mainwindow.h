@@ -26,7 +26,7 @@ public:
     ~MainWindow();
 
 public: signals:
-    void priceHistoryChartReqested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void priceHistoryChartReqested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void showSearchSymbolPageRequested();
     void showAboutPageRequested();
     void showTermsOfServicePageRequested();

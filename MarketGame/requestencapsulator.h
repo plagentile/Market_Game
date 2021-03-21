@@ -25,7 +25,7 @@ public:
     };
 
 public slots:
-    void on_priceHistoryChartRequested(const QString apiKey, const QString symbol, const QString priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void on_priceHistoryChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void on_networkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer);
     void on_lineChartReady(QChart * chart);
 
