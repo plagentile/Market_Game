@@ -19,18 +19,12 @@ Coordinator::Coordinator(QObject *parent)
     QObject::connect(this, &Coordinator::loginAfterInitialAccount, &mainWindow, &MainWindow::on_setupInitialAccount);
 }
 
-int32_t Coordinator::run(QApplication *coreApp){
+void Coordinator::run(){
 
-    if(coreApp)
-    {
-       /*Read the known symbols initially, in a seperate thread*/
-       QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
+    /*Read the known symbols initially, in a seperate thread*/
+    QFuture<void> fReadKnownSymbols = QtConcurrent::run(&this->symbolTernarySearchTree, &SymbolTernarySearchTree::setup);
 
-       this->signInOptionsDialog.show();
-       coreApp->exec();
-       return 0;
-    }
-    return -1;
+    this->signInOptionsDialog.show();
 }
 
 void Coordinator::on_showAboutPageRequested(){

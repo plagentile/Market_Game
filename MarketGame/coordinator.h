@@ -1,7 +1,6 @@
 #ifndef COORDINATOR_H
 #define COORDINATOR_H
 
-#include <QApplication>
 #include <QtConcurrent/QtConcurrentRun>
 #include "mainwindow.h"
 #include "initialaccountsetup.h"
@@ -22,7 +21,7 @@ public:
     Coordinator & operator =(const Coordinator &assignThis)=delete;
     ~Coordinator() =default;
 
-    int32_t run(QApplication *coreApp);
+    void run();
 
 public: signals:
     void loginAfterInitialAccount(const QString &key, const int32_t initBalance);
