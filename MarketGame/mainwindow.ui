@@ -32,18 +32,7 @@
 }
 
 
-#symbolSearchLineEdit
-{
-	font-size: 28px;
-	font-family: Georgia;
-}
-
-#symbolListResults
-{
-
-	color:black;
-	font-size: 22px;
-	font-family: Verdana;
+#symbolListResults{
 	background-color:white;
 }
 
@@ -57,8 +46,6 @@
 {
 	background-color:DodgerBlue;
 	color: white;
-	font-size: 28px;
-	font-family: Georgia;
 	border-radius: 30px;
 }</string>
   </property>
@@ -131,7 +118,7 @@
           <property name="font">
            <font>
             <family>Georgia</family>
-            <pointsize>18</pointsize>
+            <pointsize>16</pointsize>
            </font>
           </property>
           <property name="text">
@@ -232,6 +219,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Georgia</family>
+                 <pointsize>18</pointsize>
+                </font>
+               </property>
                <property name="mouseTracking">
                 <bool>true</bool>
                </property>
@@ -265,6 +258,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Georgia</family>
+                 <pointsize>14</pointsize>
+                </font>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -314,6 +313,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Georgia</family>
+                 <pointsize>18</pointsize>
+                </font>
                </property>
                <property name="text">
                 <string>Search</string>

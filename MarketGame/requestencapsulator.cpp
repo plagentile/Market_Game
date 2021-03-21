@@ -3,14 +3,24 @@
 RequestEncapsulator::RequestEncapsulator(QObject *parent)
     :QObject(parent), requestType(RequestType::Unknown),networkHandler(nullptr), chartBuilder(nullptr)
 {
-    connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
-    connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_networkReplyFinished);
-    connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
-    connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_lineChartReady);
+    QObject::connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
+    QObject::connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_networkReplyFinished);
+
+    QObject::connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
+    QObject::connect(this,&RequestEncapsulator::requestCandlestickChart,&chartBuilder,&ChartBuilder::on_requestCandlestickChart);
+    QObject::connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_chartReady);
 }
 
-void RequestEncapsulator::on_priceHistoryChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods){
+void RequestEncapsulator::on_priceHistoryLineChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods){
     this->requestType = RequestType::PriceHistoryLine;
+    QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
+    requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
+    emit this->sendNetworkRequest(requestURL);
+}
+
+void RequestEncapsulator::on_priceHistoryCandlestickChartRequested(const QString &apiKey, const QString &symbol, const QString &priceHistoryPeriodType, const int32_t amountOfPeriods)
+{
+    this->requestType = RequestType::PriceHistoryCandleStick;
     QString requestURL("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/pricehistory?apikey=" + apiKey);
     requestURL += this->getPeriodType(priceHistoryPeriodType, amountOfPeriods);
     emit this->sendNetworkRequest(requestURL);
@@ -28,6 +38,7 @@ void RequestEncapsulator::on_networkReplyFinished(NetworkHandler::Status status,
             }
             case(RequestType::PriceHistoryCandleStick):
             {
+                emit this->requestCandlestickChart(jResponsePointer);
                 break;
             }
             default:
@@ -36,16 +47,11 @@ void RequestEncapsulator::on_networkReplyFinished(NetworkHandler::Status status,
     }
 }
 
-void RequestEncapsulator::on_lineChartReady(QChart *chart){
-    if(chart){
-        emit this->requestReady(Status::ChartOkay, chart);
-    }
-    else{
-        emit this->requestReady(Status::Error, nullptr);
-    }
+void RequestEncapsulator::on_chartReady(QChart *chart){
+       emit this->requestReady(chart);
 }
 
-const QString RequestEncapsulator::getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept{
+const QString RequestEncapsulator::getPeriodType(const QString& pType, const int32_t amountOfPeriods) const noexcept{
     if(pType == "day"){
         return  ("&periodType=day&period=" + QString::number(amountOfPeriods) + "&frequencyType=minute&frequency=30");
     }
@@ -60,5 +66,3 @@ const QString RequestEncapsulator::getPeriodType(const QString pType, const int3
     }
     return "";
 }
-
-

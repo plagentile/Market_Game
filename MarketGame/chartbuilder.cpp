@@ -42,4 +42,14 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
     emit this->lineChartReady(chart);
 }
 
+void ChartBuilder::on_requestCandlestickChart(const QJsonObject *jResponsePointer)
+{
+    QChart * chart = new QChart();
+    if(jResponsePointer && !jResponsePointer->empty())
+    {
+        printf("\nMaking a candlestick...");
+    }
+    emit this->lineChartReady(chart);
+}
+
 

@@ -19,7 +19,9 @@ InitialAccountSetup::~InitialAccountSetup(){
  * Can add (initial) key checks here
  */
 bool InitialAccountSetup::keyOk() const noexcept{
-    if(this->ui->APIKeyInput->text() > 5) return true;
+    if(this->ui->APIKeyInput->text().size() > 5){
+        return true;
+    }
     return false;
 }
 

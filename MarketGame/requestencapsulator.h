@@ -18,24 +18,21 @@ public:
     RequestEncapsulator & operator =(const RequestEncapsulator & assign) = delete;
     ~RequestEncapsulator() = default;
 
-
-    enum class Status{
-        ChartOkay,
-        Error
-    };
-
 public slots:
-    void on_priceHistoryChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void on_priceHistoryLineChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void on_priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
+
     void on_networkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer);
-    void on_lineChartReady(QChart * chart);
+    void on_chartReady(QChart * chart);
 
 public: signals:
+    void requestCandlestickChart(const QJsonObject* jResponsePointer);
     void requestLineChart(const QJsonObject* jResponsePointer);
-    void requestReady(Status status, QChart * chart);
+    void requestReady(QChart * chart);
     void sendNetworkRequest(QString url);
 
 private:
-    const QString getPeriodType(const QString pType, const int32_t amountOfPeriods) const noexcept;
+    const QString getPeriodType(const QString& pType, const int32_t amountOfPeriods) const noexcept;
 
 private:
 
@@ -45,7 +42,6 @@ private:
         PriceHistoryCandleStick
     };
     RequestType requestType;
-
     NetworkHandler networkHandler;
     ChartBuilder chartBuilder;
 };

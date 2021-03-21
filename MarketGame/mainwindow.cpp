@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     QObject::connect(this->ui->searchSymbolButton, &QPushButton::clicked, this, &MainWindow::on_goToViewSymbolOverviewPage);
 
     QObject::connect(this,&MainWindow::showSearchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
-    QObject::connect(this, &MainWindow::priceHistoryChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryChartRequested);
+    QObject::connect(this, &MainWindow::priceHistoryLineChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryLineChartRequested);
+    QObject::connect(this, &MainWindow::priceHistoryCandlestickChartRequested,&requestEncapsulator,&RequestEncapsulator::on_priceHistoryCandlestickChartRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
 
 }
@@ -81,9 +82,8 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){
     }
 }
 
-void MainWindow::on_requestReady(RequestEncapsulator::Status status, QChart * chart){
-    if(status == RequestEncapsulator::Status::ChartOkay && chart)
-    {
+void MainWindow::on_requestReady(QChart * chart){
+    if(chart){
         QChart * pTemp = this->ui->graphicsView->chart();
         chart->layout()->setContentsMargins(0, 0, 0, 0);
         this->ui->graphicsView->setChart(chart);
@@ -102,10 +102,9 @@ void MainWindow::on_goToSymbolSearchPageRequested(){
 
 void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
-    const QString currTextEdit = this->ui->symbolSearchLineEdit->text();
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
-            emit this->priceHistoryChartReqested(this->account.getAPIKey(), currTextEdit, "day", 2);
+            emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
             this->ui->menuChart->menuAction()->setVisible(true);
             break;
@@ -117,3 +116,11 @@ void MainWindow::on_goToTradePageButton_clicked(){
 
 }
 
+
+void MainWindow::on_actionCandlestick_triggered(){
+    emit this->priceHistoryCandlestickChartRequested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
+}
+
+void MainWindow::on_actionLinechart_triggered(){
+    emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
+}
