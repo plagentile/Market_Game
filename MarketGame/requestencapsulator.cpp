@@ -8,7 +8,7 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
 
     QObject::connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
     QObject::connect(this,&RequestEncapsulator::requestCandlestickChart,&chartBuilder,&ChartBuilder::on_requestCandlestickChart);
-    QObject::connect(&chartBuilder, &ChartBuilder::lineChartReady, this, &RequestEncapsulator::on_chartReady);
+    QObject::connect(&chartBuilder, &ChartBuilder::chartReady, this, &RequestEncapsulator::on_chartReady);
 }
 
 void RequestEncapsulator::on_priceHistoryLineChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods){

@@ -8,16 +8,16 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
     QChart * chart = new QChart();
     if(jResponsePointer && !jResponsePointer->empty())
     {
-        const QString symbolName = jResponsePointer->value("symbol").toString();
 
         QLineSeries *closeSeries = new QLineSeries();
-        closeSeries->setName(symbolName + " Close");
         closeSeries->setColor(QColor(Qt::blue));
+        closeSeries->setName(jResponsePointer->value("symbol").toString() + " Close");
+        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History");
+
 
         const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
         for(const QJsonValue & v : arr){
-            const double epochVal = v.toObject().value("datetime").toDouble();
-            closeSeries->append(epochVal, v.toObject().value("close").toDouble());
+            closeSeries->append(v.toObject().value("datetime").toDouble(), v.toObject().value("close").toDouble());
         }
 
         chart->addSeries(closeSeries);
@@ -35,11 +35,10 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
         chart->addAxis(axisY, Qt::AlignLeft);
         closeSeries->attachAxis(axisY);
 
-        chart->setTitle(symbolName + " Price History");
         chart->legend()->setVisible(true);
         chart->legend()->setAlignment(Qt::AlignBottom);
     }
-    emit this->lineChartReady(chart);
+    emit this->chartReady(chart);
 }
 
 void ChartBuilder::on_requestCandlestickChart(const QJsonObject *jResponsePointer)
@@ -47,9 +46,43 @@ void ChartBuilder::on_requestCandlestickChart(const QJsonObject *jResponsePointe
     QChart * chart = new QChart();
     if(jResponsePointer && !jResponsePointer->empty())
     {
-        printf("\nMaking a candlestick...");
+        QCandlestickSeries *series = new QCandlestickSeries();
+        series->setIncreasingColor(QColor(Qt::green));
+        series->setDecreasingColor(QColor(Qt::red));
+        series->setName(jResponsePointer->value("symbol").toString() + " Close");
+        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History");
+
+
+        const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
+        for(const QJsonValue & v : arr)
+        {
+            QCandlestickSet *candlestickSet = new QCandlestickSet(v.toObject().value("datetime").toDouble());
+            candlestickSet->setOpen(v.toObject().value("open").toDouble());
+            candlestickSet->setHigh(v.toObject().value("high").toDouble());
+            candlestickSet->setLow(v.toObject().value("low").toDouble());
+            candlestickSet->setClose(v.toObject().value("close").toDouble());
+            series->append(candlestickSet);
+        }
+
+        chart->addSeries(series);
+
+        QDateTimeAxis *axisX = new QDateTimeAxis;
+        axisX->setTickCount(20);
+        axisX->setFormat("dd MMM");
+        axisX->setTitleText("Date");
+        chart->addAxis(axisX, Qt::AlignBottom);
+        series->attachAxis(axisX);
+
+        QValueAxis *axisY = new QValueAxis;
+        axisY->setLabelFormat("%.2f");
+        axisY->setTitleText("Price");
+        chart->addAxis(axisY, Qt::AlignLeft);
+        series->attachAxis(axisY);
+
+        chart->legend()->setVisible(true);
+        chart->legend()->setAlignment(Qt::AlignBottom);
     }
-    emit this->lineChartReady(chart);
+    emit this->chartReady(chart);
 }
 
 

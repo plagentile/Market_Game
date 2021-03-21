@@ -20,7 +20,7 @@ public slots:
     void on_requestCandlestickChart(const QJsonObject* jResponsePointer);
 
 public: signals:
-    void lineChartReady(QChart * chart);
+    void chartReady(QChart * chart);
 
 };
 
