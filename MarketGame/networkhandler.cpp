@@ -32,7 +32,7 @@ void NetworkHandler::readyRead(){
 
 void NetworkHandler::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator){
     this->status = Status::NeedAuthentication;
-    if(reply) reply->abort();
+    if(reply){reply->abort();}
     Q_UNUSED(authenticator);
 }
 
@@ -43,16 +43,19 @@ void NetworkHandler::encrypted(QNetworkReply *reply){
 
 void NetworkHandler::finished(QNetworkReply *reply){
     if(this->status != Status::PassedReadyRead){
-        if(reply) reply->abort();
-        emit done(this->status, nullptr);
-        return;
+        if(reply) {reply->abort();}
+        emit done(nullptr);
     }
-    this->status = Status::PassedFinshed;
-    emit done(this->status, &this->jResponseObject);
+    else
+    {
+        this->status = Status::PassedFinshed;
+        emit done(&this->jResponseObject);
+    }
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
-    if(reply) reply->abort();
+    if(reply){reply->abort();}
+
     this->status = Status::SSLError;
     QFile file(QDir::currentPath() + "SSL_ERRORS.txt");
 

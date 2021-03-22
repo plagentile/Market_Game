@@ -113,7 +113,7 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
 }
 
 void MainWindow::on_goToTradePageButton_clicked(){
-
+    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(2);
 }
 
 

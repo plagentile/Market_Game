@@ -53,7 +53,7 @@ private slots:
     void on_actionLinechart_triggered();
 
 private:
-    RequestEncapsulator requestEncapsulator;
+    const RequestEncapsulator requestEncapsulator;
     Account account;
     QStandardItemModel model;
     Ui::MainWindow *ui;

@@ -72,7 +72,7 @@
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="searchSymbolPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -765,14 +765,8 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="1" column="2">
-           <widget class="QLabel" name="staticUnrealizedTotalLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="staticAccountBalanceLabel">
             <property name="font">
              <font>
               <family>Verdana</family>
@@ -783,14 +777,33 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>Unrealized Total: </string>
+             <string>AccountBalance</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item row="0" column="1">
+           <widget class="QLabel" name="staticAvailableFundsLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>Available Funds</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
            <widget class="QLabel" name="dynamicAccountBalanceLabel">
             <property name="font">
              <font>
@@ -810,31 +823,6 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="dynamicSharesOwnedLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
            <widget class="QLabel" name="dynamicAvailableFundsLabel">
             <property name="font">
              <font>
@@ -854,53 +842,6 @@
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QLabel" name="staticAccountBalanceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>AccountBalance:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="dynamicUnrealizedTotalLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
            <widget class="QLabel" name="staticSharesOwnedLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -929,8 +870,14 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="staticAvailableFundsLabel">
+          <item row="1" column="2">
+           <widget class="QLabel" name="dynamicSharesOwnedLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Verdana</family>
@@ -941,7 +888,60 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>Available Funds:</string>
+             <string>0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="staticUnrealizedTotalLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>Unrealized Total: </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="dynamicUnrealizedTotalLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>0.0</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1007,6 +1007,8 @@
     </widget>
     <addaction name="menuType"/>
     <addaction name="actionRange"/>
+    <addaction name="separator"/>
+    <addaction name="actionRefresh"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
@@ -1061,6 +1063,11 @@
   <action name="actionRange">
    <property name="text">
     <string>Range</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
    </property>
   </action>
  </widget>

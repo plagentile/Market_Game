@@ -22,7 +22,7 @@ public slots:
     void on_priceHistoryLineChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void on_priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
 
-    void on_networkReplyFinished(NetworkHandler::Status status, const QJsonObject * jResponsePointer);
+    void on_networkReplyFinished(const QJsonObject * jResponsePointer);
     void on_chartReady(QChart * chart);
 
 public: signals:
@@ -41,9 +41,10 @@ private:
         PriceHistoryLine,
         PriceHistoryCandleStick
     };
-    RequestType requestType;
     NetworkHandler networkHandler;
-    ChartBuilder chartBuilder;
+    const ChartBuilder chartBuilder;
+    RequestType requestType;
+
 };
 
 #endif // REQUESTENCAPSULATOR_H

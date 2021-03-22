@@ -19,30 +19,10 @@
  border-image: url(:/files/img/getAPIKeyBackground.png) 0 0 0 0 stretch stretch;
 }
 
-#directionLabel, #noticeLabel
-{
-	font-family: Georgia;
-	font-size:18;
-	color: black;
-}
-
-
-#APIKeyInput, #accountBalanceInput
-{
-	font-size: 28px;
-	font-family: Verdana;
-	color: Grey;
-	font-weight: 400;
-}
-
-
 #loginButton
 {
 	background-color: DodgerBlue;
 	color: white;
-	font-size:20;
-	font-family: Verdana;
-
 }
 
 #loginButton, #APIKeyInput, #accountBalanceInput
@@ -50,7 +30,7 @@
 	border-radius: 30px;
 }
 
-#loginButton:Hover, #APIKeyInput:Hover
+#loginButton:Hover
 {
 	font-weight: 500;
 }
@@ -58,7 +38,7 @@
 #showInputButton
 {
 	border-image: url(:/files/img/hideInput.png) 0 0 0 0 stretch stretch;
-	color:transparent;
+	color: transparent;
 }</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
@@ -110,8 +90,17 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <family>Georgia</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
       <property name="contextMenuPolicy">
        <enum>Qt::DefaultContextMenu</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:grey</string>
       </property>
       <property name="frame">
        <bool>false</bool>
@@ -142,6 +131,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Georgia</family>
+          <pointsize>16</pointsize>
+         </font>
         </property>
         <property name="text">
          <string/>
@@ -189,7 +184,7 @@
       <property name="font">
        <font>
         <family>Verdana</family>
-        <pointsize>12</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -211,7 +206,7 @@
       <property name="font">
        <font>
         <family>Georgia</family>
-        <pointsize>10</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -251,7 +246,7 @@
       <property name="font">
        <font>
         <family>Georgia</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
         <italic>true</italic>
        </font>
       </property>
