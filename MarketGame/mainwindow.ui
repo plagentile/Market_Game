@@ -26,7 +26,11 @@
    <string>Qt Market Viewer</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#searchSymbolPage
+   <string notr="true">#viewSymbolOverviewPage
+{
+	background-color:white;
+}
+#searchSymbolPage
 {
 	border-image: url(:/files/img/mainWindowBackground.png) 0 0 0 0 stretch stretch;
 }
@@ -47,7 +51,34 @@
 	background-color:DodgerBlue;
 	color: white;
 	border-radius: 30px;
-}</string>
+}
+
+#buyButton, #goToSymbolSearchPageButton, #sellButton
+{
+	border-radius:15px;
+	color:white;
+}
+
+#buyButton
+{
+	background-color: #4CAF50;
+}
+
+#sellButton
+{
+	background-color:red;
+}
+
+#goToSymbolSearchPageButton
+{
+	background-color:DodgerBlue;
+}
+
+#buyButton:hover, #goToSymbolSearchPageButton:hover, #sellButton:hover
+{
+	font-weight:500;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -72,7 +103,7 @@
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="searchSymbolPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -445,50 +476,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="navigationButtonsHorizontalLayout">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="sizeConstraint">
-           <enum>QLayout::SetNoConstraint</enum>
-          </property>
-          <item>
-           <widget class="QPushButton" name="goToSymbolSearchPageButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Search Different Symbol</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="goToTradePageButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Trade Symbol</string>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="viewSymbolLivePage">
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <layout class="QGridLayout" name="stockInfoGrid">
+         <layout class="QGridLayout" name="quoteGridLayout">
           <property name="topMargin">
            <number>0</number>
           </property>
@@ -498,117 +486,27 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="3" column="4">
-           <widget class="QLabel" name="dynamicOpenPriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="staticHighPriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-              <stylestrategy>PreferDefault</stylestrategy>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>High</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="4">
-           <widget class="QLabel" name="staticOpenPriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>Open</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="dynamicVolumeLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QLabel" name="staticCurrentPriceLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="font">
              <font>
               <family>Verdana</family>
               <pointsize>10</pointsize>
-              <stylestrategy>PreferDefault</stylestrategy>
              </font>
             </property>
             <property name="frameShape">
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>Current Price</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Current Price&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
-          <item row="3" column="5">
-           <widget class="QLabel" name="dynamicClosePriceLabel">
+          <item row="5" column="2">
+           <widget class="QLabel" name="dynamicHighLabel">
             <property name="font">
              <font>
               <family>Verdana</family>
@@ -619,18 +517,15 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>0.0</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
-            <property name="margin">
-             <number>10</number>
-            </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="dynamicHighPriceLabel">
+          <item row="5" column="3">
+           <widget class="QLabel" name="dynamicLowLabel">
             <property name="font">
              <font>
               <family>Verdana</family>
@@ -641,51 +536,7 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="dynamicLowPriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="staticLowPriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>Low</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -693,25 +544,6 @@
            </widget>
           </item>
           <item row="2" column="5">
-           <widget class="QLabel" name="staticClosePriceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>Close</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
            <widget class="QLabel" name="staticVolumeLabel">
             <property name="font">
              <font>
@@ -723,14 +555,109 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>Volume</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volume&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="2">
+           <widget class="QLabel" name="staticHighLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;High&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="staticLowLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Low&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLabel" name="dynamicCloseLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLabel" name="dynamicOpenLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLabel" name="staticCloseLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
            <widget class="QLabel" name="dynamicCurrentPriceLabel">
             <property name="font">
              <font>
@@ -742,209 +669,159 @@
              <enum>QFrame::Box</enum>
             </property>
             <property name="text">
-             <string>0.0</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
-            <property name="margin">
-             <number>10</number>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="staticOpenLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="5">
+           <widget class="QLabel" name="dynamicVolumeLabel">
+            <property name="font">
+             <font>
+              <family>Verdana</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#595959;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QGridLayout" name="briefAccountInfoGrid">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="navigationButtonsHorizontalLayout">
+          <property name="spacing">
+           <number>20</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
           <property name="topMargin">
            <number>0</number>
           </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
           <property name="bottomMargin">
-           <number>0</number>
+           <number>10</number>
           </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="staticAccountBalanceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>AccountBalance</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="staticAvailableFundsLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>Available Funds</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="dynamicAccountBalanceLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="dynamicAvailableFundsLabel">
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="staticSharesOwnedLabel">
+          <item>
+           <widget class="QPushButton" name="goToSymbolSearchPageButton">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="font">
              <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-              <kerning>true</kerning>
+              <family>Georgia</family>
+              <pointsize>16</pointsize>
              </font>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
             <property name="text">
-             <string>Shares Owned:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Search Different Symbol</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="dynamicSharesOwnedLabel">
+          <item>
+           <widget class="QPushButton" name="sellButton">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="font">
              <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
+              <family>Georgia</family>
+              <pointsize>16</pointsize>
              </font>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
             <property name="text">
-             <string>0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Simulate Sell</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QLabel" name="staticUnrealizedTotalLabel">
+          <item>
+           <widget class="QPushButton" name="buyButton">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="font">
              <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
+              <family>Georgia</family>
+              <pointsize>16</pointsize>
              </font>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
             <property name="text">
-             <string>Unrealized Total: </string>
+             <string>Simulate Buy</string>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QLabel" name="dynamicUnrealizedTotalLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Verdana</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

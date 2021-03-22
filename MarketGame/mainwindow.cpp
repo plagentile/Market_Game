@@ -42,10 +42,20 @@ void MainWindow::on_actionTerms_Of_Service_triggered(){
 }
 
 void MainWindow::on_actionQuit_triggered(){
-    if(this->account.isActiveWindow()){
-        account.close();
-    }
+    account.close();
     emit this->exitProgram();
+}
+
+void MainWindow::on_actionCandlestick_triggered(){
+    emit this->priceHistoryCandlestickChartRequested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
+}
+
+void MainWindow::on_actionLinechart_triggered(){
+    emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
+}
+
+void MainWindow::on_actionAccount_Overview_triggered(){
+    this->account.show();
 }
 
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
@@ -112,15 +122,3 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     }
 }
 
-void MainWindow::on_goToTradePageButton_clicked(){
-    this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(2);
-}
-
-
-void MainWindow::on_actionCandlestick_triggered(){
-    emit this->priceHistoryCandlestickChartRequested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
-}
-
-void MainWindow::on_actionLinechart_triggered(){
-    emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
-}

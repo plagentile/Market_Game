@@ -25,7 +25,8 @@ SOURCES += \
     requestencapsulator.cpp \
     signinoptionsdialog.cpp \
     symbolternarysearchtree.cpp \
-    termsofservice.cpp
+    termsofservice.cpp \
+    tradehandler.cpp
 
 HEADERS += \
     about.h \
@@ -38,7 +39,8 @@ HEADERS += \
     requestencapsulator.h \
     signinoptionsdialog.h \
     symbolternarysearchtree.h \
-    termsofservice.h
+    termsofservice.h \
+    tradehandler.h
 
 FORMS += \
     about.ui \
@@ -46,7 +48,8 @@ FORMS += \
     initialaccountsetup.ui \
     mainwindow.ui \
     signinoptionsdialog.ui \
-    termsofservice.ui
+    termsofservice.ui \
+    tradehandler.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

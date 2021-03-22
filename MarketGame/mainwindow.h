@@ -40,17 +40,17 @@ public slots:
     void on_actionTerms_Of_Service_triggered();
     void on_actionQuit_triggered();
 
-private slots:    
+private slots:
+    void on_actionCandlestick_triggered();
+    void on_actionLinechart_triggered();
+    void on_actionAccount_Overview_triggered();
+
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
     void on_symbolListResults_clicked(const QModelIndex &index);
     void on_requestReady(QChart * chart);;
 
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
-    void on_goToTradePageButton_clicked();
-
-    void on_actionCandlestick_triggered();
-    void on_actionLinechart_triggered();
 
 private:
     const RequestEncapsulator requestEncapsulator;
