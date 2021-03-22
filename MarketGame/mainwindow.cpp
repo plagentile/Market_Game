@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     : QMainWindow(parent),
       requestEncapsulator(nullptr),
       account(nullptr, 0, ""),
+      tradeHandler(nullptr),
       ui(new Ui::MainWindow),
       pSymbolTST(pTST)
 {
@@ -43,6 +44,7 @@ void MainWindow::on_actionTerms_Of_Service_triggered(){
 
 void MainWindow::on_actionQuit_triggered(){
     account.close();
+    tradeHandler.close();
     emit this->exitProgram();
 }
 
@@ -96,8 +98,11 @@ void MainWindow::on_requestReady(QChart * chart){
     if(chart){
         QChart * pTemp = this->ui->graphicsView->chart();
         chart->layout()->setContentsMargins(0, 0, 0, 0);
+        chart->legend()->font().setPointSizeF(20);
+        chart->legend()->update();
         this->ui->graphicsView->setChart(chart);
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+
         pTemp->deleteLater();
     }
 }
@@ -122,3 +127,6 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     }
 }
 
+void MainWindow::on_buyButton_clicked(){
+    this->tradeHandler.show();
+}

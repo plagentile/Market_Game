@@ -2,10 +2,14 @@
 
 ChartBuilder::ChartBuilder(QObject *parent)
     :QObject(parent)
-{}
+{
+    this->font.setPointSize(12);
+    this->font.setFamily("Georgia");
+}
 
 void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
     QChart * chart = new QChart();
+
     if(jResponsePointer && !jResponsePointer->empty())
     {
 
@@ -13,7 +17,7 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
         closeSeries->setColor(QColor(Qt::blue));
         closeSeries->setName(jResponsePointer->value("symbol").toString() + " Close");
         chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History");
-
+        chart->setTitleFont(this->font);
 
         const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
         for(const QJsonValue & v : arr){
@@ -26,15 +30,18 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
         axisX->setTickCount(20);
         axisX->setFormat("dd MMM");
         axisX->setTitleText("Date");
+        axisX->setTitleFont(this->font);
         chart->addAxis(axisX, Qt::AlignBottom);
         closeSeries->attachAxis(axisX);
 
         QValueAxis *axisY = new QValueAxis;
         axisY->setLabelFormat("%.2f");
         axisY->setTitleText("Price");
+        axisY->setTitleFont(this->font);
         chart->addAxis(axisY, Qt::AlignLeft);
         closeSeries->attachAxis(axisY);
 
+        chart->legend()->setFont(this->font);
         chart->legend()->setVisible(true);
         chart->legend()->setAlignment(Qt::AlignBottom);
     }
@@ -70,15 +77,18 @@ void ChartBuilder::on_requestCandlestickChart(const QJsonObject *jResponsePointe
         axisX->setTickCount(20);
         axisX->setFormat("dd MMM");
         axisX->setTitleText("Date");
+        axisX->setTitleFont(this->font);
         chart->addAxis(axisX, Qt::AlignBottom);
         series->attachAxis(axisX);
 
         QValueAxis *axisY = new QValueAxis;
         axisY->setLabelFormat("%.2f");
         axisY->setTitleText("Price");
+        axisY->setTitleFont(this->font);
         chart->addAxis(axisY, Qt::AlignLeft);
         series->attachAxis(axisY);
 
+        chart->legend()->setFont(this->font);
         chart->legend()->setVisible(true);
         chart->legend()->setAlignment(Qt::AlignBottom);
     }

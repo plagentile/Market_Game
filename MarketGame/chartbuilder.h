@@ -22,6 +22,8 @@ public slots:
 public: signals:
     void chartReady(QChart * chart);
 
+private:
+    QFont font;
 };
 
 #endif // CHARTBUILDER_H

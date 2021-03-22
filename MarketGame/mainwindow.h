@@ -9,6 +9,7 @@
 #include "account.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
+#include "tradehandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,9 +53,12 @@ private slots:
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
 
+    void on_buyButton_clicked();
+
 private:
     const RequestEncapsulator requestEncapsulator;
     Account account;
+    TradeHandler tradeHandler;
     QStandardItemModel model;
     Ui::MainWindow *ui;
     const SymbolTernarySearchTree * pSymbolTST;

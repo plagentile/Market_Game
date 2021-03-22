@@ -13,6 +13,9 @@ class TradeHandler : public QDialog
 
 public:
     explicit TradeHandler(QWidget *parent = nullptr);
+    TradeHandler() =delete;
+    TradeHandler(const TradeHandler & assign) =delete;
+    TradeHandler & operator=(const TradeHandler & assign) =delete;
     ~TradeHandler();
 
 private:
