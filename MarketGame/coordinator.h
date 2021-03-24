@@ -1,7 +1,6 @@
 #ifndef COORDINATOR_H
 #define COORDINATOR_H
 
-#include <QtConcurrent/QtConcurrentRun>
 #include "mainwindow.h"
 #include "initialaccountsetup.h"
 #include "signinoptionsdialog.h"

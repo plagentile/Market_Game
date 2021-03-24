@@ -6,10 +6,12 @@
 #include <QRegExpValidator>
 #include <QRegExp>
 #include <QStandardItemModel>
+#include <QtConcurrent/QtConcurrentRun>
 #include "account.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
 #include "tradehandler.h"
+#include "updatehandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -33,7 +35,9 @@ public: signals:
     void showSearchSymbolPageRequested();
     void showAboutPageRequested();
     void showTermsOfServicePageRequested();
+    void quitThread();
     void exitProgram();
+
 
 public slots:
     void on_setupInitialAccount(const QString & key, const int32_t balance);
@@ -52,8 +56,10 @@ private slots:
 
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
-
     void on_buyButton_clicked();
+
+private:
+    void startupLiveQuoteThread();
 
 private:
     const RequestEncapsulator requestEncapsulator;
@@ -63,5 +69,6 @@ private:
     Ui::MainWindow *ui;
     const SymbolTernarySearchTree * pSymbolTST;
     QVector<const SymbolTernarySearchTree::Node *> vSearchResults;
+
 };
 #endif // MAINWINDOW_H

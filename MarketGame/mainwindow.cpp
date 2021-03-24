@@ -45,6 +45,7 @@ void MainWindow::on_actionTerms_Of_Service_triggered(){
 void MainWindow::on_actionQuit_triggered(){
     account.close();
     tradeHandler.close();
+    emit this->quitThread();
     emit this->exitProgram();
 }
 
@@ -98,21 +99,19 @@ void MainWindow::on_requestReady(QChart * chart){
     if(chart){
         QChart * pTemp = this->ui->graphicsView->chart();
         chart->layout()->setContentsMargins(0, 0, 0, 0);
-        chart->legend()->font().setPointSizeF(20);
-        chart->legend()->update();
         this->ui->graphicsView->setChart(chart);
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-
+        QtConcurrent::run(this, &MainWindow::startupLiveQuoteThread);
         pTemp->deleteLater();
     }
 }
 
 void MainWindow::on_goToSymbolSearchPageRequested(){
+    emit this->quitThread();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
     this->ui->menuChart->menuAction()->setVisible(false);
     this->ui->searchSymbolButton->hide();
     this->ui->symbolListResults->hide();
-    this->ui->searchSymbolButton->hide();
 }
 
 void MainWindow::on_goToViewSymbolOverviewPage(){
@@ -130,3 +129,11 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
 void MainWindow::on_buyButton_clicked(){
     this->tradeHandler.show();
 }
+
+void MainWindow::startupLiveQuoteThread(){
+    UpdateHandler *pUdateHandler = new UpdateHandler(nullptr);
+    QObject::connect(this, &MainWindow::quitThread, pUdateHandler, &UpdateHandler::stop, Qt::QueuedConnection);
+    pUdateHandler->start();
+}
+
+

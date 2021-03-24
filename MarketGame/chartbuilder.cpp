@@ -12,11 +12,10 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
 
     if(jResponsePointer && !jResponsePointer->empty())
     {
-
         QLineSeries *closeSeries = new QLineSeries();
         closeSeries->setColor(QColor(Qt::blue));
         closeSeries->setName(jResponsePointer->value("symbol").toString() + " Close");
-        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History");
+        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History (Delayed)");
         chart->setTitleFont(this->font);
 
         const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
