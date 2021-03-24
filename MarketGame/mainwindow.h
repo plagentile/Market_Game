@@ -7,6 +7,7 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 #include <QtConcurrent/QtConcurrentRun>
+#include <QCloseEvent>
 #include "account.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
@@ -57,6 +58,9 @@ private slots:
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
     void on_buyButton_clicked();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     void startupLiveQuoteThread();

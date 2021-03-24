@@ -43,10 +43,7 @@ void MainWindow::on_actionTerms_Of_Service_triggered(){
 }
 
 void MainWindow::on_actionQuit_triggered(){
-    account.close();
-    tradeHandler.close();
-    emit this->quitThread();
-    emit this->exitProgram();
+    this->close();
 }
 
 void MainWindow::on_actionCandlestick_triggered(){
@@ -128,6 +125,14 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
 
 void MainWindow::on_buyButton_clicked(){
     this->tradeHandler.show();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event){
+    account.close();
+    tradeHandler.close();
+    emit this->quitThread();
+    emit this->exitProgram();
+    event->accept();
 }
 
 void MainWindow::startupLiveQuoteThread(){
