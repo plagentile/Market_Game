@@ -6,7 +6,6 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QAuthenticator>
-#include <future>
 #include <QFile>
 #include <QDir>
 #include <QJsonObject>

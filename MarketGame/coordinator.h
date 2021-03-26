@@ -6,7 +6,7 @@
 #include "signinoptionsdialog.h"
 #include "termsofservice.h"
 #include "about.h"
-#include "symbolternarysearchtree.h"
+#include <QtConcurrent/QtConcurrent>
 
 /*This class is responsible for controlling the (initial) flow of the program*/
 

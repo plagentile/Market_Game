@@ -17,7 +17,9 @@ void NetworkHandler::get(const QString& location){
 void NetworkHandler::readyRead(){
     if(this->handShakeOccurred){
         QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
-        if(reply) emit response(QJsonDocument::fromJson(reply->readAll()).object());
+        if(reply) {
+          emit response(QJsonDocument::fromJson(reply->readAll()).object());
+        }
     }
     else{
         qobject_cast<QNetworkReply*>(sender())->abort();
@@ -37,11 +39,14 @@ void NetworkHandler::encrypted(QNetworkReply *reply){
 }
 
 void NetworkHandler::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors){
-    if(reply){reply->abort();}
+    if(reply){
+        reply->abort();
+    }
 
     QFile file(QDir::currentPath() + "SSL_ERRORS.txt");
-
-    if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QIODevice::Text)) return; //no hope...
+    if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate| QIODevice::Text)){
+        return; //no hope...
+    }
 
     for(const QSslError &err : errors){
         file.write(err.errorString().toLocal8Bit());

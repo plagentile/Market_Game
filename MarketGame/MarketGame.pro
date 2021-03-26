@@ -26,8 +26,7 @@ SOURCES += \
     signinoptionsdialog.cpp \
     symbolternarysearchtree.cpp \
     termsofservice.cpp \
-    tradehandler.cpp \
-    updatehandler.cpp
+    tradehandler.cpp
 
 HEADERS += \
     about.h \
@@ -41,8 +40,7 @@ HEADERS += \
     signinoptionsdialog.h \
     symbolternarysearchtree.h \
     termsofservice.h \
-    tradehandler.h \
-    updatehandler.h
+    tradehandler.h
 
 FORMS += \
     about.ui \

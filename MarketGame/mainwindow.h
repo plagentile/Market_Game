@@ -6,13 +6,12 @@
 #include <QRegExpValidator>
 #include <QRegExp>
 #include <QStandardItemModel>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QCloseEvent>
+#include <QDebug>
 #include "account.h"
 #include "symbolternarysearchtree.h"
 #include "requestencapsulator.h"
 #include "tradehandler.h"
-#include "updatehandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,11 +31,10 @@ public:
 public: signals:
     void priceHistoryLineChartReqested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
-
+    void requestLiveQuote(const QString& apiKey, const QString& symbol);
     void showSearchSymbolPageRequested();
     void showAboutPageRequested();
     void showTermsOfServicePageRequested();
-    void quitThread();
     void exitProgram();
 
 
@@ -45,8 +43,14 @@ public slots:
     void on_actionAbout_triggered();
     void on_actionTerms_Of_Service_triggered();
     void on_actionQuit_triggered();
+    void on_liveQuoteRequestReady(QJsonObject jObject);
 
 private slots:
+
+    void timeout();
+    void start();
+    void stop();
+
     void on_actionCandlestick_triggered();
     void on_actionLinechart_triggered();
     void on_actionAccount_Overview_triggered();
@@ -54,21 +58,20 @@ private slots:
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
     void on_symbolListResults_clicked(const QModelIndex &index);
     void on_requestReady(QChart * chart);;
-
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
     void on_buyButton_clicked();
 
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 
-private:
-    void startupLiveQuoteThread();
 
 private:
     const RequestEncapsulator requestEncapsulator;
     Account account;
     TradeHandler tradeHandler;
+    QTimer timer;
     QStandardItemModel model;
     Ui::MainWindow *ui;
     const SymbolTernarySearchTree * pSymbolTST;

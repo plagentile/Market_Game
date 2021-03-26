@@ -21,6 +21,11 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     QObject::connect(this, &MainWindow::priceHistoryLineChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryLineChartRequested);
     QObject::connect(this, &MainWindow::priceHistoryCandlestickChartRequested,&requestEncapsulator,&RequestEncapsulator::on_priceHistoryCandlestickChartRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
+    QObject::connect(this, &MainWindow::requestLiveQuote, &requestEncapsulator, &RequestEncapsulator::on_liveQuoteRequested);
+    QObject::connect(&requestEncapsulator, &RequestEncapsulator::liveQuoteReady, this, &MainWindow::on_liveQuoteRequestReady);
+    QObject::connect(&this->timer, &QTimer::timeout, this, &MainWindow::timeout);
+    timer.setInterval(5000);
+
 
 }
 
@@ -98,13 +103,35 @@ void MainWindow::on_requestReady(QChart * chart){
         chart->layout()->setContentsMargins(0, 0, 0, 0);
         this->ui->graphicsView->setChart(chart);
         this->ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-        QtConcurrent::run(this, &MainWindow::startupLiveQuoteThread);
         pTemp->deleteLater();
     }
 }
 
+void MainWindow::on_liveQuoteRequestReady(QJsonObject jObject)
+{
+    if(!jObject.empty()){
+        qInfo() << "\nValid Live quote?";
+    }
+    else
+    {
+        qInfo() << "\nInValid Live quote?";
+    }
+}
+
+void MainWindow::timeout(){
+    emit this->requestLiveQuote(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text());
+}
+
+void MainWindow::start(){
+     this->timer.start();
+}
+
+void MainWindow::stop(){
+     this->timer.stop();
+}
+
 void MainWindow::on_goToSymbolSearchPageRequested(){
-    emit this->quitThread();
+    this->stop();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
     this->ui->menuChart->menuAction()->setVisible(false);
     this->ui->searchSymbolButton->hide();
@@ -115,6 +142,7 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
+            this->start();
             emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
             this->ui->menuChart->menuAction()->setVisible(true);
@@ -130,15 +158,9 @@ void MainWindow::on_buyButton_clicked(){
 void MainWindow::closeEvent(QCloseEvent *event){
     account.close();
     tradeHandler.close();
-    emit this->quitThread();
+    this->stop();
     emit this->exitProgram();
     event->accept();
-}
-
-void MainWindow::startupLiveQuoteThread(){
-    UpdateHandler *pUdateHandler = new UpdateHandler(nullptr);
-    QObject::connect(this, &MainWindow::quitThread, pUdateHandler, &UpdateHandler::stop, Qt::QueuedConnection);
-    pUdateHandler->start();
 }
 
 
