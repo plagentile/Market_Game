@@ -12,7 +12,6 @@ class RequestEncapsulator: public QObject
 {
     Q_OBJECT
 public:
-
     explicit RequestEncapsulator(QObject *parent = nullptr);
     RequestEncapsulator() =delete;
     RequestEncapsulator(const RequestEncapsulator & assign) =delete;
@@ -27,17 +26,18 @@ public slots:
     void on_chartReady(QtCharts::QChart *chart);
 
 public: signals:
+    void requestForChartReady(QtCharts::QChart *chart);
+    void liveQuoteReady(QJsonObject jReponseObject);
+
+private: signals:
     void requestCandlestickChart(QJsonObject jReponseObject);
     void requestLineChart(QJsonObject jReponseObject);
-    void requestReady(QtCharts::QChart *chart);
-    void liveQuoteReady(QJsonObject jReponseObject);
     void sendNetworkRequest(QString url);
 
 private:
     const QString getPeriodType(const QString& pType, const int32_t amountOfPeriods) const noexcept;
 
 private:
-
     enum class RequestType{
         Unknown,
         PriceHistoryLine,

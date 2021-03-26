@@ -20,13 +20,11 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     QObject::connect(this,&MainWindow::showSearchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
     QObject::connect(this, &MainWindow::priceHistoryLineChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryLineChartRequested);
     QObject::connect(this, &MainWindow::priceHistoryCandlestickChartRequested,&requestEncapsulator,&RequestEncapsulator::on_priceHistoryCandlestickChartRequested);
-    QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestReady, this, &MainWindow::on_requestReady);
+    QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestForChartReady, this, &MainWindow::on_chartRequestReady);
     QObject::connect(this, &MainWindow::requestLiveQuote, &requestEncapsulator, &RequestEncapsulator::on_liveQuoteRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::liveQuoteReady, this, &MainWindow::on_liveQuoteRequestReady);
-    QObject::connect(&this->timer, &QTimer::timeout, this, &MainWindow::timeout);
+    QObject::connect(&this->timer, &QTimer::timeout, this, &MainWindow::timerTimeout);
     timer.setInterval(5000);
-
-
 }
 
 MainWindow::~MainWindow(){
@@ -63,6 +61,18 @@ void MainWindow::on_actionAccount_Overview_triggered(){
     this->account.show();
 }
 
+void MainWindow::timerTimeout(){
+    emit this->requestLiveQuote(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text());
+}
+
+void MainWindow::timerStart(){
+     this->timer.start();
+}
+
+void MainWindow::timerStop(){
+     this->timer.stop();
+}
+
 void MainWindow::on_symbolSearchLineEdit_textChanged(const QString &arg1){
     if(arg1.length() <= 0) return;
 
@@ -97,7 +107,7 @@ void MainWindow::on_symbolListResults_clicked(const QModelIndex &index){
     }
 }
 
-void MainWindow::on_requestReady(QChart * chart){
+void MainWindow::on_chartRequestReady(QChart * chart){
     if(chart){
         QChart * pTemp = this->ui->graphicsView->chart();
         chart->layout()->setContentsMargins(0, 0, 0, 0);
@@ -118,20 +128,8 @@ void MainWindow::on_liveQuoteRequestReady(QJsonObject jObject)
     }
 }
 
-void MainWindow::timeout(){
-    emit this->requestLiveQuote(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text());
-}
-
-void MainWindow::start(){
-     this->timer.start();
-}
-
-void MainWindow::stop(){
-     this->timer.stop();
-}
-
 void MainWindow::on_goToSymbolSearchPageRequested(){
-    this->stop();
+    this->timerStop();
     this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(0);
     this->ui->menuChart->menuAction()->setVisible(false);
     this->ui->searchSymbolButton->hide();
@@ -142,7 +140,7 @@ void MainWindow::on_goToViewSymbolOverviewPage(){
     //Check if the current text exists in this->vectSearchResults;
     for(int32_t x = 0, length = this->vSearchResults.length(); x < length; ++x){
         if(this->ui->symbolSearchLineEdit->text() == vSearchResults[x]->symbol){
-            this->start();
+            this->timerStart();
             emit this->priceHistoryLineChartReqested(this->account.getAPIKey(), this->ui->symbolSearchLineEdit->text(), "day", 2);
             this->ui->searchAndViewSymbolStackedWidget->setCurrentIndex(1);
             this->ui->menuChart->menuAction()->setVisible(true);
@@ -158,7 +156,7 @@ void MainWindow::on_buyButton_clicked(){
 void MainWindow::closeEvent(QCloseEvent *event){
     account.close();
     tradeHandler.close();
-    this->stop();
+    this->timerStop();
     emit this->exitProgram();
     event->accept();
 }

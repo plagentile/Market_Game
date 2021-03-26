@@ -29,14 +29,15 @@ public:
     ~MainWindow();
 
 public: signals:
-    void priceHistoryLineChartReqested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
-    void priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
-    void requestLiveQuote(const QString& apiKey, const QString& symbol);
     void showSearchSymbolPageRequested();
     void showAboutPageRequested();
     void showTermsOfServicePageRequested();
-    void exitProgram();
 
+private: signals:
+    void priceHistoryLineChartReqested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
+    void requestLiveQuote(const QString& apiKey, const QString& symbol);
+    void exitProgram();
 
 public slots:
     void on_setupInitialAccount(const QString & key, const int32_t balance);
@@ -46,18 +47,17 @@ public slots:
     void on_liveQuoteRequestReady(QJsonObject jObject);
 
 private slots:
-
-    void timeout();
-    void start();
-    void stop();
-
     void on_actionCandlestick_triggered();
     void on_actionLinechart_triggered();
     void on_actionAccount_Overview_triggered();
 
+    void timerTimeout();
+    void timerStart();
+    void timerStop();
+
     void on_symbolSearchLineEdit_textChanged(const QString &arg1);
     void on_symbolListResults_clicked(const QModelIndex &index);
-    void on_requestReady(QChart * chart);;
+    void on_chartRequestReady(QChart * chart);;
     void on_goToSymbolSearchPageRequested();
     void on_goToViewSymbolOverviewPage();
     void on_buyButton_clicked();
@@ -65,7 +65,6 @@ private slots:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
-
 
 private:
     const RequestEncapsulator requestEncapsulator;

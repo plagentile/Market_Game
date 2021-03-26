@@ -51,7 +51,7 @@ void RequestEncapsulator::on_networkReplyFinished(QJsonObject jReponseObject){
 }
 
 void RequestEncapsulator::on_chartReady(QChart *chart){
-       emit this->requestReady(chart);
+       emit this->requestForChartReady(chart);
 }
 
 const QString RequestEncapsulator::getPeriodType(const QString& pType, const int32_t amountOfPeriods) const noexcept{
