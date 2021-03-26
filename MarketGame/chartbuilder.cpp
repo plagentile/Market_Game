@@ -7,7 +7,7 @@ ChartBuilder::ChartBuilder(QObject *parent)
     this->font.setFamily("Georgia");
 }
 
-void ChartBuilder::on_requestLineChart(QJsonObject jReponseObject){
+void ChartBuilder::on_requestLineChart(const QJsonObject jReponseObject) const {
     QChart * chart = new QChart();
 
     if(!jReponseObject.empty())
@@ -47,7 +47,7 @@ void ChartBuilder::on_requestLineChart(QJsonObject jReponseObject){
     emit this->chartReady(chart);
 }
 
-void ChartBuilder::on_requestCandlestickChart(QJsonObject jReponseObject)
+void ChartBuilder::on_requestCandlestickChart(const QJsonObject jReponseObject) const
 {
     QChart * chart = new QChart();
     if(!jReponseObject.empty())

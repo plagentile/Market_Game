@@ -21,7 +21,7 @@ public:
     ~NetworkHandler() = default;
 
 public: signals:
-    void response(QJsonObject jReponseObject);
+    void response(const QJsonObject jReponseObject);
 
 public slots:
     void get(const QString& location);

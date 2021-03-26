@@ -30,7 +30,7 @@ void RequestEncapsulator::on_liveQuoteRequested(const QString &apiKey, const QSt
    this->networkHandler.get("https://api.tdameritrade.com/v1/marketdata/" + symbol + "/quotes?apikey=" + apiKey);
 }
 
-void RequestEncapsulator::on_networkReplyFinished(QJsonObject jReponseObject){
+void RequestEncapsulator::on_networkReplyFinished(const QJsonObject jReponseObject){
     RequestType ticket = this->ticketQueue.dequeue();
     switch(ticket){
       case(RequestType::PriceHistoryLine):{
@@ -50,7 +50,7 @@ void RequestEncapsulator::on_networkReplyFinished(QJsonObject jReponseObject){
     }
 }
 
-void RequestEncapsulator::on_chartReady(QChart *chart){
+void RequestEncapsulator::on_chartReady(QChart *chart) const {
        emit this->requestForChartReady(chart);
 }
 

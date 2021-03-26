@@ -12,19 +12,21 @@ MainWindow::MainWindow(QWidget *parent,  const SymbolTernarySearchTree *pTST)
     this->ui->setupUi(this);
     this->ui->symbolSearchLineEdit->setValidator(new QRegExpValidator(QRegExp("[A-Z]{0,4}"), this));
     vSearchResults.reserve(this->pSymbolTST->getSYMBOL_SEARCH_VECTOR_RESERVE_SIZE());
+    timer.setInterval(5000);
 
     QObject::connect(this->ui->goToSymbolSearchPageButton, &QPushButton::clicked, this, &MainWindow::on_goToSymbolSearchPageRequested);
     QObject::connect(this->ui->symbolSearchLineEdit, &QLineEdit::returnPressed,this, &MainWindow::on_goToViewSymbolOverviewPage);
     QObject::connect(this->ui->searchSymbolButton, &QPushButton::clicked, this, &MainWindow::on_goToViewSymbolOverviewPage);
 
     QObject::connect(this,&MainWindow::showSearchSymbolPageRequested, this, &MainWindow::on_goToSymbolSearchPageRequested);
+
     QObject::connect(this, &MainWindow::priceHistoryLineChartReqested, &requestEncapsulator, &RequestEncapsulator::on_priceHistoryLineChartRequested);
     QObject::connect(this, &MainWindow::priceHistoryCandlestickChartRequested,&requestEncapsulator,&RequestEncapsulator::on_priceHistoryCandlestickChartRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::requestForChartReady, this, &MainWindow::on_chartRequestReady);
     QObject::connect(this, &MainWindow::requestLiveQuote, &requestEncapsulator, &RequestEncapsulator::on_liveQuoteRequested);
     QObject::connect(&requestEncapsulator, &RequestEncapsulator::liveQuoteReady, this, &MainWindow::on_liveQuoteRequestReady);
+
     QObject::connect(&this->timer, &QTimer::timeout, this, &MainWindow::timerTimeout);
-    timer.setInterval(5000);
 }
 
 MainWindow::~MainWindow(){
@@ -117,7 +119,7 @@ void MainWindow::on_chartRequestReady(QChart * chart){
     }
 }
 
-void MainWindow::on_liveQuoteRequestReady(QJsonObject jObject)
+void MainWindow::on_liveQuoteRequestReady(const QJsonObject jObject)
 {
     if(!jObject.empty()){
         qInfo() << "\nValid Live quote?";

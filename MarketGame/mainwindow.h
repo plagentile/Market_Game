@@ -44,7 +44,7 @@ public slots:
     void on_actionAbout_triggered();
     void on_actionTerms_Of_Service_triggered();
     void on_actionQuit_triggered();
-    void on_liveQuoteRequestReady(QJsonObject jObject);
+    void on_liveQuoteRequestReady(const QJsonObject jObject);
 
 private slots:
     void on_actionCandlestick_triggered();

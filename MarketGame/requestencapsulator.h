@@ -22,17 +22,17 @@ public slots:
     void on_priceHistoryLineChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void on_priceHistoryCandlestickChartRequested(const QString& apiKey, const QString& symbol, const QString& priceHistoryPeriodType, const int32_t amountOfPeriods);
     void on_liveQuoteRequested(const QString& apiKey, const QString& symbol);
-    void on_networkReplyFinished(QJsonObject jReponseObject);
-    void on_chartReady(QtCharts::QChart *chart);
+    void on_networkReplyFinished(const QJsonObject jReponseObject);
+    void on_chartReady(QtCharts::QChart *chart) const;
 
 public: signals:
-    void requestForChartReady(QtCharts::QChart *chart);
-    void liveQuoteReady(QJsonObject jReponseObject);
+    void requestForChartReady(QtCharts::QChart *chart) const;
+    void liveQuoteReady(const QJsonObject jReponseObject) const;
 
 private: signals:
-    void requestCandlestickChart(QJsonObject jReponseObject);
-    void requestLineChart(QJsonObject jReponseObject);
-    void sendNetworkRequest(QString url);
+    void requestCandlestickChart(const QJsonObject jReponseObject);
+    void requestLineChart(const QJsonObject jReponseObject);
+    void sendNetworkRequest(const QString url);
 
 private:
     const QString getPeriodType(const QString& pType, const int32_t amountOfPeriods) const noexcept;

@@ -16,11 +16,11 @@ public:
     ~ChartBuilder() = default;
 
 public slots:
-    void on_requestLineChart(QJsonObject jReponseObject);
-    void on_requestCandlestickChart(QJsonObject jReponseObject);
+    void on_requestLineChart(const QJsonObject jReponseObject) const ;
+    void on_requestCandlestickChart(const QJsonObject jReponseObject) const ;
 
 public: signals:
-    void chartReady(QChart * chart);
+    void chartReady(QChart * chart) const;
 
 private:
     QFont font;
