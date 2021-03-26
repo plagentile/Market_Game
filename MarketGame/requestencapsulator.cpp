@@ -4,7 +4,7 @@ RequestEncapsulator::RequestEncapsulator(QObject *parent)
     :QObject(parent),networkHandler(nullptr), chartBuilder(nullptr), requestType(RequestType::Unknown)
 {
     QObject::connect(this, &RequestEncapsulator::sendNetworkRequest, &networkHandler, &NetworkHandler::get);
-    QObject::connect(&networkHandler, &NetworkHandler::done, this, &RequestEncapsulator::on_networkReplyFinished);
+    QObject::connect(&networkHandler, &NetworkHandler::response, this, &RequestEncapsulator::on_networkReplyFinished);
 
     QObject::connect(this, &RequestEncapsulator::requestLineChart, &chartBuilder, &ChartBuilder::on_requestLineChart);
     QObject::connect(this,&RequestEncapsulator::requestCandlestickChart,&chartBuilder,&ChartBuilder::on_requestCandlestickChart);
@@ -25,22 +25,29 @@ void RequestEncapsulator::on_priceHistoryCandlestickChartRequested(const QString
     emit this->sendNetworkRequest(requestURL);
 }
 
-void RequestEncapsulator::on_networkReplyFinished(const QJsonObject * jResponsePointer){
+void RequestEncapsulator::on_liveQuoteRequested(const QString &apiKey, const QString &symbol)
+{
+    this->requestType = RequestType::LiveQuote;
+    this->networkHandler.get("");
+}
+
+void RequestEncapsulator::on_networkReplyFinished(QJsonObject jReponseObject){
     //A nullptr will be picked in chart builder
-    switch(requestType)
-    {
-         case(RequestType::PriceHistoryLine):
-         {
-             emit this->requestLineChart(jResponsePointer);
-             break;
-         }
-         case(RequestType::PriceHistoryCandleStick):
-         {
-             emit this->requestCandlestickChart(jResponsePointer);
-             break;
-         }
-         default:
-             break;
+    switch(requestType){
+      case(RequestType::PriceHistoryLine):{
+          emit this->requestLineChart(jReponseObject);
+          break;
+      }
+      case(RequestType::PriceHistoryCandleStick):{
+          emit this->requestCandlestickChart(jReponseObject);
+          break;
+      }
+      case(RequestType::LiveQuote):{
+
+         break;
+      }
+      default:
+          break;
     }
 }
 

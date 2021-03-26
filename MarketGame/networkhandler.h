@@ -6,6 +6,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QAuthenticator>
+#include <future>
 #include <QFile>
 #include <QDir>
 #include <QJsonObject>
@@ -19,44 +20,21 @@ public:
     NetworkHandler(const NetworkHandler & assign) = delete;
     NetworkHandler & operator =(const NetworkHandler & assign) =delete;
     ~NetworkHandler() = default;
-public:
-    enum class Status
-    {
-        NotStarted,
-        Started,
-        PassedGet,
-        PassedReadyRead,
-        PassedFinshed,
-        NeedAuthentication,
-        SSLError,
-        FailedEncryptCheck,
-        FailedReadyReadCheck,
-        Internal_Errors,
-        BadReply
-    };
-
-    Status getStatus() const;
-
-public:
-   QJsonArray getJSONReponse();
 
 public: signals:
-    void done(const QJsonObject*jReponseObject );
+    void response(QJsonObject jReponseObject);
 
 public slots:
-    void get(const QString location);
+    void get(const QString& location);
 
 private slots:
     void readyRead();
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
     void encrypted(QNetworkReply *reply);
-    void finished(QNetworkReply *reply);
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
    QNetworkAccessManager qNetworkAccessManager;
-   QJsonObject jResponseObject;
-   Status status;
    bool handShakeOccurred;
 };
 

@@ -7,18 +7,18 @@ ChartBuilder::ChartBuilder(QObject *parent)
     this->font.setFamily("Georgia");
 }
 
-void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
+void ChartBuilder::on_requestLineChart(QJsonObject jReponseObject){
     QChart * chart = new QChart();
 
-    if(jResponsePointer && !jResponsePointer->empty())
+    if(!jReponseObject.empty())
     {
         QLineSeries *closeSeries = new QLineSeries();
         closeSeries->setColor(QColor(Qt::blue));
-        closeSeries->setName(jResponsePointer->value("symbol").toString() + " Close");
-        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History (Delayed)");
+        closeSeries->setName(jReponseObject.value("symbol").toString() + " Close");
+        chart->setTitle(jReponseObject.value("symbol").toString() + " Price History (Delayed)");
         chart->setTitleFont(this->font);
 
-        const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
+        const QJsonArray &arr =  jReponseObject.value("candles").toArray();
         for(const QJsonValue & v : arr){
             closeSeries->append(v.toObject().value("datetime").toDouble(), v.toObject().value("close").toDouble());
         }
@@ -47,19 +47,19 @@ void ChartBuilder::on_requestLineChart(const QJsonObject* jResponsePointer){
     emit this->chartReady(chart);
 }
 
-void ChartBuilder::on_requestCandlestickChart(const QJsonObject *jResponsePointer)
+void ChartBuilder::on_requestCandlestickChart(QJsonObject jReponseObject)
 {
     QChart * chart = new QChart();
-    if(jResponsePointer && !jResponsePointer->empty())
+    if(!jReponseObject.empty())
     {
         QCandlestickSeries *series = new QCandlestickSeries();
         series->setIncreasingColor(QColor(Qt::green));
         series->setDecreasingColor(QColor(Qt::red));
-        series->setName(jResponsePointer->value("symbol").toString() + " Close");
-        chart->setTitle(jResponsePointer->value("symbol").toString() + " Price History");
+        series->setName(jReponseObject.value("symbol").toString() + " Close");
+        chart->setTitle(jReponseObject.value("symbol").toString() + " Price History");
 
 
-        const QJsonArray &arr =  jResponsePointer->value("candles").toArray();
+        const QJsonArray &arr = jReponseObject.value("candles").toArray();
         for(const QJsonValue & v : arr)
         {
             QCandlestickSet *candlestickSet = new QCandlestickSet(v.toObject().value("datetime").toDouble());

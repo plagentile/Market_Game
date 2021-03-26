@@ -16,8 +16,8 @@ public:
     ~ChartBuilder() = default;
 
 public slots:
-    void on_requestLineChart(const QJsonObject* jResponsePointer);
-    void on_requestCandlestickChart(const QJsonObject* jResponsePointer);
+    void on_requestLineChart(QJsonObject jReponseObject);
+    void on_requestCandlestickChart(QJsonObject jReponseObject);
 
 public: signals:
     void chartReady(QChart * chart);
